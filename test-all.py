@@ -24,6 +24,7 @@ import tools.data_manager as data_manager
 from tools.video_loader import VideoDataset
 from tools.utils import Logger
 from tools.eval_metrics import evaluate
+from common_test_train import modify_model
 
 parser = argparse.ArgumentParser(description='Test AP3D using all frames')
 # Datasets
@@ -40,7 +41,8 @@ parser.add_argument('--test_frames', default=32, type=int,
 parser.add_argument('-a', '--arch', type=str, default='ap3dres50', 
                     help="ap3dres50, ap3dnlres50")
 # Miscs
-parser.add_argument('--resume', type=str, default='', metavar='PATH')
+parser.add_argument('--resume', type=str, default='./', metavar='PATH')
+parser.add_argument('--pretrain', type=str, default='')
 parser.add_argument('--test_epochs', default=[240], nargs='+', type=int)
 parser.add_argument('--distance', type=str, default='cosine', 
                     help="euclidean or cosine")
@@ -82,15 +84,16 @@ def main():
     print("Initializing model: {}".format(args.arch))
     model = models.init_model(name=args.arch, num_classes=dataset.num_train_pids)
     print("Model size: {:.5f}M".format(sum(p.numel() for p in model.parameters())/1000000.0))
-
+    
+    
     for epoch in args.test_epochs:
-        model_path = osp.join(args.resume, 'checkpoint_ep'+str(epoch)+'.pth.tar')
-        print("Loading checkpoint from '{}'".format(model_path))
-        checkpoint = torch.load(model_path)
-        model.load_state_dict(checkpoint['state_dict'])
-
+#         model_path = osp.join(args.resume, 'checkpoint_ep'+str(epoch)+'.pth.tar')
+#         print("Loading checkpoint from '{}'".format(model_path))
+#         checkpoint = torch.load(model_path)
+#         model.load_state_dict(checkpoint['state_dict'])
+        modify_model(model, args)
         if use_gpu: model = model.cuda()
-
+            
         print("Evaluate")
         with torch.no_grad():
             test(model, queryloader, galleryloader, use_gpu)
@@ -159,7 +162,7 @@ def test(model, queryloader, galleryloader, use_gpu):
 
     time_elapsed = time.time() - since
     print('Extracting features complete in {:.0f}m {:.0f}s'.format(time_elapsed // 60, time_elapsed % 60))
-
+    
     print("Computing distance matrix")
     m, n = qf.size(0), gf.size(0)
     distmat = torch.zeros((m,n))

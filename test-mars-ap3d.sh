@@ -1,0 +1,1 @@
+python test-all.py --root /mnt/File/shamgholi/datasets -d mars --arch ap3dres50 --gpu 0 --pretrain mnt/File/shamgholi/projects/person_reid/AP3D_old/logs/log-mars-ap3d/best_model.pth.tar --test_frames 16

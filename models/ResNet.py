@@ -13,6 +13,9 @@ from models import inflate
 from models import AP3D
 from models import NonLocal
 
+from .MyModels import HistByNorm, HistYusufLayer, HistByProf
+import config as conf
+import pdb
 
 __all__ = ['AP3DResNet50', 'AP3DNLResNet50']
 
@@ -112,10 +115,15 @@ class ResNet503D(nn.Module):
         self.layer4 = self._inflate_reslayer(resnet2d.layer4, c3d_idx=c3d_idx[3], \
                                              nonlocal_idx=nl_idx[3], nonlocal_channels=2048)
 
-        self.bn = nn.BatchNorm1d(2048)
+        
+#         self.hist = HistYusufLayer(conf.centers, conf.width)
+#         self.hist = HistYusufLayer(n_bins=conf.nbins, inchannel=2048, centers=conf.centers, width=conf.width)
+        self.hist = HistByProf(edges=conf.hist_by_prof_edges)
+        
+        self.bn = nn.BatchNorm1d(2048 * (self.hist.nbins + 1))
         self.bn.apply(weights_init_kaiming)
 
-        self.classifier = nn.Linear(2048, num_classes)
+        self.classifier = nn.Linear(2048 * (self.hist.nbins + 1), num_classes)
         self.classifier.apply(weights_init_classifier)
 
     def _inflate_reslayer(self, reslayer2d, c3d_idx, nonlocal_idx=[], nonlocal_channels=0):
@@ -148,8 +156,14 @@ class ResNet503D(nn.Module):
         b, c, t, h, w = x.size()
         x = x.permute(0, 2, 1, 3, 4).contiguous()
         x = x.view(b*t, c, h, w)
-        x = F.max_pool2d(x, x.size()[2:])
+        
+        x1 = self.hist(x)
+        x2 = F.max_pool2d(x, x.size()[2:]).view(b*t, -1) # -> [80, 2048, 1, 1]
+        x = torch.cat((x1, x2), 1)
+#         pdb.set_trace()
+#         x = F.max_pool2d(x, x.size()[2:])
         x = x.view(b, t, -1)
+#         pdb.set_trace()
 
         if not self.training:
             return x

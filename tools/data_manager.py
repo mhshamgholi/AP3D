@@ -35,7 +35,7 @@ class Mars(object):
         min_seq_len (int): tracklet with length shorter than this value will be discarded (default: 0).
     """
     def __init__(self, root='/data/datasets/', min_seq_len=0):
-        self.root = osp.join(root, 'MARS')
+        self.root = osp.join(root, 'mars')
         self.train_name_path = osp.join(self.root, 'info/train_name.txt')
         self.test_name_path = osp.join(self.root, 'info/test_name.txt')
         self.track_train_info_path = osp.join(self.root, 'info/tracks_train_info.mat')
