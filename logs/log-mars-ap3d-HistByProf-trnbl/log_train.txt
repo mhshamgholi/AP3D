@@ -1,0 +1,59 @@
+==========
+Args:Namespace(arch='ap3dres50', dataset='mars', distance='cosine', eval_step=10, gamma=0.1, gpu='0', height=256, lr=8e-05, margin=0.3, max_epoch=240, num_instances=4, pretrain='./logs/log-mars-ap3d-HistByProf/best_model.pth.tar', resume='', root='/mnt/File/shamgholi/datasets/', sample_stride=8, save_dir='./logs/log-mars-ap3d-HistByProf-trnbl', seed=1, seq_len=4, start_epoch=0, start_eval=0, stepsize=[60, 120, 180], test_batch=14, train_batch=14, use_cpu=False, weight_decay=0.0005, width=128, workers=4)
+==========
+Currently using GPU 0
+Initializing dataset mars
+=> MARS loaded
+Dataset statistics:
+  ------------------------------
+  subset   | # ids | # tracklets
+  ------------------------------
+  train    |   625 |     8298
+  query    |   626 |     1980
+  gallery  |   622 |     9330
+  ------------------------------
+  total    |  1247 |    19608
+  number of images per tracklet: 2 ~ 920, average 59.5
+  ------------------------------
+Initializing model: ap3dres50
+Model size: 34.51263M
+pretrain state dict loaded
+>>> module hist.norm_centers is trainable
+>>> module hist.sigmoid_semi_centers is trainable
+Model size: 34.51263M
+==> Start training
+Epoch1 Time:99.6s Data:1.7s Loss:0.0331 Xent:0.0320 Htri:0.0011 Acc:99.81% 
+model hist : norm_centers Parameter containing:
+tensor([0.0614, 0.2615, 0.4579, 0.6576, 0.8577], device='cuda:0',
+       requires_grad=True) , sigmoid_semi_centers Parameter containing:
+tensor([-0.0054,  0.9574], device='cuda:0', requires_grad=True)
+Epoch2 Time:99.9s Data:1.6s Loss:0.0353 Xent:0.0341 Htri:0.0012 Acc:99.83% 
+model hist : norm_centers Parameter containing:
+tensor([0.0326, 0.2274, 0.4175, 0.6164, 0.8163], device='cuda:0',
+       requires_grad=True) , sigmoid_semi_centers Parameter containing:
+tensor([-0.0078,  0.9155], device='cuda:0', requires_grad=True)
+Epoch3 Time:99.9s Data:1.7s Loss:0.0332 Xent:0.0315 Htri:0.0017 Acc:99.88% 
+model hist : norm_centers Parameter containing:
+tensor([0.0140, 0.1971, 0.3785, 0.5760, 0.7753], device='cuda:0',
+       requires_grad=True) , sigmoid_semi_centers Parameter containing:
+tensor([-0.0076,  0.8744], device='cuda:0', requires_grad=True)
+Epoch4 Time:99.8s Data:1.6s Loss:0.0351 Xent:0.0336 Htri:0.0014 Acc:99.87% 
+model hist : norm_centers Parameter containing:
+tensor([0.0045, 0.1703, 0.3404, 0.5365, 0.7351], device='cuda:0',
+       requires_grad=True) , sigmoid_semi_centers Parameter containing:
+tensor([-0.0110,  0.8338], device='cuda:0', requires_grad=True)
+Epoch5 Time:99.5s Data:1.6s Loss:0.0335 Xent:0.0318 Htri:0.0016 Acc:99.87% 
+model hist : norm_centers Parameter containing:
+tensor([0.0009, 0.1519, 0.3038, 0.4978, 0.6954], device='cuda:0',
+       requires_grad=True) , sigmoid_semi_centers Parameter containing:
+tensor([-0.0121,  0.7936], device='cuda:0', requires_grad=True)
+Epoch6 Time:99.3s Data:1.6s Loss:0.0366 Xent:0.0352 Htri:0.0015 Acc:99.84% 
+model hist : norm_centers Parameter containing:
+tensor([1.1539e-04, 1.3929e-01, 2.6855e-01, 4.5962e-01, 6.5594e-01],
+       device='cuda:0', requires_grad=True) , sigmoid_semi_centers Parameter containing:
+tensor([-0.0121,  0.7539], device='cuda:0', requires_grad=True)
+Epoch7 Time:99.0s Data:1.6s Loss:0.0307 Xent:0.0296 Htri:0.0011 Acc:99.92% 
+model hist : norm_centers Parameter containing:
+tensor([6.9299e-06, 1.2676e-01, 2.3448e-01, 4.2217e-01, 6.1693e-01],
+       device='cuda:0', requires_grad=True) , sigmoid_semi_centers Parameter containing:
+tensor([-0.0113,  0.7145], device='cuda:0', requires_grad=True)

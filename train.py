@@ -26,7 +26,7 @@ from tools.losses import TripletLoss
 from tools.utils import AverageMeter, Logger, save_checkpoint
 from tools.eval_metrics import evaluate
 from tools.samplers import RandomIdentitySampler
-from common_test_train import modify_model
+from commons import modify_model, log_model_after_epoch
 
 parser = argparse.ArgumentParser(description='Train AP3D')
 # Datasets
@@ -170,6 +170,7 @@ def main():
         train(epoch, model, criterion_xent, criterion_htri, optimizer, trainloader, use_gpu)
         train_time += round(time.time() - start_train_time)
         scheduler.step()
+        log_model_after_epoch(model)
 
         
         if (epoch+1) >= args.start_eval and args.eval_step > 0 and (epoch+1) % args.eval_step == 0 or (epoch+1) == args.max_epoch:
