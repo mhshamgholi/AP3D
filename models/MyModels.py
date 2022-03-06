@@ -30,29 +30,32 @@ class HistByNorm(nn.Module):
 class HistByProf(nn.Module):
     def __init__(self, edges):
         super(HistByProf, self).__init__()
-        self.hist_edges = edges
-        self.norm_centers = []
-        self.sigma = 0.39
+        self.hist_edges = nn.Parameter(torch.tensor(edges, dtype=torch.float32), requires_grad=True)
+#         self.norm_centers = []
+#         self.sigma = 0.39
         self.nbins = len(edges) + 1
         
-        for i in range(len(edges)-1):
-            self.norm_centers.append((self.hist_edges[i] + self.hist_edges[i+1])/2)
+#         for i in range(len(edges)-1):
+#             self.norm_centers.append((self.hist_edges[i] + self.hist_edges[i+1])/2)
             
-        self.norm_centers = nn.Parameter(torch.tensor(self.norm_centers, dtype=torch.float32), requires_grad=True)
-        self.sigmoid_semi_centers = nn.Parameter(torch.tensor([self.hist_edges[0], self.hist_edges[-1]], dtype=torch.float32), requires_grad=True)
+#         self.norm_centers = nn.Parameter(torch.tensor(self.norm_centers, dtype=torch.float32), requires_grad=True)
+#         self.sigmoid_semi_centers = nn.Parameter(torch.tensor([self.hist_edges[0], self.hist_edges[-1]], dtype=torch.float32), requires_grad=True)
+        
 
     def forward(self, x): #[72,2048,16,8]
+        
         res = torch.zeros((x.shape[0] * x.shape[1], self.nbins)).cuda()
         inputt = x.view(x.shape[0] * x.shape[1], -1)
-        for i in range(1, len(self.norm_centers)): # exclude first and last
-            res[:, i] = torch.mean(self.norm(inputt, self.norm_centers[i]), 1)
+#         for i in range(1, len(self.norm_centers)): # exclude first and last        
+        for i in range(len(self.hist_edges)-1):
+            res[:, i] = torch.mean(self.norm(inputt, (self.hist_edges[i] + self.hist_edges[i+1])/2, (self.hist_edges[i+1] - self.hist_edges[i])/4), 1)
         
-        res[:, 0] = torch.mean(1 - self.sigmoid(inputt - self.sigmoid_semi_centers[0]), 1)
-        res[:, -1] = torch.mean(self.sigmoid(inputt - self.sigmoid_semi_centers[-1]), 1)
+        res[:, 0] = torch.mean(1 - self.sigmoid(inputt - self.hist_edges[0]), 1)
+        res[:, -1] = torch.mean(self.sigmoid(inputt - self.hist_edges[-1]), 1)
         return res.view(x.shape[0], -1)
     
-    def norm(self, x, mu):
-        return (1 / (self.sigma * torch.sqrt(torch.tensor(2 * math.pi)))) * torch.exp((-0.5*((x - mu)/self.sigma)**2))
+    def norm(self, x, mu, sigma):
+        return torch.exp((-0.5*((x - mu)/sigma)**2))
 
     def sigmoid(self, x):
         return 1 / (1 + torch.exp(-20*x))
