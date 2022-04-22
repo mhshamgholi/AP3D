@@ -16,6 +16,7 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 from torch.autograd import Variable
 from torch.optim import lr_scheduler
+from torchvision import transforms as torchT
 
 import models
 import transforms.spatial_transforms as ST
@@ -95,11 +96,13 @@ def main():
     dataset = data_manager.init_dataset(name=args.dataset, root=args.root)
 
     # Data augmentation
-    spatial_transform_train = ST.Compose([
-                ST.Scale((args.height, args.width), interpolation=3),
-                ST.RandomHorizontalFlip(),
-                ST.ToTensor(),
-                ST.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+    spatial_transform_train = torchT.Compose([
+                torchT.Scale((int(args.height * 1.2), int(args.width * 1.2)), interpolation=3), #(args.height, args.width)
+                torchT.RandomCrop((args.height, args.width)),
+                torchT.RandomRotation(degrees=(-20, 20)),
+                torchT.RandomHorizontalFlip(),
+                torchT.ToTensor(),
+                torchT.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
             ])
     temporal_transform_train = TT.TemporalRandomCrop(size=args.seq_len, stride=args.sample_stride)
 
