@@ -99,8 +99,8 @@ def main():
     spatial_transform_train = torchT.Compose([
                 torchT.Scale((int(args.height * 1.2), int(args.width * 1.2)), interpolation=3), #(args.height, args.width)
                 torchT.RandomCrop((args.height, args.width)),
-                torchT.RandomRotation(degrees=(-15, 15)),
-                torchT.RandomHorizontalFlip(),
+                torchT.RandomRotation(degrees=(-20, 20)),
+                torchT.RandomHorizontalFlip(p=0.5),
                 torchT.ToTensor(),
                 torchT.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
             ])

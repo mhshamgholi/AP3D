@@ -118,12 +118,23 @@ class ResNet503D(nn.Module):
         
 #         self.hist = HistYusufLayer(conf.centers, conf.width)
 #         self.hist = HistYusufLayer(n_bins=conf.nbins, inchannel=2048, centers=conf.centers, width=conf.width)
-        self.hist = HistByProf(edges=conf.hist_by_prof_edges)
+        if conf.use_hist:
+            self.hist = HistByProf(edges=conf.hist_by_prof_edges)
         
-        self.bn = nn.BatchNorm1d(2048 * (self.hist.nbins + 1))
+        if conf.use_dropout:
+            self.dropout = nn.Dropout(p=0.5)
+        
+        if conf.use_hist:
+            self.bn = nn.BatchNorm1d(2048 * (self.hist.nbins + 1))
+        else:
+            self.bn = nn.BatchNorm1d(2048)
         self.bn.apply(weights_init_kaiming)
 
-        self.classifier = nn.Linear(2048 * (self.hist.nbins + 1), num_classes)
+        if conf.use_hist:
+            self.classifier = nn.Linear(2048 * (self.hist.nbins + 1), num_classes)
+        else:
+            self.classifier = nn.Linear(2048, num_classes)
+
         self.classifier.apply(weights_init_classifier)
 
     def _inflate_reslayer(self, reslayer2d, c3d_idx, nonlocal_idx=[], nonlocal_channels=0):
@@ -149,27 +160,36 @@ class ResNet503D(nn.Module):
         x = self.maxpool(x)
 
         x = self.layer1(x)
+        if conf.use_dropout:
+            x = self.dropout(x)
         x = self.layer2(x)
+        if conf.use_dropout:
+            x = self.dropout(x)
         x = self.layer3(x)
+        if conf.use_dropout:
+            x = self.dropout(x)
         x = self.layer4(x)
-
+        if conf.use_dropout:
+            x = self.dropout(x)
+            
         b, c, t, h, w = x.size()
         x = x.permute(0, 2, 1, 3, 4).contiguous()
         x = x.view(b*t, c, h, w)
-        
-        x1 = self.hist(x)
-        x2 = F.max_pool2d(x, x.size()[2:]).view(b*t, -1) # -> [80, 2048, 1, 1]
-        x = torch.cat((x1, x2), 1)
-#         pdb.set_trace()
-#         x = F.max_pool2d(x, x.size()[2:])
+        if conf.hist and conf.concat_hist_max:
+            x1 = self.hist(x)
+            x2 = F.max_pool2d(x, x.size()[2:]).view(b*t, -1) # -> [80, 2048, 1, 1]
+            x = torch.cat((x1, x2), 1)
+        else:
+            x = F.max_pool2d(x, x.size()[2:])
         x = x.view(b, t, -1)
-#         pdb.set_trace()
 
         if not self.training:
             return x
 
         x = x.mean(1)
         f = self.bn(x)
+        if conf.use_dropout:
+            f = self.dropout(f)
         y = self.classifier(f)
 
         return y, f
