@@ -5,20 +5,26 @@ def modify_model(model, args):
 #         return None
     
     map_loc = 'cuda' if torch.cuda.is_available() else "cpu"
-    my_state_dict = torch.load(args.pretrain, map_location=map_loc)['state_dict']
-    # copy params from random model to pretrain model, because some layer are new or some layer's size is changed
+    if args.pretrain != '':
+        my_state_dict = torch.load(args.pretrain, map_location=map_loc)['state_dict']
+        # copy params from random model to pretrain model, because some layer are new or some layer's size is changed
+        for n, p in model.named_parameters():
+            if ('hist.' in n) or ('classifier' in n):
+                my_state_dict[n] = p
+        my_state_dict = dict(filter(lambda elem: 'bn.' not in elem[0], my_state_dict.items()))
+
+        model.load_state_dict(my_state_dict, strict=False)
+        # model.bn.load_state_dict(my_state_dict['bn'])
+
     for n, p in model.named_parameters():
-        if ('hist.' in n) or ('classifier' in n):
-            my_state_dict[n] = p
-    my_state_dict = dict(filter(lambda elem: 'bn.' not in elem[0], my_state_dict.items()))
-    
-    model.load_state_dict(my_state_dict, strict=False)
-    # model.bn.load_state_dict(my_state_dict['bn'])
-    for n, p in model.named_parameters():
-        if ('layer4.2' in n) or ('classifier' in n) or ('bn.' in n) : #  or  ('hist.' in n)
-            pass
-        else:
+        if 'hist.' in n:
             p.requires_grad = False
+        else:
+            p.requires_grad = True
+#         if ('layer4.2' in n) or ('classifier' in n) or ('bn.' in n) : #  or  ('hist.' in n)
+#             pass
+#         else:
+#             p.requires_grad = False
     print("pretrain state dict loaded")
     # exit()
     for name, param in model.named_parameters():
