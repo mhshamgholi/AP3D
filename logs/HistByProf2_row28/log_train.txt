@@ -1,0 +1,213 @@
+==========
+Args:Namespace(arch='ap3dres50', dataset='mars', distance='cosine', eval_step=10, gamma=0.1, gpu='0', height=256, lr=0.0003, margin=0.3, max_epoch=240, num_instances=4, pretrain='', resume='', root='/mnt/File/shamgholi/datasets/', sample_stride=8, save_dir='./logs/HistByProf2_row28', seed=1, seq_len=4, start_epoch=0, start_eval=0, stepsize=[60, 120, 180], test_batch=14, train_batch=14, use_cpu=False, weight_decay=0.0005, width=128, workers=4)
+==========
+Currently using GPU 0
+Initializing dataset mars
+=> MARS loaded
+Dataset statistics:
+  ------------------------------
+  subset   | # ids | # tracklets
+  ------------------------------
+  train    |   625 |     8298
+  query    |   626 |     1980
+  gallery  |   622 |     9330
+  ------------------------------
+  total    |  1247 |    19608
+  number of images per tracklet: 2 ~ 920, average 59.5
+  ------------------------------
+Initializing model: ap3dres50
+Model size: 34.51263M
+pretrain state dict loaded
+>>> module conv1.weight is trainable
+>>> module bn1.weight is trainable
+>>> module bn1.bias is trainable
+>>> module layer1.0.conv1.weight is trainable
+>>> module layer1.0.bn1.weight is trainable
+>>> module layer1.0.bn1.bias is trainable
+>>> module layer1.0.conv2.weight is trainable
+>>> module layer1.0.bn2.weight is trainable
+>>> module layer1.0.bn2.bias is trainable
+>>> module layer1.0.conv3.weight is trainable
+>>> module layer1.0.bn3.weight is trainable
+>>> module layer1.0.bn3.bias is trainable
+>>> module layer1.0.downsample.0.weight is trainable
+>>> module layer1.0.downsample.1.weight is trainable
+>>> module layer1.0.downsample.1.bias is trainable
+>>> module layer1.1.conv1.weight is trainable
+>>> module layer1.1.bn1.weight is trainable
+>>> module layer1.1.bn1.bias is trainable
+>>> module layer1.1.conv2.weight is trainable
+>>> module layer1.1.bn2.weight is trainable
+>>> module layer1.1.bn2.bias is trainable
+>>> module layer1.1.conv3.weight is trainable
+>>> module layer1.1.bn3.weight is trainable
+>>> module layer1.1.bn3.bias is trainable
+>>> module layer1.2.conv1.weight is trainable
+>>> module layer1.2.bn1.weight is trainable
+>>> module layer1.2.bn1.bias is trainable
+>>> module layer1.2.conv2.weight is trainable
+>>> module layer1.2.bn2.weight is trainable
+>>> module layer1.2.bn2.bias is trainable
+>>> module layer1.2.conv3.weight is trainable
+>>> module layer1.2.bn3.weight is trainable
+>>> module layer1.2.bn3.bias is trainable
+>>> module layer2.0.conv1.weight is trainable
+>>> module layer2.0.bn1.weight is trainable
+>>> module layer2.0.bn1.bias is trainable
+>>> module layer2.0.conv2.APM.semantic_mapping.weight is trainable
+>>> module layer2.0.conv2.APM.x_mapping.weight is trainable
+>>> module layer2.0.conv2.APM.n_mapping.weight is trainable
+>>> module layer2.0.conv2.APM.contrastive_att_net.0.weight is trainable
+>>> module layer2.0.conv2.spatial_conv3d.weight is trainable
+>>> module layer2.0.conv2.temporal_conv3d.weight is trainable
+>>> module layer2.0.bn2.weight is trainable
+>>> module layer2.0.bn2.bias is trainable
+>>> module layer2.0.conv3.weight is trainable
+>>> module layer2.0.bn3.weight is trainable
+>>> module layer2.0.bn3.bias is trainable
+>>> module layer2.0.downsample.0.weight is trainable
+>>> module layer2.0.downsample.1.weight is trainable
+>>> module layer2.0.downsample.1.bias is trainable
+>>> module layer2.1.conv1.weight is trainable
+>>> module layer2.1.bn1.weight is trainable
+>>> module layer2.1.bn1.bias is trainable
+>>> module layer2.1.conv2.weight is trainable
+>>> module layer2.1.bn2.weight is trainable
+>>> module layer2.1.bn2.bias is trainable
+>>> module layer2.1.conv3.weight is trainable
+>>> module layer2.1.bn3.weight is trainable
+>>> module layer2.1.bn3.bias is trainable
+>>> module layer2.2.conv1.weight is trainable
+>>> module layer2.2.bn1.weight is trainable
+>>> module layer2.2.bn1.bias is trainable
+>>> module layer2.2.conv2.APM.semantic_mapping.weight is trainable
+>>> module layer2.2.conv2.APM.x_mapping.weight is trainable
+>>> module layer2.2.conv2.APM.n_mapping.weight is trainable
+>>> module layer2.2.conv2.APM.contrastive_att_net.0.weight is trainable
+>>> module layer2.2.conv2.spatial_conv3d.weight is trainable
+>>> module layer2.2.conv2.temporal_conv3d.weight is trainable
+>>> module layer2.2.bn2.weight is trainable
+>>> module layer2.2.bn2.bias is trainable
+>>> module layer2.2.conv3.weight is trainable
+>>> module layer2.2.bn3.weight is trainable
+>>> module layer2.2.bn3.bias is trainable
+>>> module layer2.3.conv1.weight is trainable
+>>> module layer2.3.bn1.weight is trainable
+>>> module layer2.3.bn1.bias is trainable
+>>> module layer2.3.conv2.weight is trainable
+>>> module layer2.3.bn2.weight is trainable
+>>> module layer2.3.bn2.bias is trainable
+>>> module layer2.3.conv3.weight is trainable
+>>> module layer2.3.bn3.weight is trainable
+>>> module layer2.3.bn3.bias is trainable
+>>> module layer3.0.conv1.weight is trainable
+>>> module layer3.0.bn1.weight is trainable
+>>> module layer3.0.bn1.bias is trainable
+>>> module layer3.0.conv2.APM.semantic_mapping.weight is trainable
+>>> module layer3.0.conv2.APM.x_mapping.weight is trainable
+>>> module layer3.0.conv2.APM.n_mapping.weight is trainable
+>>> module layer3.0.conv2.APM.contrastive_att_net.0.weight is trainable
+>>> module layer3.0.conv2.spatial_conv3d.weight is trainable
+>>> module layer3.0.conv2.temporal_conv3d.weight is trainable
+>>> module layer3.0.bn2.weight is trainable
+>>> module layer3.0.bn2.bias is trainable
+>>> module layer3.0.conv3.weight is trainable
+>>> module layer3.0.bn3.weight is trainable
+>>> module layer3.0.bn3.bias is trainable
+>>> module layer3.0.downsample.0.weight is trainable
+>>> module layer3.0.downsample.1.weight is trainable
+>>> module layer3.0.downsample.1.bias is trainable
+>>> module layer3.1.conv1.weight is trainable
+>>> module layer3.1.bn1.weight is trainable
+>>> module layer3.1.bn1.bias is trainable
+>>> module layer3.1.conv2.weight is trainable
+>>> module layer3.1.bn2.weight is trainable
+>>> module layer3.1.bn2.bias is trainable
+>>> module layer3.1.conv3.weight is trainable
+>>> module layer3.1.bn3.weight is trainable
+>>> module layer3.1.bn3.bias is trainable
+>>> module layer3.2.conv1.weight is trainable
+>>> module layer3.2.bn1.weight is trainable
+>>> module layer3.2.bn1.bias is trainable
+>>> module layer3.2.conv2.APM.semantic_mapping.weight is trainable
+>>> module layer3.2.conv2.APM.x_mapping.weight is trainable
+>>> module layer3.2.conv2.APM.n_mapping.weight is trainable
+>>> module layer3.2.conv2.APM.contrastive_att_net.0.weight is trainable
+>>> module layer3.2.conv2.spatial_conv3d.weight is trainable
+>>> module layer3.2.conv2.temporal_conv3d.weight is trainable
+>>> module layer3.2.bn2.weight is trainable
+>>> module layer3.2.bn2.bias is trainable
+>>> module layer3.2.conv3.weight is trainable
+>>> module layer3.2.bn3.weight is trainable
+>>> module layer3.2.bn3.bias is trainable
+>>> module layer3.3.conv1.weight is trainable
+>>> module layer3.3.bn1.weight is trainable
+>>> module layer3.3.bn1.bias is trainable
+>>> module layer3.3.conv2.weight is trainable
+>>> module layer3.3.bn2.weight is trainable
+>>> module layer3.3.bn2.bias is trainable
+>>> module layer3.3.conv3.weight is trainable
+>>> module layer3.3.bn3.weight is trainable
+>>> module layer3.3.bn3.bias is trainable
+>>> module layer3.4.conv1.weight is trainable
+>>> module layer3.4.bn1.weight is trainable
+>>> module layer3.4.bn1.bias is trainable
+>>> module layer3.4.conv2.APM.semantic_mapping.weight is trainable
+>>> module layer3.4.conv2.APM.x_mapping.weight is trainable
+>>> module layer3.4.conv2.APM.n_mapping.weight is trainable
+>>> module layer3.4.conv2.APM.contrastive_att_net.0.weight is trainable
+>>> module layer3.4.conv2.spatial_conv3d.weight is trainable
+>>> module layer3.4.conv2.temporal_conv3d.weight is trainable
+>>> module layer3.4.bn2.weight is trainable
+>>> module layer3.4.bn2.bias is trainable
+>>> module layer3.4.conv3.weight is trainable
+>>> module layer3.4.bn3.weight is trainable
+>>> module layer3.4.bn3.bias is trainable
+>>> module layer3.5.conv1.weight is trainable
+>>> module layer3.5.bn1.weight is trainable
+>>> module layer3.5.bn1.bias is trainable
+>>> module layer3.5.conv2.weight is trainable
+>>> module layer3.5.bn2.weight is trainable
+>>> module layer3.5.bn2.bias is trainable
+>>> module layer3.5.conv3.weight is trainable
+>>> module layer3.5.bn3.weight is trainable
+>>> module layer3.5.bn3.bias is trainable
+>>> module layer4.0.conv1.weight is trainable
+>>> module layer4.0.bn1.weight is trainable
+>>> module layer4.0.bn1.bias is trainable
+>>> module layer4.0.conv2.weight is trainable
+>>> module layer4.0.bn2.weight is trainable
+>>> module layer4.0.bn2.bias is trainable
+>>> module layer4.0.conv3.weight is trainable
+>>> module layer4.0.bn3.weight is trainable
+>>> module layer4.0.bn3.bias is trainable
+>>> module layer4.0.downsample.0.weight is trainable
+>>> module layer4.0.downsample.1.weight is trainable
+>>> module layer4.0.downsample.1.bias is trainable
+>>> module layer4.1.conv1.weight is trainable
+>>> module layer4.1.bn1.weight is trainable
+>>> module layer4.1.bn1.bias is trainable
+>>> module layer4.1.conv2.weight is trainable
+>>> module layer4.1.bn2.weight is trainable
+>>> module layer4.1.bn2.bias is trainable
+>>> module layer4.1.conv3.weight is trainable
+>>> module layer4.1.bn3.weight is trainable
+>>> module layer4.1.bn3.bias is trainable
+>>> module layer4.2.conv1.weight is trainable
+>>> module layer4.2.bn1.weight is trainable
+>>> module layer4.2.bn1.bias is trainable
+>>> module layer4.2.conv2.weight is trainable
+>>> module layer4.2.bn2.weight is trainable
+>>> module layer4.2.bn2.bias is trainable
+>>> module layer4.2.conv3.weight is trainable
+>>> module layer4.2.bn3.weight is trainable
+>>> module layer4.2.bn3.bias is trainable
+>>> module bn.weight is trainable
+>>> module bn.bias is trainable
+>>> module classifier.weight is trainable
+>>> module classifier.bias is trainable
+Model size: 34.51263M
+==> Start training
+Epoch1 Time:280.9s Data:1.6s Loss:7.2808 Xent:6.8542 Htri:0.4266 Acc:2.46% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')

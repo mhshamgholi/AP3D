@@ -160,14 +160,8 @@ class ResNet503D(nn.Module):
         x = self.maxpool(x)
 
         x = self.layer1(x)
-        if conf.use_dropout:
-            x = self.dropout(x)
         x = self.layer2(x)
-        if conf.use_dropout:
-            x = self.dropout(x)
         x = self.layer3(x)
-        if conf.use_dropout:
-            x = self.dropout(x)
         x = self.layer4(x)
         if conf.use_dropout:
             x = self.dropout(x)
@@ -175,7 +169,7 @@ class ResNet503D(nn.Module):
         b, c, t, h, w = x.size()
         x = x.permute(0, 2, 1, 3, 4).contiguous()
         x = x.view(b*t, c, h, w)
-        if conf.hist and conf.concat_hist_max:
+        if conf.use_hist and conf.concat_hist_max:
             x1 = self.hist(x)
             x2 = F.max_pool2d(x, x.size()[2:]).view(b*t, -1) # -> [80, 2048, 1, 1]
             x = torch.cat((x1, x2), 1)
