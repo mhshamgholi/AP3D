@@ -135,16 +135,16 @@ class ResNet503D(nn.Module):
             _coef = (self.hist.nbins + 1) if conf.concat_hist_max else (self.hist.nbins)
             if conf.use_dropout:
                 self.classifier = nn.Sequential(
-                    (nn.Linear(2048 * (_coef), 4096),
-                     nn.Relu(),
+                    nn.Linear(2048 * (_coef), 4096),
+                     nn.ReLU(),
                      nn.Dropout(0.5),
-                     nn.Linear(4096, num_classes))
+                     nn.Linear(4096, num_classes)
                 )
             else:
                 self.classifier = nn.Sequential(
-                    (nn.Linear(2048 * (_coef), 4096),
-                     nn.Relu(),
-                     nn.Linear(4096, num_classes))
+                    nn.Linear(2048 * (_coef), 4096),
+                     nn.ReLU(),
+                     nn.Linear(4096, num_classes)
                 )
         else:
             self.classifier = nn.Linear(2048, num_classes)
