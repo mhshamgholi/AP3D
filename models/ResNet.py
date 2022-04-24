@@ -131,7 +131,21 @@ class ResNet503D(nn.Module):
         self.bn.apply(weights_init_kaiming)
 
         if conf.use_hist:
-            self.classifier = nn.Linear(2048 * (self.hist.nbins + 1), num_classes)
+#             self.classifier = nn.Linear(2048 * (self.hist.nbins + 1), num_classes)
+            _coef = (self.hist.nbins + 1) if conf.concat_hist_max else (self.hist.nbins)
+            if conf.use_dropout:
+                self.classifier = nn.Sequential(
+                    (nn.Linear(2048 * (_coef), 4096),
+                     nn.Relu(),
+                     nn.Dropout(0.5),
+                     nn.Linear(4096, num_classes))
+                )
+            else:
+                self.classifier = nn.Sequential(
+                    (nn.Linear(2048 * (_coef), 4096),
+                     nn.Relu(),
+                     nn.Linear(4096, num_classes))
+                )
         else:
             self.classifier = nn.Linear(2048, num_classes)
 
