@@ -211,3 +211,938 @@ Model size: 34.51263M
 Epoch1 Time:280.9s Data:1.6s Loss:7.2808 Xent:6.8542 Htri:0.4266 Acc:2.46% 
 model hist : edges : Parameter containing:
 tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch2 Time:280.6s Data:1.5s Loss:7.5562 Xent:7.0774 Htri:0.4788 Acc:2.38% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch3 Time:280.4s Data:1.6s Loss:7.3930 Xent:6.9417 Htri:0.4513 Acc:3.65% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch4 Time:279.3s Data:1.6s Loss:7.0350 Xent:6.5367 Htri:0.4983 Acc:3.88% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch5 Time:279.3s Data:1.6s Loss:6.4455 Xent:5.9260 Htri:0.5194 Acc:5.72% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch6 Time:280.0s Data:1.6s Loss:6.0878 Xent:5.6487 Htri:0.4391 Acc:8.02% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch7 Time:280.0s Data:1.6s Loss:5.7251 Xent:5.2921 Htri:0.4331 Acc:9.59% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch8 Time:278.1s Data:1.6s Loss:5.4730 Xent:5.0812 Htri:0.3918 Acc:11.50% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch9 Time:279.7s Data:1.6s Loss:5.1428 Xent:4.7687 Htri:0.3740 Acc:14.26% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch10 Time:279.4s Data:1.6s Loss:4.8924 Xent:4.5206 Htri:0.3719 Acc:16.54% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 3m 4s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:14.2% top5:24.9% top10:30.9% mAP:6.3%
+------------------
+Epoch11 Time:280.6s Data:2.1s Loss:4.7380 Xent:4.3567 Htri:0.3813 Acc:18.40% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch12 Time:280.5s Data:1.7s Loss:5.2764 Xent:4.8540 Htri:0.4224 Acc:15.08% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch13 Time:280.3s Data:1.6s Loss:5.1278 Xent:4.7302 Htri:0.3977 Acc:16.17% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch14 Time:280.9s Data:1.6s Loss:4.9202 Xent:4.5696 Htri:0.3506 Acc:20.30% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch15 Time:281.2s Data:1.6s Loss:4.5452 Xent:4.1957 Htri:0.3495 Acc:24.38% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch16 Time:280.2s Data:1.6s Loss:4.1745 Xent:3.8417 Htri:0.3328 Acc:26.90% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch17 Time:280.0s Data:1.6s Loss:4.0287 Xent:3.6857 Htri:0.3430 Acc:28.69% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch18 Time:279.9s Data:1.6s Loss:3.9664 Xent:3.6378 Htri:0.3286 Acc:30.36% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch19 Time:280.5s Data:1.6s Loss:3.6902 Xent:3.3723 Htri:0.3179 Acc:32.18% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch20 Time:280.2s Data:1.6s Loss:3.4022 Xent:3.0857 Htri:0.3166 Acc:36.67% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 2m 59s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:8.3% top5:17.9% top10:23.1% mAP:3.3%
+------------------
+Epoch21 Time:279.8s Data:1.9s Loss:3.4095 Xent:3.0991 Htri:0.3104 Acc:36.88% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch22 Time:279.9s Data:1.6s Loss:3.2333 Xent:2.9366 Htri:0.2967 Acc:39.64% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch23 Time:279.8s Data:1.6s Loss:3.2703 Xent:2.9686 Htri:0.3017 Acc:39.15% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch24 Time:280.2s Data:1.6s Loss:2.9808 Xent:2.6838 Htri:0.2969 Acc:44.03% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch25 Time:279.5s Data:1.6s Loss:2.8693 Xent:2.5778 Htri:0.2915 Acc:45.37% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch26 Time:279.9s Data:1.6s Loss:2.7583 Xent:2.4729 Htri:0.2854 Acc:45.98% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch27 Time:280.2s Data:1.6s Loss:2.6085 Xent:2.3296 Htri:0.2789 Acc:48.41% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch28 Time:280.3s Data:1.6s Loss:2.5800 Xent:2.2975 Htri:0.2825 Acc:49.60% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch29 Time:280.2s Data:1.6s Loss:2.7810 Xent:2.4902 Htri:0.2907 Acc:46.59% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch30 Time:280.0s Data:1.6s Loss:2.8357 Xent:2.5446 Htri:0.2910 Acc:45.35% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 3m 0s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:23.7% top5:37.7% top10:45.0% mAP:11.7%
+------------------
+Epoch31 Time:280.4s Data:2.2s Loss:2.3910 Xent:2.1158 Htri:0.2752 Acc:53.58% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch32 Time:280.4s Data:1.6s Loss:2.4962 Xent:2.2098 Htri:0.2864 Acc:50.65% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch33 Time:279.6s Data:1.6s Loss:2.3508 Xent:2.0735 Htri:0.2773 Acc:53.13% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch34 Time:279.8s Data:1.6s Loss:2.2538 Xent:1.9763 Htri:0.2775 Acc:55.88% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch35 Time:279.8s Data:1.6s Loss:2.1179 Xent:1.8469 Htri:0.2710 Acc:58.24% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch36 Time:279.8s Data:1.6s Loss:2.0333 Xent:1.7590 Htri:0.2743 Acc:59.80% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch37 Time:279.4s Data:1.6s Loss:1.9647 Xent:1.6925 Htri:0.2722 Acc:60.27% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch38 Time:280.2s Data:1.7s Loss:2.0011 Xent:1.7245 Htri:0.2766 Acc:60.06% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch39 Time:279.8s Data:1.6s Loss:1.8892 Xent:1.6199 Htri:0.2693 Acc:62.56% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch40 Time:280.1s Data:1.6s Loss:1.7675 Xent:1.4983 Htri:0.2692 Acc:64.99% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 2m 59s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:27.5% top5:41.9% top10:48.8% mAP:14.0%
+------------------
+Epoch41 Time:280.3s Data:2.2s Loss:1.7109 Xent:1.4416 Htri:0.2693 Acc:66.95% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch42 Time:280.2s Data:1.6s Loss:1.6834 Xent:1.4185 Htri:0.2650 Acc:66.72% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch43 Time:280.4s Data:1.7s Loss:1.6531 Xent:1.3911 Htri:0.2620 Acc:67.51% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch44 Time:280.6s Data:1.6s Loss:1.6284 Xent:1.3640 Htri:0.2644 Acc:67.95% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch45 Time:279.9s Data:1.6s Loss:1.6189 Xent:1.3510 Htri:0.2678 Acc:68.17% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch46 Time:280.0s Data:1.6s Loss:1.5728 Xent:1.3013 Htri:0.2715 Acc:69.38% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch47 Time:279.8s Data:1.7s Loss:1.6071 Xent:1.3358 Htri:0.2713 Acc:68.81% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch48 Time:280.0s Data:1.6s Loss:1.5326 Xent:1.2699 Htri:0.2627 Acc:69.70% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch49 Time:280.1s Data:1.6s Loss:1.5744 Xent:1.3165 Htri:0.2579 Acc:68.75% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch50 Time:279.6s Data:1.6s Loss:1.4901 Xent:1.2267 Htri:0.2634 Acc:70.72% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 3m 3s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:29.8% top5:46.6% top10:54.1% mAP:16.1%
+------------------
+Epoch51 Time:280.3s Data:2.2s Loss:1.4907 Xent:1.2303 Htri:0.2604 Acc:70.37% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch52 Time:279.9s Data:1.6s Loss:1.4634 Xent:1.2054 Htri:0.2580 Acc:71.53% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch53 Time:279.4s Data:1.7s Loss:1.4701 Xent:1.2105 Htri:0.2597 Acc:71.02% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch54 Time:279.8s Data:1.6s Loss:1.3244 Xent:1.0640 Htri:0.2604 Acc:74.60% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch55 Time:280.6s Data:1.6s Loss:1.3130 Xent:1.0545 Htri:0.2586 Acc:75.00% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch56 Time:281.1s Data:1.7s Loss:1.2909 Xent:1.0352 Htri:0.2557 Acc:75.24% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch57 Time:280.5s Data:1.6s Loss:1.2389 Xent:0.9837 Htri:0.2552 Acc:77.15% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch58 Time:280.1s Data:1.6s Loss:1.2115 Xent:0.9580 Htri:0.2536 Acc:77.66% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch59 Time:281.5s Data:1.7s Loss:1.2770 Xent:1.0227 Htri:0.2543 Acc:75.37% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch60 Time:283.9s Data:1.7s Loss:1.2404 Xent:0.9873 Htri:0.2531 Acc:76.58% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 3m 19s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:32.3% top5:48.9% top10:56.4% mAP:17.6%
+------------------
+Epoch61 Time:280.7s Data:2.3s Loss:0.9762 Xent:0.7261 Htri:0.2502 Acc:83.55% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch62 Time:280.4s Data:1.6s Loss:0.9107 Xent:0.6621 Htri:0.2487 Acc:84.72% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch63 Time:279.3s Data:1.6s Loss:0.8769 Xent:0.6310 Htri:0.2459 Acc:86.26% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch64 Time:279.4s Data:1.6s Loss:0.8455 Xent:0.6013 Htri:0.2442 Acc:86.44% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch65 Time:278.6s Data:1.6s Loss:0.8226 Xent:0.5777 Htri:0.2449 Acc:87.59% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch66 Time:279.6s Data:1.6s Loss:0.8233 Xent:0.5784 Htri:0.2449 Acc:87.55% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch67 Time:279.5s Data:1.6s Loss:0.7812 Xent:0.5379 Htri:0.2432 Acc:88.09% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch68 Time:279.6s Data:1.6s Loss:0.7854 Xent:0.5391 Htri:0.2463 Acc:88.94% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch69 Time:279.0s Data:1.6s Loss:0.7695 Xent:0.5272 Htri:0.2423 Acc:88.63% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch70 Time:278.9s Data:1.6s Loss:0.7780 Xent:0.5342 Htri:0.2438 Acc:88.55% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 3m 2s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:35.4% top5:52.2% top10:59.2% mAP:19.5%
+------------------
+Epoch71 Time:279.5s Data:2.3s Loss:0.7482 Xent:0.5071 Htri:0.2411 Acc:89.03% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch72 Time:280.2s Data:1.6s Loss:0.7354 Xent:0.4954 Htri:0.2401 Acc:89.68% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch73 Time:280.7s Data:1.6s Loss:0.7371 Xent:0.4957 Htri:0.2414 Acc:89.51% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch74 Time:280.5s Data:1.6s Loss:0.7249 Xent:0.4848 Htri:0.2401 Acc:89.68% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch75 Time:280.1s Data:1.6s Loss:0.7357 Xent:0.4958 Htri:0.2399 Acc:89.90% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch76 Time:280.2s Data:1.6s Loss:0.7264 Xent:0.4869 Htri:0.2395 Acc:89.50% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch77 Time:279.3s Data:1.6s Loss:0.7211 Xent:0.4819 Htri:0.2392 Acc:89.67% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch78 Time:279.2s Data:1.6s Loss:0.7151 Xent:0.4759 Htri:0.2391 Acc:90.00% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch79 Time:279.7s Data:1.6s Loss:0.7082 Xent:0.4684 Htri:0.2399 Acc:90.28% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch80 Time:279.7s Data:1.6s Loss:0.7010 Xent:0.4631 Htri:0.2379 Acc:90.57% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 3m 7s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:36.7% top5:53.0% top10:60.3% mAP:20.0%
+------------------
+Epoch81 Time:280.3s Data:2.2s Loss:0.7037 Xent:0.4658 Htri:0.2379 Acc:90.41% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch82 Time:280.4s Data:1.6s Loss:0.7096 Xent:0.4722 Htri:0.2374 Acc:90.41% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch83 Time:279.9s Data:1.7s Loss:0.7069 Xent:0.4675 Htri:0.2393 Acc:90.64% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch84 Time:280.7s Data:1.7s Loss:0.6617 Xent:0.4257 Htri:0.2360 Acc:91.57% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch85 Time:281.1s Data:1.6s Loss:0.6737 Xent:0.4388 Htri:0.2349 Acc:91.32% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch86 Time:280.5s Data:1.6s Loss:0.6648 Xent:0.4303 Htri:0.2344 Acc:91.49% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch87 Time:280.0s Data:1.6s Loss:0.6723 Xent:0.4377 Htri:0.2345 Acc:91.06% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch88 Time:279.9s Data:1.6s Loss:0.6472 Xent:0.4130 Htri:0.2342 Acc:92.11% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch89 Time:279.6s Data:1.6s Loss:0.6655 Xent:0.4298 Htri:0.2358 Acc:90.97% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch90 Time:279.9s Data:1.6s Loss:0.6622 Xent:0.4255 Htri:0.2367 Acc:91.87% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 3m 6s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:35.3% top5:52.9% top10:59.8% mAP:19.5%
+------------------
+Epoch91 Time:280.6s Data:1.9s Loss:0.6594 Xent:0.4246 Htri:0.2348 Acc:91.66% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch92 Time:279.7s Data:1.6s Loss:0.6562 Xent:0.4215 Htri:0.2347 Acc:91.63% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch93 Time:279.5s Data:1.6s Loss:0.6698 Xent:0.4367 Htri:0.2330 Acc:91.23% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch94 Time:280.8s Data:1.6s Loss:0.6414 Xent:0.4076 Htri:0.2338 Acc:92.33% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch95 Time:280.5s Data:1.6s Loss:0.6428 Xent:0.4108 Htri:0.2320 Acc:92.25% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch96 Time:279.8s Data:1.6s Loss:0.6240 Xent:0.3922 Htri:0.2318 Acc:92.58% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch97 Time:279.5s Data:1.6s Loss:0.6406 Xent:0.4094 Htri:0.2312 Acc:91.54% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch98 Time:280.0s Data:1.6s Loss:0.6431 Xent:0.4107 Htri:0.2324 Acc:92.14% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch99 Time:280.4s Data:1.6s Loss:0.6199 Xent:0.3890 Htri:0.2308 Acc:92.70% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch100 Time:280.0s Data:1.6s Loss:0.6221 Xent:0.3907 Htri:0.2314 Acc:92.53% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 3m 1s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:36.7% top5:55.3% top10:62.2% mAP:20.8%
+------------------
+Epoch101 Time:279.4s Data:1.9s Loss:0.6240 Xent:0.3929 Htri:0.2311 Acc:92.40% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch102 Time:279.8s Data:1.6s Loss:0.6322 Xent:0.4015 Htri:0.2307 Acc:92.26% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch103 Time:279.8s Data:1.6s Loss:0.6263 Xent:0.3925 Htri:0.2339 Acc:92.42% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch104 Time:279.8s Data:1.7s Loss:0.6204 Xent:0.3897 Htri:0.2307 Acc:92.75% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch105 Time:279.8s Data:1.6s Loss:0.6166 Xent:0.3852 Htri:0.2314 Acc:93.06% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch106 Time:279.9s Data:1.6s Loss:0.5966 Xent:0.3667 Htri:0.2299 Acc:93.24% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch107 Time:280.1s Data:1.6s Loss:0.6095 Xent:0.3797 Htri:0.2298 Acc:92.70% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch108 Time:280.0s Data:1.6s Loss:0.5939 Xent:0.3666 Htri:0.2274 Acc:93.10% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch109 Time:280.1s Data:1.6s Loss:0.5944 Xent:0.3676 Htri:0.2268 Acc:93.53% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch110 Time:279.8s Data:1.6s Loss:0.5856 Xent:0.3583 Htri:0.2273 Acc:93.56% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 3m 0s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:38.1% top5:56.2% top10:63.1% mAP:22.0%
+------------------
+Epoch111 Time:280.2s Data:2.2s Loss:0.5935 Xent:0.3648 Htri:0.2288 Acc:93.30% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch112 Time:279.8s Data:1.6s Loss:0.5964 Xent:0.3697 Htri:0.2267 Acc:93.00% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch113 Time:279.3s Data:1.6s Loss:0.5924 Xent:0.3643 Htri:0.2281 Acc:93.82% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch114 Time:279.4s Data:1.6s Loss:0.5999 Xent:0.3732 Htri:0.2267 Acc:92.94% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch115 Time:280.1s Data:1.6s Loss:0.5786 Xent:0.3544 Htri:0.2242 Acc:93.75% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch116 Time:280.2s Data:1.6s Loss:0.5750 Xent:0.3492 Htri:0.2258 Acc:93.71% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch117 Time:279.7s Data:1.6s Loss:0.5724 Xent:0.3485 Htri:0.2239 Acc:94.04% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch118 Time:280.1s Data:1.6s Loss:0.5876 Xent:0.3603 Htri:0.2273 Acc:93.26% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch119 Time:280.0s Data:1.6s Loss:0.5642 Xent:0.3394 Htri:0.2248 Acc:94.04% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch120 Time:280.0s Data:1.6s Loss:0.5811 Xent:0.3576 Htri:0.2235 Acc:93.84% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 2m 60s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:38.0% top5:56.2% top10:63.1% mAP:21.9%
+------------------
+Epoch121 Time:280.0s Data:1.9s Loss:0.5596 Xent:0.3361 Htri:0.2235 Acc:94.40% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch122 Time:280.0s Data:1.6s Loss:0.5516 Xent:0.3291 Htri:0.2226 Acc:94.28% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch123 Time:279.6s Data:1.6s Loss:0.5460 Xent:0.3230 Htri:0.2230 Acc:94.68% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch124 Time:280.2s Data:1.6s Loss:0.5613 Xent:0.3380 Htri:0.2233 Acc:94.00% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch125 Time:280.0s Data:1.6s Loss:0.5490 Xent:0.3256 Htri:0.2235 Acc:94.44% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch126 Time:279.8s Data:1.6s Loss:0.5385 Xent:0.3144 Htri:0.2241 Acc:94.84% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch127 Time:279.7s Data:1.6s Loss:0.5481 Xent:0.3247 Htri:0.2233 Acc:94.65% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch128 Time:280.2s Data:1.6s Loss:0.5537 Xent:0.3283 Htri:0.2255 Acc:94.04% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch129 Time:280.0s Data:1.6s Loss:0.5369 Xent:0.3156 Htri:0.2213 Acc:94.46% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch130 Time:279.8s Data:1.6s Loss:0.5603 Xent:0.3383 Htri:0.2220 Acc:94.09% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 2m 60s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:39.1% top5:56.9% top10:63.0% mAP:22.3%
+------------------
+Epoch131 Time:281.0s Data:2.2s Loss:0.5497 Xent:0.3249 Htri:0.2248 Acc:94.11% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch132 Time:280.4s Data:1.7s Loss:0.5381 Xent:0.3168 Htri:0.2213 Acc:94.28% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch133 Time:280.1s Data:1.6s Loss:0.5518 Xent:0.3285 Htri:0.2233 Acc:94.64% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch134 Time:280.2s Data:1.6s Loss:0.5425 Xent:0.3188 Htri:0.2237 Acc:94.65% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch135 Time:283.9s Data:1.7s Loss:0.5362 Xent:0.3127 Htri:0.2235 Acc:94.80% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch136 Time:283.9s Data:1.7s Loss:0.5351 Xent:0.3141 Htri:0.2210 Acc:94.77% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch137 Time:281.0s Data:1.7s Loss:0.5342 Xent:0.3096 Htri:0.2246 Acc:94.97% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch138 Time:280.4s Data:1.6s Loss:0.5361 Xent:0.3140 Htri:0.2221 Acc:94.58% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch139 Time:280.1s Data:1.6s Loss:0.5406 Xent:0.3176 Htri:0.2230 Acc:94.66% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch140 Time:279.5s Data:1.6s Loss:0.5245 Xent:0.3030 Htri:0.2215 Acc:94.77% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 3m 3s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:39.1% top5:57.1% top10:63.7% mAP:22.5%
+------------------
+Epoch141 Time:280.9s Data:2.2s Loss:0.5321 Xent:0.3113 Htri:0.2207 Acc:94.77% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch142 Time:280.8s Data:1.6s Loss:0.5399 Xent:0.3185 Htri:0.2213 Acc:94.61% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch143 Time:279.9s Data:1.6s Loss:0.5371 Xent:0.3149 Htri:0.2222 Acc:94.73% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch144 Time:280.1s Data:1.6s Loss:0.5367 Xent:0.3161 Htri:0.2206 Acc:94.88% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch145 Time:279.6s Data:1.6s Loss:0.5187 Xent:0.2989 Htri:0.2198 Acc:95.29% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch146 Time:279.9s Data:1.6s Loss:0.5278 Xent:0.3067 Htri:0.2211 Acc:95.15% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch147 Time:279.3s Data:1.6s Loss:0.5291 Xent:0.3060 Htri:0.2231 Acc:94.92% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch148 Time:279.8s Data:1.6s Loss:0.5378 Xent:0.3148 Htri:0.2230 Acc:94.65% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch149 Time:280.2s Data:1.6s Loss:0.5358 Xent:0.3143 Htri:0.2215 Acc:94.65% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch150 Time:280.1s Data:1.6s Loss:0.5332 Xent:0.3127 Htri:0.2205 Acc:94.85% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 3m 1s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:38.7% top5:57.3% top10:64.0% mAP:22.7%
+------------------
+Epoch151 Time:280.3s Data:1.9s Loss:0.5493 Xent:0.3265 Htri:0.2228 Acc:94.33% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch152 Time:280.1s Data:1.6s Loss:0.5361 Xent:0.3151 Htri:0.2211 Acc:94.64% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch153 Time:279.9s Data:1.6s Loss:0.5265 Xent:0.3061 Htri:0.2204 Acc:94.95% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch154 Time:280.1s Data:1.6s Loss:0.5251 Xent:0.3045 Htri:0.2206 Acc:95.18% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch155 Time:280.6s Data:1.6s Loss:0.5335 Xent:0.3120 Htri:0.2215 Acc:94.60% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch156 Time:280.9s Data:1.6s Loss:0.5191 Xent:0.2980 Htri:0.2211 Acc:95.07% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch157 Time:281.2s Data:1.6s Loss:0.5081 Xent:0.2877 Htri:0.2203 Acc:95.37% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch158 Time:281.0s Data:1.6s Loss:0.5214 Xent:0.2985 Htri:0.2229 Acc:95.10% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch159 Time:280.0s Data:1.7s Loss:0.5324 Xent:0.3116 Htri:0.2208 Acc:94.68% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch160 Time:280.5s Data:1.6s Loss:0.5257 Xent:0.3040 Htri:0.2217 Acc:95.17% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 3m 18s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:37.8% top5:54.4% top10:62.2% mAP:21.2%
+------------------
+Epoch161 Time:283.7s Data:2.0s Loss:0.5302 Xent:0.3101 Htri:0.2201 Acc:94.90% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch162 Time:280.1s Data:1.6s Loss:0.5263 Xent:0.3041 Htri:0.2222 Acc:95.26% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch163 Time:280.1s Data:1.6s Loss:0.5217 Xent:0.3013 Htri:0.2204 Acc:95.13% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch164 Time:280.1s Data:1.6s Loss:0.5293 Xent:0.3085 Htri:0.2207 Acc:94.93% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch165 Time:280.0s Data:1.6s Loss:0.5294 Xent:0.3091 Htri:0.2203 Acc:94.59% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch166 Time:280.3s Data:1.6s Loss:0.5304 Xent:0.3070 Htri:0.2234 Acc:94.90% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch167 Time:280.5s Data:1.6s Loss:0.5193 Xent:0.2991 Htri:0.2202 Acc:94.88% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch168 Time:280.0s Data:1.6s Loss:0.5239 Xent:0.3050 Htri:0.2189 Acc:94.88% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch169 Time:279.3s Data:1.6s Loss:0.5293 Xent:0.3086 Htri:0.2206 Acc:94.95% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch170 Time:279.6s Data:1.7s Loss:0.5065 Xent:0.2870 Htri:0.2195 Acc:95.56% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 3m 1s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:39.3% top5:57.7% top10:64.5% mAP:23.2%
+------------------
+Epoch171 Time:279.9s Data:2.2s Loss:0.5260 Xent:0.3053 Htri:0.2207 Acc:94.84% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch172 Time:280.0s Data:1.6s Loss:0.5242 Xent:0.3019 Htri:0.2223 Acc:94.90% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch173 Time:279.8s Data:1.6s Loss:0.5222 Xent:0.3011 Htri:0.2211 Acc:95.19% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch174 Time:280.6s Data:1.7s Loss:0.5013 Xent:0.2820 Htri:0.2193 Acc:95.46% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch175 Time:280.4s Data:1.6s Loss:0.5165 Xent:0.2965 Htri:0.2200 Acc:95.11% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch176 Time:280.3s Data:1.6s Loss:0.5196 Xent:0.3005 Htri:0.2191 Acc:94.92% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch177 Time:280.3s Data:1.6s Loss:0.5201 Xent:0.3002 Htri:0.2199 Acc:94.77% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch178 Time:280.3s Data:1.6s Loss:0.5101 Xent:0.2899 Htri:0.2203 Acc:95.31% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch179 Time:280.3s Data:1.6s Loss:0.5104 Xent:0.2906 Htri:0.2199 Acc:95.19% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch180 Time:280.2s Data:1.6s Loss:0.5187 Xent:0.2990 Htri:0.2197 Acc:95.01% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 2m 59s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:39.9% top5:57.8% top10:64.6% mAP:23.4%
+------------------
+Epoch181 Time:279.8s Data:2.2s Loss:0.5198 Xent:0.3004 Htri:0.2194 Acc:95.34% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch182 Time:280.0s Data:1.6s Loss:0.5209 Xent:0.3015 Htri:0.2195 Acc:95.16% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch183 Time:280.4s Data:1.6s Loss:0.5043 Xent:0.2848 Htri:0.2194 Acc:95.47% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch184 Time:280.0s Data:1.6s Loss:0.5163 Xent:0.2971 Htri:0.2192 Acc:95.14% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch185 Time:280.2s Data:1.6s Loss:0.5180 Xent:0.2975 Htri:0.2206 Acc:95.21% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch186 Time:280.3s Data:1.6s Loss:0.5266 Xent:0.3054 Htri:0.2212 Acc:94.89% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch187 Time:280.3s Data:1.6s Loss:0.5215 Xent:0.3037 Htri:0.2178 Acc:95.09% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch188 Time:281.2s Data:1.6s Loss:0.5238 Xent:0.3059 Htri:0.2179 Acc:95.39% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch189 Time:280.4s Data:1.6s Loss:0.5131 Xent:0.2946 Htri:0.2185 Acc:94.99% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch190 Time:280.0s Data:1.6s Loss:0.5144 Xent:0.2952 Htri:0.2192 Acc:95.11% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 2m 59s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:38.9% top5:56.9% top10:63.4% mAP:22.6%
+------------------
+Epoch191 Time:280.2s Data:1.9s Loss:0.5113 Xent:0.2926 Htri:0.2187 Acc:95.27% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch192 Time:280.5s Data:1.6s Loss:0.5121 Xent:0.2935 Htri:0.2186 Acc:95.09% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch193 Time:280.0s Data:1.6s Loss:0.5221 Xent:0.3010 Htri:0.2211 Acc:95.12% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch194 Time:280.2s Data:1.6s Loss:0.4965 Xent:0.2757 Htri:0.2208 Acc:95.55% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch195 Time:279.8s Data:1.6s Loss:0.5226 Xent:0.3025 Htri:0.2201 Acc:95.32% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch196 Time:280.5s Data:1.6s Loss:0.5209 Xent:0.2981 Htri:0.2228 Acc:95.05% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch197 Time:280.8s Data:1.6s Loss:0.5272 Xent:0.3066 Htri:0.2205 Acc:94.95% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch198 Time:281.4s Data:1.6s Loss:0.5137 Xent:0.2938 Htri:0.2199 Acc:95.31% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch199 Time:280.8s Data:1.6s Loss:0.5144 Xent:0.2967 Htri:0.2177 Acc:94.90% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch200 Time:279.7s Data:1.6s Loss:0.4976 Xent:0.2819 Htri:0.2157 Acc:95.45% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 2m 57s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:39.6% top5:57.5% top10:64.3% mAP:23.2%
+------------------
+Epoch201 Time:279.9s Data:1.9s Loss:0.5087 Xent:0.2896 Htri:0.2191 Acc:95.15% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch202 Time:280.2s Data:1.6s Loss:0.5009 Xent:0.2836 Htri:0.2173 Acc:95.33% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch203 Time:280.3s Data:1.6s Loss:0.5218 Xent:0.3029 Htri:0.2189 Acc:94.86% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch204 Time:280.3s Data:1.6s Loss:0.5085 Xent:0.2906 Htri:0.2179 Acc:95.46% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch205 Time:281.3s Data:1.6s Loss:0.5142 Xent:0.2962 Htri:0.2180 Acc:95.25% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch206 Time:281.4s Data:1.7s Loss:0.5032 Xent:0.2852 Htri:0.2181 Acc:95.54% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch207 Time:280.7s Data:1.6s Loss:0.5111 Xent:0.2924 Htri:0.2187 Acc:95.18% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch208 Time:280.6s Data:1.6s Loss:0.5153 Xent:0.2962 Htri:0.2191 Acc:95.22% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch209 Time:280.6s Data:1.6s Loss:0.5196 Xent:0.2997 Htri:0.2199 Acc:95.11% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch210 Time:280.4s Data:1.6s Loss:0.5106 Xent:0.2925 Htri:0.2182 Acc:95.10% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 3m 0s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:40.4% top5:57.5% top10:64.6% mAP:23.4%
+------------------
+Epoch211 Time:280.7s Data:2.2s Loss:0.5120 Xent:0.2921 Htri:0.2198 Acc:95.46% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch212 Time:280.8s Data:1.6s Loss:0.5242 Xent:0.3048 Htri:0.2194 Acc:95.18% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch213 Time:280.5s Data:1.6s Loss:0.5153 Xent:0.2950 Htri:0.2203 Acc:94.98% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch214 Time:280.7s Data:1.6s Loss:0.5241 Xent:0.3034 Htri:0.2207 Acc:95.14% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch215 Time:280.7s Data:1.6s Loss:0.5213 Xent:0.3019 Htri:0.2194 Acc:94.72% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch216 Time:280.5s Data:1.6s Loss:0.5318 Xent:0.3110 Htri:0.2208 Acc:94.74% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch217 Time:281.4s Data:1.6s Loss:0.5072 Xent:0.2883 Htri:0.2190 Acc:95.35% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch218 Time:281.7s Data:1.6s Loss:0.5175 Xent:0.2982 Htri:0.2192 Acc:95.19% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch219 Time:280.3s Data:1.6s Loss:0.5170 Xent:0.2973 Htri:0.2198 Acc:95.09% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch220 Time:280.9s Data:1.6s Loss:0.5100 Xent:0.2921 Htri:0.2179 Acc:95.47% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 2m 59s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:39.6% top5:57.8% top10:64.5% mAP:23.2%
+------------------
+Epoch221 Time:280.2s Data:2.0s Loss:0.5249 Xent:0.3053 Htri:0.2196 Acc:95.02% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch222 Time:281.3s Data:1.6s Loss:0.5310 Xent:0.3114 Htri:0.2196 Acc:94.80% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch223 Time:281.7s Data:1.6s Loss:0.5263 Xent:0.3079 Htri:0.2184 Acc:95.29% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch224 Time:281.5s Data:1.6s Loss:0.5166 Xent:0.2957 Htri:0.2209 Acc:94.98% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch225 Time:281.2s Data:1.6s Loss:0.5205 Xent:0.3004 Htri:0.2200 Acc:95.06% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch226 Time:281.0s Data:1.7s Loss:0.5161 Xent:0.2964 Htri:0.2197 Acc:95.19% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch227 Time:280.5s Data:1.6s Loss:0.5062 Xent:0.2879 Htri:0.2183 Acc:95.43% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch228 Time:280.7s Data:1.6s Loss:0.5084 Xent:0.2888 Htri:0.2196 Acc:95.13% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch229 Time:280.1s Data:1.6s Loss:0.5150 Xent:0.2965 Htri:0.2185 Acc:94.81% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch230 Time:279.9s Data:1.6s Loss:0.5056 Xent:0.2858 Htri:0.2198 Acc:95.49% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 2m 58s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:39.7% top5:56.7% top10:62.8% mAP:22.5%
+------------------
+Epoch231 Time:279.8s Data:1.9s Loss:0.5104 Xent:0.2885 Htri:0.2219 Acc:95.26% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch232 Time:280.6s Data:1.6s Loss:0.5117 Xent:0.2925 Htri:0.2192 Acc:95.44% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch233 Time:281.2s Data:1.6s Loss:0.5090 Xent:0.2903 Htri:0.2187 Acc:94.94% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch234 Time:281.5s Data:1.6s Loss:0.5217 Xent:0.3017 Htri:0.2200 Acc:95.15% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch235 Time:281.2s Data:1.6s Loss:0.5054 Xent:0.2875 Htri:0.2179 Acc:95.33% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch236 Time:280.0s Data:1.6s Loss:0.5076 Xent:0.2897 Htri:0.2179 Acc:95.20% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch237 Time:280.1s Data:1.6s Loss:0.5152 Xent:0.2960 Htri:0.2192 Acc:95.07% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch238 Time:280.3s Data:1.6s Loss:0.5210 Xent:0.3007 Htri:0.2203 Acc:95.13% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch239 Time:280.7s Data:1.6s Loss:0.5042 Xent:0.2860 Htri:0.2182 Acc:95.51% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+Epoch240 Time:280.4s Data:1.6s Loss:0.5145 Xent:0.2951 Htri:0.2194 Acc:95.21% 
+model hist : edges : Parameter containing:
+tensor([0.0000, 0.2000, 0.4000, 0.6000, 0.8000, 1.0000], device='cuda:0')
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 16384]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 16384]) matrix
+Extracting features complete in 2m 59s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:40.6% top5:58.5% top10:64.6% mAP:23.9%
+------------------
+==> Best Rank-1 40.6%, achieved at epoch 240
+Finished. Total elapsed time (h:m:s): 20:33:47. Training time (h:m:s): 18:41:08.

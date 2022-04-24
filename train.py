@@ -141,7 +141,7 @@ def main():
     print("Initializing model: {}".format(args.arch))
     model = models.init_model(name=args.arch, num_classes=dataset.num_train_pids)
     print("Model size: {:.5f}M".format(sum(p.numel() for p in model.parameters())/1000000.0))
-    
+
     modify_model(model, args)
     
     criterion_xent = nn.CrossEntropyLoss()

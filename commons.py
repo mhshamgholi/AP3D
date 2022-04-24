@@ -34,4 +34,5 @@ def modify_model(model, args):
     
 
 def log_model_after_epoch(model):
-    print(f'model hist : edges : {model.module.hist.hist_edges}')
+#     print(f'model hist : edges : {model.module.hist.hist_edges}')
+    pass
