@@ -187,6 +187,8 @@ class ResNet503D(nn.Module):
             x1 = self.hist(x)
             x2 = F.max_pool2d(x, x.size()[2:]).view(b*t, -1) # -> [80, 2048, 1, 1]
             x = torch.cat((x1, x2), 1)
+        if conf.use_hist and not conf.concat_hist_max:
+            x = self.hist(x)
         else:
             x = F.max_pool2d(x, x.size()[2:])
         x = x.view(b, t, -1)
