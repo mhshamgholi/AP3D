@@ -99,7 +99,7 @@ class ResNet503D(nn.Module):
         self.temperature = temperature
         self.contrastive_att = contrastive_att
 
-        resnet2d = torchvision.models.resnet18(pretrained=True)
+        resnet2d = torchvision.models.resnet50(pretrained=True)
         resnet2d.layer4[0].conv2.stride=(1, 1)
         resnet2d.layer4[0].downsample[0].stride=(1, 1)
 
