@@ -33,11 +33,11 @@ class HistByProf(nn.Module):
         self.hist_edges = nn.Parameter(torch.tensor(edges, dtype=torch.float32), requires_grad=True)
 #         self.norm_centers = []
 #         self.sigma = 0.39
-        self.nbins = len(edges) + 1
+        self.nbins =len(edges) + 1
         
 #         for i in range(len(edges)-1):
 #             self.norm_centers.append((self.hist_edges[i] + self.hist_edges[i+1])/2)
-            
+        
 #         self.norm_centers = nn.Parameter(torch.tensor(self.norm_centers, dtype=torch.float32), requires_grad=True)
 #         self.sigmoid_semi_centers = nn.Parameter(torch.tensor([self.hist_edges[0], self.hist_edges[-1]], dtype=torch.float32), requires_grad=True)
         
@@ -52,7 +52,9 @@ class HistByProf(nn.Module):
         
         res[:, 0] = torch.mean(1 - self.sigmoid(inputt - self.hist_edges[0]), 1)
         res[:, -1] = torch.mean(self.sigmoid(inputt - self.hist_edges[-1]), 1)
-        return res.view(x.shape[0], -1)
+        res = res.view(x.shape[0], -1)
+        res = res * x.shape[-1] * x.shape[-2] # unnormalize to prevent from gradient vannish
+        return res
     
     def norm(self, x, mu, sigma):
         return torch.exp((-0.5*((x - mu)/sigma)**2))

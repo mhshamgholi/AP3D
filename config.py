@@ -6,5 +6,5 @@ nbins = len(centers)
 
 hist_by_prof_edges = [0, 0.2, 0.4, 0.6, 0.8, 1] # 15, 30]
 use_dropout = False
-use_hist = False #False
+use_hist = True #False
 concat_hist_max = False #False
