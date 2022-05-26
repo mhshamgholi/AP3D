@@ -1,0 +1,123 @@
+==========
+Args:Namespace(arch='ap3dres50', dataset='mars', distance='cosine', eval_step=10, gamma=0.1, gpu='0', height=256, lr=0.0003, margin=0.3, max_epoch=240, num_instances=4, pretrain='', resume='', root='/mnt/File/shamgholi/datasets/', sample_stride=8, save_dir='/mnt/storage/shamgholi/ap3d_logs/logs/HistByProf2_row31', seed=1, seq_len=4, start_epoch=0, start_eval=0, stepsize=[60, 120, 180], test_batch=14, train_batch=14, use_cpu=False, weight_decay=0.0005, width=128, workers=4)
+==========
+Currently using CPU (GPU is highly recommended)
+Initializing dataset mars
+=> MARS loaded
+Dataset statistics:
+  ------------------------------
+  subset   | # ids | # tracklets
+  ------------------------------
+  train    |   625 |     8298
+  query    |   626 |     1980
+  gallery  |   622 |     9330
+  ------------------------------
+  total    |  1247 |    19608
+  number of images per tracklet: 2 ~ 920, average 59.5
+  ------------------------------
+Initializing model: ap3dres50
+Model size: 12.72238M
+pretrain state dict loaded
+>>> module conv1.weight is trainable ? True
+>>> module bn1.weight is trainable ? True
+>>> module bn1.bias is trainable ? True
+>>> module layer1.0.conv1.weight is trainable ? True
+>>> module layer1.0.bn1.weight is trainable ? True
+>>> module layer1.0.bn1.bias is trainable ? True
+>>> module layer1.0.conv2.weight is trainable ? True
+>>> module layer1.0.bn2.weight is trainable ? True
+>>> module layer1.0.bn2.bias is trainable ? True
+>>> module layer1.1.conv1.weight is trainable ? True
+>>> module layer1.1.bn1.weight is trainable ? True
+>>> module layer1.1.bn1.bias is trainable ? True
+>>> module layer1.1.conv2.weight is trainable ? True
+>>> module layer1.1.bn2.weight is trainable ? True
+>>> module layer1.1.bn2.bias is trainable ? True
+>>> module layer2.0.conv1.weight is trainable ? True
+>>> module layer2.0.bn1.weight is trainable ? True
+>>> module layer2.0.bn1.bias is trainable ? True
+>>> module layer2.0.conv2.APM.semantic_mapping.weight is trainable ? True
+>>> module layer2.0.conv2.APM.x_mapping.weight is trainable ? True
+>>> module layer2.0.conv2.APM.n_mapping.weight is trainable ? True
+>>> module layer2.0.conv2.APM.contrastive_att_net.0.weight is trainable ? True
+>>> module layer2.0.conv2.spatial_conv3d.weight is trainable ? True
+>>> module layer2.0.conv2.temporal_conv3d.weight is trainable ? True
+>>> module layer2.0.bn2.weight is trainable ? True
+>>> module layer2.0.bn2.bias is trainable ? True
+>>> module layer2.0.downsample.0.weight is trainable ? True
+>>> module layer2.0.downsample.1.weight is trainable ? True
+>>> module layer2.0.downsample.1.bias is trainable ? True
+>>> module layer2.1.conv1.weight is trainable ? True
+>>> module layer2.1.bn1.weight is trainable ? True
+>>> module layer2.1.bn1.bias is trainable ? True
+>>> module layer2.1.conv2.weight is trainable ? True
+>>> module layer2.1.bn2.weight is trainable ? True
+>>> module layer2.1.bn2.bias is trainable ? True
+>>> module layer3.0.conv1.weight is trainable ? True
+>>> module layer3.0.bn1.weight is trainable ? True
+>>> module layer3.0.bn1.bias is trainable ? True
+>>> module layer3.0.conv2.APM.semantic_mapping.weight is trainable ? True
+>>> module layer3.0.conv2.APM.x_mapping.weight is trainable ? True
+>>> module layer3.0.conv2.APM.n_mapping.weight is trainable ? True
+>>> module layer3.0.conv2.APM.contrastive_att_net.0.weight is trainable ? True
+>>> module layer3.0.conv2.spatial_conv3d.weight is trainable ? True
+>>> module layer3.0.conv2.temporal_conv3d.weight is trainable ? True
+>>> module layer3.0.bn2.weight is trainable ? True
+>>> module layer3.0.bn2.bias is trainable ? True
+>>> module layer3.0.downsample.0.weight is trainable ? True
+>>> module layer3.0.downsample.1.weight is trainable ? True
+>>> module layer3.0.downsample.1.bias is trainable ? True
+>>> module layer3.1.conv1.weight is trainable ? True
+>>> module layer3.1.bn1.weight is trainable ? True
+>>> module layer3.1.bn1.bias is trainable ? True
+>>> module layer3.1.conv2.weight is trainable ? True
+>>> module layer3.1.bn2.weight is trainable ? True
+>>> module layer3.1.bn2.bias is trainable ? True
+>>> module layer4.0.conv1.weight is trainable ? True
+>>> module layer4.0.bn1.weight is trainable ? True
+>>> module layer4.0.bn1.bias is trainable ? True
+>>> module layer4.0.conv2.weight is trainable ? True
+>>> module layer4.0.bn2.weight is trainable ? True
+>>> module layer4.0.bn2.bias is trainable ? True
+>>> module layer4.0.downsample.0.weight is trainable ? True
+>>> module layer4.0.downsample.1.weight is trainable ? True
+>>> module layer4.0.downsample.1.bias is trainable ? True
+>>> module layer4.1.conv1.weight is trainable ? True
+>>> module layer4.1.bn1.weight is trainable ? True
+>>> module layer4.1.bn1.bias is trainable ? True
+>>> module layer4.1.conv2.weight is trainable ? True
+>>> module layer4.1.bn2.weight is trainable ? True
+>>> module layer4.1.bn2.bias is trainable ? True
+>>> module bn.weight is trainable ? True
+>>> module bn.bias is trainable ? True
+>>> module classifier.weight is trainable ? True
+>>> module classifier.bias is trainable ? True
+Model size: 12.72238M
+==> Start training
+out torch.Size([14, 64, 4, 64, 32]), residual torch.Size([14, 64, 4, 64, 32])
+out torch.Size([14, 64, 4, 64, 32]), residual torch.Size([14, 64, 4, 64, 32])
+out torch.Size([14, 128, 4, 32, 16]), residual torch.Size([14, 128, 4, 32, 16])
+out torch.Size([14, 128, 4, 32, 16]), residual torch.Size([14, 128, 4, 32, 16])
+out torch.Size([14, 256, 4, 16, 8]), residual torch.Size([14, 256, 4, 16, 8])
+out torch.Size([14, 256, 4, 16, 8]), residual torch.Size([14, 256, 4, 16, 8])
+out torch.Size([14, 512, 4, 8, 4]), residual torch.Size([14, 512, 4, 16, 8])
+Traceback (most recent call last):
+  File "train.py", line 348, in <module>
+    main()
+  File "train.py", line 173, in main
+    train(epoch, model, criterion_xent, criterion_htri, optimizer, trainloader, use_gpu)
+  File "train.py", line 232, in train
+    outputs, features = model(vids)
+  File "/home/shamgholi/miniconda3/envs/master/lib/python3.6/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/mnt/storage/shamgholi/projects/person_reid/AP3D/models/ResNet.py", line 181, in forward
+    x = self.layer4(x)
+  File "/home/shamgholi/miniconda3/envs/master/lib/python3.6/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/home/shamgholi/miniconda3/envs/master/lib/python3.6/site-packages/torch/nn/modules/container.py", line 117, in forward
+    input = module(input)
+  File "/home/shamgholi/miniconda3/envs/master/lib/python3.6/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/mnt/storage/shamgholi/projects/person_reid/AP3D/models/ResNet.py", line 88, in forward
+    out += residual
+RuntimeError: The size of tensor a (4) must match the size of tensor b (8) at non-singleton dimension 4

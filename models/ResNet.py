@@ -51,8 +51,9 @@ class Bottleneck3D(nn.Module):
         else:
             self.conv2 = inflate.inflate_conv(bottleneck2d.conv2, time_dim=1)
         self.bn2 = inflate.inflate_batch_norm(bottleneck2d.bn2)
-        self.conv3 = inflate.inflate_conv(bottleneck2d.conv3, time_dim=1)
-        self.bn3 = inflate.inflate_batch_norm(bottleneck2d.bn3)
+        if hasattr(bottleneck2d, 'conv3'):
+            self.conv3 = inflate.inflate_conv(bottleneck2d.conv3, time_dim=1)
+            self.bn3 = inflate.inflate_batch_norm(bottleneck2d.bn3)
         self.relu = nn.ReLU(inplace=True)
 
         if bottleneck2d.downsample is not None:
@@ -76,13 +77,14 @@ class Bottleneck3D(nn.Module):
         out = self.conv2(out)
         out = self.bn2(out)
         out = self.relu(out)
-
-        out = self.conv3(out)
-        out = self.bn3(out)
+        if hasattr(self, 'conv3'):
+            out = self.conv3(out)
+            out = self.bn3(out)
 
         if self.downsample is not None:
             residual = self.downsample(x)
-
+#         pdb.set_trace()
+#         print(f"out {out.shape}, residual {residual.shape}")
         out += residual
         out = self.relu(out)
 
@@ -97,9 +99,9 @@ class ResNet503D(nn.Module):
         self.temperature = temperature
         self.contrastive_att = contrastive_att
 
-        resnet2d = torchvision.models.resnet50(pretrained=True)
+        resnet2d = torchvision.models.resnet18(pretrained=True)
         resnet2d.layer4[0].conv2.stride=(1, 1)
-        resnet2d.layer4[0].downsample[0].stride=(1, 1) 
+        resnet2d.layer4[0].downsample[0].stride=(1, 1)
 
         self.conv1 = inflate.inflate_conv(resnet2d.conv1, time_dim=1)
         self.bn1 = inflate.inflate_batch_norm(resnet2d.bn1)
@@ -187,7 +189,7 @@ class ResNet503D(nn.Module):
             x1 = self.hist(x)
             x2 = F.max_pool2d(x, x.size()[2:]).view(b*t, -1) # -> [80, 2048, 1, 1]
             x = torch.cat((x1, x2), 1)
-        if conf.use_hist and not conf.concat_hist_max:
+        elif conf.use_hist and not conf.concat_hist_max:
             x = self.hist(x)
         else:
             x = F.max_pool2d(x, x.size()[2:])
