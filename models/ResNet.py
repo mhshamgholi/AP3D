@@ -16,6 +16,7 @@ from models import NonLocal
 from .MyModels import HistByNorm, HistYusufLayer, HistByProf
 import config as conf
 import pdb
+import config as conf
 
 __all__ = ['AP3DResNet50', 'AP3DNLResNet50']
 
@@ -84,10 +85,18 @@ class Bottleneck3D(nn.Module):
         if self.downsample is not None:
             residual = self.downsample(x)
 #         pdb.set_trace()
-#         print(f"out {out.shape}, residual {residual.shape}")
+#         if residual.shape[-1] == 8 and out.shape[-1] == 4 and residual.shape[-2] == 16 and out.shape[-2] == 8:
+        if conf.use_pad_for_resnet18_Bottleneck3D:
+            #out torch.Size([14, 512, 4, 8, 4]) residual torch.Size([14, 512, 4, 16, 8])
+            p2d = (1, 2, 2, 4) # pad last dim by (1, 1) and 2nd to last by (2, 2)
+            temp = torch.zeros_like(residual)
+            temp[:,:, :, :out.shape[-2], :out.shape[-1]] = out
+            out = temp
+#             out = F.pad(out, p2d, "constant", 0)
+#         print(">>> out", out.shape, 'residual', residual.shape)
         out += residual
         out = self.relu(out)
-
+        
         return out
 
 
@@ -98,8 +107,11 @@ class ResNet503D(nn.Module):
         self.block = block
         self.temperature = temperature
         self.contrastive_att = contrastive_att
+        if conf.use_resnet18:
+            resnet2d = torchvision.models.resnet18(pretrained=True)
+        else:
+            resnet2d = torchvision.models.resnet50(pretrained=True)
 
-        resnet2d = torchvision.models.resnet50(pretrained=True)
         resnet2d.layer4[0].conv2.stride=(1, 1)
         resnet2d.layer4[0].downsample[0].stride=(1, 1)
 
@@ -119,7 +131,7 @@ class ResNet503D(nn.Module):
 
         
 #         self.hist = HistYusufLayer(conf.centers, conf.width)
-#         self.hist = HistYusufLayer(n_bins=conf.nbins, inchannel=2048, centers=conf.centers, width=conf.width)
+#         self.hist = HistYusufLayer(n_bins=conf.nbins, inchannel=conf.last_feature_dim, centers=conf.centers, width=conf.width)
         if conf.use_hist:
             self.hist = HistByProf(edges=conf.hist_by_prof_edges)
         
@@ -128,29 +140,29 @@ class ResNet503D(nn.Module):
         
         if conf.use_hist:
             _coef = 1#(self.hist.nbins + 1) if conf.concat_hist_max else (self.hist.nbins)
-            self.bn = nn.BatchNorm1d(2048 * _coef)
+            self.bn = nn.BatchNorm1d(conf.last_feature_dim * _coef)
         else:
-            self.bn = nn.BatchNorm1d(2048)
+            self.bn = nn.BatchNorm1d(conf.last_feature_dim)
         self.bn.apply(weights_init_kaiming)
 
         if conf.use_hist:
-#             self.classifier = nn.Linear(2048 * (self.hist.nbins + 1), num_classes)
+#             self.classifier = nn.Linear(conf.last_feature_dim * (self.hist.nbins + 1), num_classes)
             _coef = 1#(self.hist.nbins + 1) if conf.concat_hist_max else (self.hist.nbins)
             if conf.use_dropout:
                 self.classifier = nn.Sequential(
-                    nn.Linear(2048 * (_coef), num_classes)
+                    nn.Linear(conf.last_feature_dim * (_coef), num_classes)
 #                      nn.ReLU(),
 #                      nn.Dropout(0.5),
 #                      nn.Linear(4096, num_classes)
                 )
             else:
                 self.classifier = nn.Sequential(
-                    nn.Linear(2048 * (_coef), num_classes),
+                    nn.Linear(conf.last_feature_dim * (_coef), num_classes),
 #                      nn.ReLU(),
 #                      nn.Linear(4096, num_classes)
                 )
         else:
-            self.classifier = nn.Linear(2048, num_classes)
+            self.classifier = nn.Linear(conf.last_feature_dim, num_classes)
 
         self.classifier.apply(weights_init_classifier)
 
@@ -188,7 +200,7 @@ class ResNet503D(nn.Module):
         x = x.view(b*t, c, h, w)
         if conf.use_hist and conf.concat_hist_max:
             x1 = self.hist(x)
-            x2 = F.max_pool2d(x, x.size()[2:]).view(b*t, -1) # -> [80, 2048, 1, 1]
+            x2 = F.max_pool2d(x, x.size()[2:]).view(b*t, -1) # -> [80, conf.last_feature_dim, 1, 1]
             x = torch.cat((x1, x2), 1)
         elif conf.use_hist and not conf.concat_hist_max:
 #             pdb.set_trace()

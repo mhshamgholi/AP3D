@@ -10,6 +10,7 @@ import datetime
 import argparse
 import os.path as osp
 import numpy as np
+import config as conf
 
 import torch
 import torch.nn as nn
@@ -96,14 +97,7 @@ def main():
     dataset = data_manager.init_dataset(name=args.dataset, root=args.root)
 
     # Data augmentation
-    spatial_transform_train = torchT.Compose([
-                torchT.Scale((int(args.height * 1.2), int(args.width * 1.2)), interpolation=3), #(args.height, args.width)
-                torchT.RandomCrop((args.height, args.width)),
-                torchT.ColorJitter(brightness=.4), #torchT.RandomRotation(degrees=(-20, 20)),
-                torchT.RandomHorizontalFlip(p=0.5),
-                torchT.ToTensor(),
-                torchT.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
-            ])
+    spatial_transform_train = conf.get_spatial_transform_train(args)
     temporal_transform_train = TT.TemporalRandomCrop(size=args.seq_len, stride=args.sample_stride)
 
     spatial_transform_test = ST.Compose([
