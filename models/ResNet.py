@@ -127,7 +127,7 @@ class ResNet503D(nn.Module):
             self.dropout = nn.Dropout(p=0.5)
         
         if conf.use_hist:
-            _coef = (self.hist.nbins + 1) if conf.concat_hist_max else (self.hist.nbins)
+            _coef = 1#(self.hist.nbins + 1) if conf.concat_hist_max else (self.hist.nbins)
             self.bn = nn.BatchNorm1d(2048 * _coef)
         else:
             self.bn = nn.BatchNorm1d(2048)
@@ -135,7 +135,7 @@ class ResNet503D(nn.Module):
 
         if conf.use_hist:
 #             self.classifier = nn.Linear(2048 * (self.hist.nbins + 1), num_classes)
-            _coef = (self.hist.nbins + 1) if conf.concat_hist_max else (self.hist.nbins)
+            _coef = 1#(self.hist.nbins + 1) if conf.concat_hist_max else (self.hist.nbins)
             if conf.use_dropout:
                 self.classifier = nn.Sequential(
                     nn.Linear(2048 * (_coef), num_classes)
@@ -191,7 +191,9 @@ class ResNet503D(nn.Module):
             x2 = F.max_pool2d(x, x.size()[2:]).view(b*t, -1) # -> [80, 2048, 1, 1]
             x = torch.cat((x1, x2), 1)
         elif conf.use_hist and not conf.concat_hist_max:
+#             pdb.set_trace()
             x = self.hist(x)
+#             pdb.set_trace()
         else:
             x = F.max_pool2d(x, x.size()[2:])
         x = x.view(b, t, -1)
