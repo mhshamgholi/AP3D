@@ -196,11 +196,11 @@ class ResNet503D(nn.Module):
         x = self.relu(x)
         x = self.maxpool(x)
         if conf.use_dropout:
-            f = self.dropout(f)
+            x = self.dropout(x)
         x = self.layer1(x)
         x = self.layer2(x)
         if conf.use_dropout:
-            f = self.dropout(f)
+            x = self.dropout(x)
         x = self.layer3(x)
         x = self.layer4(x)
         if conf.use_dropout:
