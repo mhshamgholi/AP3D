@@ -84,7 +84,7 @@ class Bottleneck3D(nn.Module):
 
         if self.downsample is not None:
             residual = self.downsample(x)
-            pdb.set_trace()
+#             pdb.set_trace()
 #         if residual.shape[-1] == 8 and out.shape[-1] == 4 and residual.shape[-2] == 16 and out.shape[-2] == 8:
         if conf.use_resnet18 and conf.use_pad_for_resnet18_Bottleneck3D:
             #out torch.Size([14, 512, 4, 8, 4]) residual torch.Size([14, 512, 4, 16, 8])
