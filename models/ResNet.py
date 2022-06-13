@@ -84,7 +84,7 @@ class Bottleneck3D(nn.Module):
 
         if self.downsample is not None:
             residual = self.downsample(x)
-#         pdb.set_trace()
+            pdb.set_trace()
 #         if residual.shape[-1] == 8 and out.shape[-1] == 4 and residual.shape[-2] == 16 and out.shape[-2] == 8:
         if conf.use_resnet18 and conf.use_pad_for_resnet18_Bottleneck3D:
             #out torch.Size([14, 512, 4, 8, 4]) residual torch.Size([14, 512, 4, 16, 8])
@@ -195,9 +195,12 @@ class ResNet503D(nn.Module):
         x = self.bn1(x)
         x = self.relu(x)
         x = self.maxpool(x)
-
+        if conf.use_dropout:
+            f = self.dropout(f)
         x = self.layer1(x)
         x = self.layer2(x)
+        if conf.use_dropout:
+            f = self.dropout(f)
         x = self.layer3(x)
         x = self.layer4(x)
         if conf.use_dropout:
@@ -223,8 +226,7 @@ class ResNet503D(nn.Module):
 
         x = x.mean(1)
         f = self.bn(x)
-        if conf.use_dropout:
-            f = self.dropout(f)
+
         y = self.classifier(f)
 
         return y, f
