@@ -86,7 +86,7 @@ class Bottleneck3D(nn.Module):
             residual = self.downsample(x)
 #         pdb.set_trace()
 #         if residual.shape[-1] == 8 and out.shape[-1] == 4 and residual.shape[-2] == 16 and out.shape[-2] == 8:
-        if conf.use_pad_for_resnet18_Bottleneck3D:
+        if conf.use_resnet18 and conf.use_pad_for_resnet18_Bottleneck3D:
             #out torch.Size([14, 512, 4, 8, 4]) residual torch.Size([14, 512, 4, 16, 8])
             p2d = (1, 2, 2, 4) # pad last dim by (1, 1) and 2nd to last by (2, 2)
             temp = torch.zeros_like(residual)
@@ -139,15 +139,23 @@ class ResNet503D(nn.Module):
             self.dropout = nn.Dropout(p=0.5)
         
         if conf.use_hist:
-            _coef = 1#(self.hist.nbins + 1) if conf.concat_hist_max else (self.hist.nbins)
+            if conf.use_just_last_bin:
+                _coef = (1 + 1) if conf.concat_hist_max else 1
+            else:
+                _coef = (self.hist.nbins + 1) if conf.concat_hist_max else (self.hist.nbins)
+                
             self.bn = nn.BatchNorm1d(conf.last_feature_dim * _coef)
         else:
             self.bn = nn.BatchNorm1d(conf.last_feature_dim)
         self.bn.apply(weights_init_kaiming)
 
         if conf.use_hist:
+            if conf.use_just_last_bin:
+                _coef = (1 + 1) if conf.concat_hist_max else 1
+            else:
+                _coef = (self.hist.nbins + 1) if conf.concat_hist_max else (self.hist.nbins)
+                
 #             self.classifier = nn.Linear(conf.last_feature_dim * (self.hist.nbins + 1), num_classes)
-            _coef = 1#(self.hist.nbins + 1) if conf.concat_hist_max else (self.hist.nbins)
             if conf.use_dropout:
                 self.classifier = nn.Sequential(
                     nn.Linear(conf.last_feature_dim * (_coef), num_classes)

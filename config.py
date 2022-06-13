@@ -7,12 +7,13 @@ nbins = len(centers)
 
 hist_by_prof_edges = [0, 0.2, 0.4, 0.6, 0.8, 1] # 15, 30]
 use_dropout = False
-use_hist = False #False
-concat_hist_max = False #False
+use_hist = True #False
+use_just_last_bin = True
+concat_hist_max = True #False
 
-use_resnet18 = True
+use_resnet18 = False
 last_feature_dim = 512 if use_resnet18 else 2048
-use_pad_for_resnet18_Bottleneck3D = True
+use_pad_for_resnet18_Bottleneck3D = True # if use_resnet18 is False then this param will be ignored
 
 
 def get_spatial_transform_train(args):
