@@ -11,7 +11,7 @@ use_hist = False #False
 use_just_last_bin = False
 concat_hist_max = False #False
 
-use_resnet18 = False
+use_resnet18 = True
 last_feature_dim = 512 if use_resnet18 else 2048
 use_pad_for_resnet18_Bottleneck3D = True # if use_resnet18 is False then this param will be ignored
 
@@ -20,6 +20,7 @@ def get_spatial_transform_train(args):
     return torchT.Compose([
 #                 torchT.Scale((int(args.height * 1.2), int(args.width * 1.2)), interpolation=3), #(args.height, args.width)
 #                 torchT.RandomCrop((args.height, args.width)),
+                torchT.Scale((int(args.height), int(args.width)), interpolation=3), #(args.height, args.width)
                 torchT.ColorJitter(brightness=.4), 
                 torchT.RandomRotation(degrees=(-15, 15)),
                 torchT.RandomHorizontalFlip(p=0.5),

@@ -44,7 +44,7 @@ def weights_init_classifier(m):
 class Bottleneck3D(nn.Module):
     def __init__(self, bottleneck2d, block, inflate_time=False, temperature=4, contrastive_att=True):
         super(Bottleneck3D, self).__init__()
-
+        
         self.conv1 = inflate.inflate_conv(bottleneck2d.conv1, time_dim=1)
         self.bn1 = inflate.inflate_batch_norm(bottleneck2d.bn1)
         if inflate_time == True:
@@ -84,17 +84,17 @@ class Bottleneck3D(nn.Module):
 
         if self.downsample is not None:
             residual = self.downsample(x)
-#             pdb.set_trace()
-#         if residual.shape[-1] == 8 and out.shape[-1] == 4 and residual.shape[-2] == 16 and out.shape[-2] == 8:
-        if conf.use_resnet18 and conf.use_pad_for_resnet18_Bottleneck3D:
-            #out torch.Size([14, 512, 4, 8, 4]) residual torch.Size([14, 512, 4, 16, 8])
-            p2d = (1, 2, 2, 4) # pad last dim by (1, 1) and 2nd to last by (2, 2)
-            temp = torch.zeros_like(residual)
-            temp[:,:, :, :out.shape[-2], :out.shape[-1]] = out
-            out = temp
-#             out = F.pad(out, p2d, "constant", 0)
-#         print(">>> out", out.shape, 'residual', residual.shape)
-        out += residual
+            
+# #         if residual.shape[-1] == 8 and out.shape[-1] == 4 and residual.shape[-2] == 16 and out.shape[-2] == 8:
+#         if conf.use_resnet18 and conf.use_pad_for_resnet18_Bottleneck3D:
+#             #out torch.Size([14, 512, 4, 8, 4]) residual torch.Size([14, 512, 4, 16, 8])
+#             p2d = (1, 2, 2, 4) # pad last dim by (1, 1) and 2nd to last by (2, 2)
+#             temp = torch.zeros_like(residual)
+#             temp[:,:, :, :out.shape[-2], :out.shape[-1]] = out
+#             out = temp
+
+#         out += residual
+        out = out + residual
         out = self.relu(out)
         
         return out
@@ -113,7 +113,9 @@ class ResNet503D(nn.Module):
             resnet2d = torchvision.models.resnet50(pretrained=True)
 
         resnet2d.layer4[0].conv2.stride=(1, 1)
-        resnet2d.layer4[0].downsample[0].stride=(1, 1)
+        if not conf.use_resnet18:
+            resnet2d.layer4[0].downsample[0].stride=(1, 1)
+            
 
         self.conv1 = inflate.inflate_conv(resnet2d.conv1, time_dim=1)
         self.bn1 = inflate.inflate_batch_norm(resnet2d.bn1)
@@ -214,9 +216,7 @@ class ResNet503D(nn.Module):
             x2 = F.max_pool2d(x, x.size()[2:]).view(b*t, -1) # -> [80, conf.last_feature_dim, 1, 1]
             x = torch.cat((x1, x2), 1)
         elif conf.use_hist and not conf.concat_hist_max:
-#             pdb.set_trace()
             x = self.hist(x)
-#             pdb.set_trace()
         else:
             x = F.max_pool2d(x, x.size()[2:])
         x = x.view(b, t, -1)

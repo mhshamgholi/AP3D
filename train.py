@@ -30,6 +30,8 @@ from tools.eval_metrics import evaluate
 from tools.samplers import RandomIdentitySampler
 from commons import modify_model, log_model_after_epoch
 
+torch.autograd.set_detect_anomaly(True)
+
 parser = argparse.ArgumentParser(description='Train AP3D')
 # Datasets
 parser.add_argument('--root', type=str, default='/home/guxinqian/data/')
