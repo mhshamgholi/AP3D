@@ -5,7 +5,7 @@ import torch
 import functools
 import torch.utils.data as data
 from PIL import Image
-
+import pdb
 
 def pil_loader(path):
     # open path as file to avoid ResourceWarning (https://github.com/python-pillow/Pillow/issues/835)
@@ -95,11 +95,9 @@ class VideoDataset(data.Dataset):
             img_paths = self.temporal_transform(img_paths)
 
         clip = self.loader(img_paths)
-
         if self.spatial_transform is not None:
 #             self.spatial_transform.randomize_parameters()
             clip = [self.spatial_transform(img) for img in clip]
-
         # trans T x C x H x W to C x T x H x W
         clip = torch.stack(clip, 0).permute(1, 0, 2, 3)
 

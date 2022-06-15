@@ -1,5 +1,6 @@
 from __future__ import print_function, absolute_import
 import os
+import pdb
 import gc
 import sys
 import time
@@ -133,7 +134,7 @@ def main():
         VideoDataset(dataset.gallery, spatial_transform=spatial_transform_test, temporal_transform=temporal_transform_test),
         batch_size=args.test_batch, shuffle=False, num_workers=0,
         pin_memory=pin_memory, drop_last=False)
-
+    
     print("Initializing model: {}".format(args.arch))
     model = models.init_model(name=args.arch, num_classes=dataset.num_train_pids)
     print("Model size: {:.5f}M".format(sum(p.numel() for p in model.parameters())/1000000.0))

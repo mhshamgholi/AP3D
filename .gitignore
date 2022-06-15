@@ -1,3 +1,4 @@
+*.jpg
 *.pth.tar
 
 # Byte-compiled / optimized / DLL files

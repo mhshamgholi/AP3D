@@ -193,6 +193,8 @@ class ResNet503D(nn.Module):
         return nn.Sequential(*reslayers3d)
 
     def forward(self, x):
+        if conf.use_dropout:
+            x = F.dropout(x, p=0.25)
         x = self.conv1(x)
         x = self.bn1(x)
         x = self.relu(x)

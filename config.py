@@ -22,10 +22,14 @@ def get_spatial_transform_train(args):
 #                 torchT.RandomCrop((args.height, args.width)),
                 torchT.Scale((int(args.height), int(args.width)), interpolation=3), #(args.height, args.width)
                 torchT.ColorJitter(brightness=.4), 
-                torchT.RandomRotation(degrees=(-15, 15)),
-                torchT.RandomHorizontalFlip(p=0.5),
+                torchT.GaussianBlur(kernel_size=(5, 5), sigma=(0.1, 2)),
+#                 torchT.RandomRotation(degrees=(-15, 15)),
+#                 torchT.RandomHorizontalFlip(p=0.5),
                 torchT.ToTensor(),
-                torchT.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+                ## @#$%^&*()_
+                torchT.RandomErasing(p=0.8, scale=(0.1, 0.2), ratio=(0.3, 3.3)),
+                ## @#$%^&*()_
+                torchT.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
             ])
 #     return torchT.Compose([
 #                 torchT.Scale((int(args.height), int(args.width)), interpolation=3), #(args.height, args.width)
