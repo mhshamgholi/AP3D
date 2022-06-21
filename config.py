@@ -7,9 +7,9 @@ nbins = len(centers)
 
 hist_by_prof_edges = [0, 0.2, 0.4, 0.6, 0.8, 1] # 15, 30]
 use_dropout = False
-use_hist = False #False
-use_just_last_bin = False
-concat_hist_max = False #False
+use_hist = True #False
+use_just_last_bin = True
+concat_hist_max = True #False
 
 use_resnet18 = True
 last_feature_dim = 512 if use_resnet18 else 2048
