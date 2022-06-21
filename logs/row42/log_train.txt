@@ -294,3 +294,14 @@ Epoch106 Time:172.4s Data:1.6s Loss:0.0267 Xent:0.0260 Htri:0.0008 Acc:99.87%
 Epoch107 Time:170.3s Data:1.6s Loss:0.0290 Xent:0.0284 Htri:0.0006 Acc:99.92% 
 Epoch108 Time:170.1s Data:1.6s Loss:0.0259 Xent:0.0254 Htri:0.0004 Acc:99.97% 
 Epoch109 Time:170.0s Data:1.6s Loss:0.0248 Xent:0.0243 Htri:0.0005 Acc:99.96% 
+Epoch110 Time:169.7s Data:1.5s Loss:0.0277 Xent:0.0271 Htri:0.0005 Acc:99.88% 
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 1024]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 1024]) matrix
+Extracting features complete in 1m 35s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:81.6% top5:92.4% top10:94.7% mAP:71.4%
+------------------
+Epoch111 Time:169.9s Data:1.8s Loss:0.0268 Xent:0.0263 Htri:0.0006 Acc:99.95% 

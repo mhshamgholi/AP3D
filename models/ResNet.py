@@ -149,7 +149,9 @@ class ResNet503D(nn.Module):
             self.dropout = nn.Dropout(p=0.5)
         
         if conf.use_hist:
-            if conf.use_just_last_bin:
+            if conf.use_linear_to_merge_features:
+                _coef = 1
+            elif conf.use_just_last_bin:
                 _coef = (1 + 1) if conf.concat_hist_max else 1
             else:
                 _coef = (self.hist.nbins + 1) if conf.concat_hist_max else (self.hist.nbins)
@@ -160,7 +162,9 @@ class ResNet503D(nn.Module):
         self.bn.apply(weights_init_kaiming)
 
         if conf.use_hist:
-            if conf.use_just_last_bin:
+            if conf.use_linear_to_merge_features:
+                _coef = 1
+            elif conf.use_just_last_bin:
                 _coef = (1 + 1) if conf.concat_hist_max else 1
             else:
                 _coef = (self.hist.nbins + 1) if conf.concat_hist_max else (self.hist.nbins)
