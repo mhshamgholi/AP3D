@@ -29,6 +29,9 @@ def modify_model(model, args):
     # exit()
     for name, param in model.named_parameters():
         print(f'>>> module {name} is trainable ? {param.requires_grad}')
+    print('-'*10)
+    print('model layers:')
+    print(model)
     print("Model size: {:.5f}M".format(sum(p.numel() for p in model.parameters())/1000000.0))
     
 

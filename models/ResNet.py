@@ -131,11 +131,19 @@ class ResNet503D(nn.Module):
         self.layer4 = self._inflate_reslayer(resnet2d.layer4, c3d_idx=c3d_idx[3], \
                                              nonlocal_idx=nl_idx[3], nonlocal_channels=2048)
 
-        
+
 #         self.hist = HistYusufLayer(conf.centers, conf.width)
 #         self.hist = HistYusufLayer(n_bins=conf.nbins, inchannel=conf.last_feature_dim, centers=conf.centers, width=conf.width)
         if conf.use_hist:
             self.hist = HistByProf(edges=conf.hist_by_prof_edges)
+            
+        if conf.use_linear_to_merge_features and conf.use_hist:
+            if not conf.use_just_last_bin:
+                in_channel = 1 + self.hist.nbins if conf.concat_hist_max else self.hist.nbins
+            else:
+                in_channel = 1 + 1 if conf.concat_hist_max else 1
+
+            self.linear_merge_features = nn.Linear(in_channel, 1)
         
         if conf.use_dropout:
             self.dropout = nn.Dropout(p=0.5)
@@ -215,14 +223,20 @@ class ResNet503D(nn.Module):
         x = x.view(b*t, c, h, w)
         if conf.use_hist and conf.concat_hist_max:
             x1 = self.hist(x)
-            x2 = F.max_pool2d(x, x.size()[2:]).view(b*t, -1) # -> [80, conf.last_feature_dim, 1, 1]
-            x = torch.cat((x1, x2), 1)
+            x2 = F.max_pool2d(x, x.size()[2:]).view(b*t, conf.last_feature_dim, 1) # -> [80, conf.last_feature_dim, 1, 1]
+            #x = torch.cat((x1, x2), 1)
+            x = torch.cat((x1, x2), 2)
         elif conf.use_hist and not conf.concat_hist_max:
             x = self.hist(x)
         else:
             x = F.max_pool2d(x, x.size()[2:])
+        
+        if conf.use_linear_to_merge_features and conf.use_hist:
+            x = x.view(b * t * c, -1)
+            x = self.linear_merge_features(x)
+        
         x = x.view(b, t, -1)
-
+        
         if not self.training:
             return x
 

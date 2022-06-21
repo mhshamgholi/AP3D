@@ -3,6 +3,7 @@ from torch import nn
 import math
 import numpy as np
 import pdb
+import config as conf
 
 class HistByNorm(nn.Module):
     def __init__(self, centers, widths):
@@ -52,10 +53,11 @@ class HistByProf(nn.Module):
         
         res[:, 0] = torch.mean(1 - self.sigmoid(inputt - self.hist_edges[0]), 1)
         res[:, -1] = torch.mean(self.sigmoid(inputt - self.hist_edges[-1]), 1)
-        res = res[:, -1] # get last bin
-        res = res.view(x.shape[0], -1)
+        if conf.use_just_last_bin:
+            res = res[:, -1] # get last bin
+        res = res.view(x.shape[0], x.shape[1], -1)
         res = res * x.shape[-1] * x.shape[-2] # unnormalize to prevent from gradient vannish
-        return res
+        return res # [72,2048,7]
     
     def norm(self, x, mu, sigma):
         return torch.exp((-0.5*((x - mu)/sigma)**2))
