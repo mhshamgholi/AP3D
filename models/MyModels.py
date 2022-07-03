@@ -56,7 +56,7 @@ class HistByProf(nn.Module):
         if conf.use_just_last_bin:
             res = res[:, -1] # get last bin
         res = res.view(x.shape[0], x.shape[1], -1)
-        res = res * x.shape[-1] * x.shape[-2] # unnormalize to prevent from gradient vannish
+#         res = res * x.shape[-1] * x.shape[-2] # unnormalize to prevent from gradient vannish
         return res # [72,2048,7]
     
     def norm(self, x, mu, sigma):
