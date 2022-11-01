@@ -155,8 +155,12 @@ class ResNet503D(nn.Module):
                 _coef = (1 + 1) if conf.concat_hist_max else 1
             else:
                 _coef = (self.hist.nbins + 1) if conf.concat_hist_max else (self.hist.nbins)
-                
-            self.bn = nn.BatchNorm1d(conf.last_feature_dim * _coef)
+
+            if conf.use_linear_to_get_important_features:
+                # if this is true then _coef is must be one but we need the value later so we don't assinged it to 1
+                self.bn = nn.BatchNorm1d(conf.last_feature_dim)
+            else:
+                self.bn = nn.BatchNorm1d(conf.last_feature_dim * _coef)
         else:
             self.bn = nn.BatchNorm1d(conf.last_feature_dim)
         self.bn.apply(weights_init_kaiming)
@@ -170,21 +174,21 @@ class ResNet503D(nn.Module):
                 _coef = (self.hist.nbins + 1) if conf.concat_hist_max else (self.hist.nbins)
                 
 #             self.classifier = nn.Linear(conf.last_feature_dim * (self.hist.nbins + 1), num_classes)
-            if conf.use_dropout:
-                self.classifier = nn.Sequential(
-                    nn.Linear(conf.last_feature_dim * (_coef), num_classes)
-#                      nn.ReLU(),
-#                      nn.Dropout(0.5),
-#                      nn.Linear(4096, num_classes)
-                )
+            if conf.use_linear_to_get_important_features:
+                # if this is true then _coef is must be one but we need the value later so we don't assinged it to 1
+                self.classifier = nn.Linear(conf.last_feature_dim, num_classes)
             else:
-                self.classifier = nn.Sequential(
-                    nn.Linear(conf.last_feature_dim * (_coef), num_classes),
-#                      nn.ReLU(),
-#                      nn.Linear(4096, num_classes)
-                )
+                self.classifier = nn.Linear(conf.last_feature_dim * (_coef), num_classes)
+               
         else:
             self.classifier = nn.Linear(conf.last_feature_dim, num_classes)
+
+        if conf.use_hist and conf.use_linear_to_get_important_features:
+            self.feature_reduction = nn.Sequential(
+                nn.Linear(conf.last_feature_dim * (_coef), conf.last_feature_dim),
+                nn.BatchNorm1d(conf.last_feature_dim),
+                nn.ReLU()
+            )
 
         self.classifier.apply(weights_init_classifier)
 
@@ -238,6 +242,11 @@ class ResNet503D(nn.Module):
         if conf.use_linear_to_merge_features and conf.use_hist:
             x = x.view(b * t * c, -1)
             x = self.linear_merge_features(x)
+        
+        if hasattr(self, 'feature_reduction'): # 2048 * 8 -> 2048
+            
+            x = x.view(b * t, -1)
+            x = self.feature_reduction(x)
         
         x = x.view(b, t, -1)
         

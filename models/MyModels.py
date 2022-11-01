@@ -5,6 +5,8 @@ import numpy as np
 import pdb
 import config as conf
 
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+
 class HistByNorm(nn.Module):
     def __init__(self, centers, widths):
         super(HistByNorm, self).__init__()
@@ -45,7 +47,7 @@ class HistByProf(nn.Module):
 
     def forward(self, x): #[72,2048,16,8]
         
-        res = torch.zeros((x.shape[0] * x.shape[1], self.nbins)).cuda()
+        res = torch.zeros((x.shape[0] * x.shape[1], self.nbins)).to(device)
         inputt = x.view(x.shape[0] * x.shape[1], -1)
 #         for i in range(1, len(self.norm_centers)): # exclude first and last        
         for i in range(len(self.hist_edges)-1):

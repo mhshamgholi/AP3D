@@ -5,8 +5,7 @@ import gc
 import sys
 import time
 import math
-import h5py
-import scipy
+# import scipy
 import datetime
 import argparse
 import os.path as osp
