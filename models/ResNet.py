@@ -1,8 +1,7 @@
 from __future__ import absolute_import
 
 import torch
-import math
-import copy
+import numpy as np
 import torchvision
 import torch.nn as nn
 from torch.nn import init
@@ -135,7 +134,9 @@ class ResNet503D(nn.Module):
 #         self.hist = HistYusufLayer(conf.centers, conf.width)
 #         self.hist = HistYusufLayer(n_bins=conf.nbins, inchannel=conf.last_feature_dim, centers=conf.centers, width=conf.width)
         if conf.use_hist:
-            self.hist = HistByProf(edges=conf.hist_by_prof_edges)
+            # self.hist = HistByProf(edges=conf.hist_by_prof_edges)
+            self.hist = HistYusufLayer(inchannel=conf.last_feature_dim, centers=conf.centers, width=conf.width)
+
             
         if conf.use_linear_to_merge_features and conf.use_hist:
             if not conf.use_just_last_bin:
