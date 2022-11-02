@@ -51,13 +51,13 @@ class HistByProf(nn.Module):
         inputt = x.view(x.shape[0] * x.shape[1], -1)
 #         for i in range(1, len(self.norm_centers)): # exclude first and last        
         for i in range(1, len(self.hist_edges)-1):
-            # res[:, i] = torch.mean(self.norm(inputt, (self.hist_edges[i] + self.hist_edges[i+1])/2, (self.hist_edges[i+1] - self.hist_edges[i])/4), 1)
-            res[:, i] = torch.sum(self.norm(inputt, (self.hist_edges[i] + self.hist_edges[i+1])/2, (self.hist_edges[i+1] - self.hist_edges[i])/4), 1)
+            res[:, i] = torch.mean(self.norm(inputt, (self.hist_edges[i] + self.hist_edges[i+1])/2, (self.hist_edges[i+1] - self.hist_edges[i])/4), 1)
+            # res[:, i] = torch.sum(self.norm(inputt, (self.hist_edges[i] + self.hist_edges[i+1])/2, (self.hist_edges[i+1] - self.hist_edges[i])/4), 1)
         
-        # res[:, 0] = torch.mean(1 - self.sigmoid(inputt - self.hist_edges[0]), 1)
-        res[:, 0] = torch.sum(1 - self.sigmoid(inputt - self.hist_edges[0]), 1)
-        # res[:, -1] = torch.mean(self.sigmoid(inputt - self.hist_edges[-1]), 1)
-        res[:, -1] = torch.sum(self.sigmoid(inputt - self.hist_edges[-1]), 1)
+        res[:, 0] = torch.mean(1 - self.sigmoid(inputt - self.hist_edges[0]), 1)
+        # res[:, 0] = torch.sum(1 - self.sigmoid(inputt - self.hist_edges[0]), 1)
+        res[:, -1] = torch.mean(self.sigmoid(inputt - self.hist_edges[-1]), 1)
+        # res[:, -1] = torch.sum(self.sigmoid(inputt - self.hist_edges[-1]), 1)
         if conf.use_just_last_bin:
             res = res[:, -1] # get last bin
         res = res.view(x.shape[0], x.shape[1], -1)
@@ -71,18 +71,20 @@ class HistByProf(nn.Module):
         return 1 / (1 + torch.exp(-20*x))
 
 class HistYusufLayer(nn.Module):
-    def __init__(self, n_bins=5, inchannel=1, centers=None, width=None):
+    def __init__(self, inchannel=1, centers=None, width=None):
         super(HistYusufLayer, self).__init__()
         
-        self.n_bins = n_bins
+        
         self.conv_centers_inchannel = inchannel
         if centers is not None and width is not None:
             self.centers, self.width = centers, width
         else:
             self.centers, self.width = self.calc_dummy_centers_and_width()
+
+        self.nbins = len(self.centers)
         # count as -u
         self.conv_centers = nn.Conv2d(self.conv_centers_inchannel, \
-                                      self.n_bins * self.conv_centers_inchannel, 1, \
+                                      self.nbins * self.conv_centers_inchannel, 1, \
                                       groups=self.conv_centers_inchannel, bias=True)
         self.conv_centers.weight.data.fill_(1)
         self.conv_centers.weight.requires_grad_(False)
@@ -90,9 +92,9 @@ class HistYusufLayer(nn.Module):
         self.conv_centers.bias.data = torch.nn.Parameter(
             -torch.tensor(np.tile(self.centers, self.conv_centers_inchannel), dtype=torch.float32))
         # count as w
-        self.conv_widths = nn.Conv2d(self.n_bins * self.conv_centers_inchannel, \
-                                    self.n_bins * self.conv_centers_inchannel, 1, \
-                                    groups=self.n_bins * self.conv_centers_inchannel, bias=True)
+        self.conv_widths = nn.Conv2d(self.nbins * self.conv_centers_inchannel, \
+                                    self.nbins * self.conv_centers_inchannel, 1, \
+                                    groups=self.nbins * self.conv_centers_inchannel, bias=True)
         self.conv_widths.weight.data.fill_(-1)
         self.conv_widths.weight.requires_grad_(False)
         # initial width
@@ -107,6 +109,7 @@ class HistYusufLayer(nn.Module):
     def forward(self, x):
         # input 2d array
 #         pdb.set_trace()
+        bt, c, h, w = x.shape
         x = self.conv_centers(x)
         x = torch.abs(x)
         x = self.conv_widths(x)
@@ -115,11 +118,12 @@ class HistYusufLayer(nn.Module):
         x = torch.add(x, 1e-6)
         x = self.relu1(x)
         x = self.gap(x)
-        x = torch.flatten(x, start_dim=1)
+        x = x.view(bt, c, self.nbins)
+        # x = torch.flatten(x, start_dim=1)
         return x
     
     def calc_dummy_centers_and_width(self):
-        bin_edges = np.linspace(-0.05, 1.05, self.n_bins + 1)
+        bin_edges = np.linspace(-0.05, 1.05, self.nbins + 1)
         centers = bin_edges + (bin_edges[2] - bin_edges[1]) / 2
         return centers[:-1], (bin_edges[2] - bin_edges[1]) / 2
 
