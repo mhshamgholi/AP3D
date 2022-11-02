@@ -79,6 +79,9 @@ parser.add_argument('--gpu', default='0', type=str,
 
 args = parser.parse_args()
 
+if input(f"log dir is {args.save_dir}, Are you sure? ") != "yes":
+    exit()
+
 
 def main():
     torch.manual_seed(args.seed)
