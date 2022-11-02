@@ -9,7 +9,7 @@ hist_by_prof_edges = [0, 0.2, 0.4, 0.6, 0.8, 1] # 15, 30]
 use_dropout = False
 use_hist = True #False
 use_just_last_bin = False
-concat_hist_max = True #False
+concat_hist_max = False #False
 use_linear_to_get_important_features = True # 2048 * 8 -> 2048
 
 use_resnet18 = True

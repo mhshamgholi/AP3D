@@ -186,8 +186,8 @@ class ResNet503D(nn.Module):
         if conf.use_hist and conf.use_linear_to_get_important_features:
             self.feature_reduction = nn.Sequential(
                 nn.Linear(conf.last_feature_dim * (_coef), conf.last_feature_dim),
-                nn.BatchNorm1d(conf.last_feature_dim),
-                nn.ReLU()
+                # nn.BatchNorm1d(conf.last_feature_dim),
+                # nn.ReLU()
             )
 
         self.classifier.apply(weights_init_classifier)
