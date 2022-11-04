@@ -1,10 +1,13 @@
 import numpy as np
 from torchvision import transforms as torchT
 
-width = np.array([0.1, 0.1, 0.1, 0.1, 0.1])
+# width = np.array([0.1, 0.1, 0.1, 0.1, 0.1])
 # width = np.array([0.1, 0.1, 0.1, 0.1, 0.1, 4, 4, 4, 4, 4])
-centers = np.array([0.1, 0.3, 0.5, 0.7, 0.9])
+# centers = np.array([0.1, 0.3, 0.5, 0.7, 0.9])
 # centers = np.array([0.1, 0.3, 0.5, 0.7, 0.9, 5, 13, 21, 29, 37])
+centers = [0.05, 0.15, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95]
+widths = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
+
 
 hist_by_prof_edges = [0, 0.2, 0.4, 0.6, 0.8, 1] # 15, 30]
 use_dropout = False
@@ -19,6 +22,8 @@ last_feature_dim = 512 if use_resnet18 else 2048
 
 use_linear_to_merge_features = False # ( 2048 * 8 ) 8 -> 1
 
+
+what_to_freeze_startwith = ['conv1.', 'bn1.', 'layer1.', 'layer2.', 'layer3.', 'layer4.', 'hist.'] # bn. , classifier. , feature_reduction. 
 
 
 

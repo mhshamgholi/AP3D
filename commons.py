@@ -1,4 +1,5 @@
 import torch
+import config
 
 def modify_model(model, args):
 #     if args.arch == "ap3dres50" and args.pretrain != "":
@@ -17,14 +18,11 @@ def modify_model(model, args):
         # model.bn.load_state_dict(my_state_dict['bn'])
 
     for n, p in model.named_parameters():
-        if 'hist.' in n:
+        if any(str(n).startswith(param) for param in config.what_to_freeze_startwith):
             p.requires_grad = False
         else:
             p.requires_grad = True
-#         if ('layer4.2' in n) or ('classifier' in n) or ('bn.' in n) : #  or  ('hist.' in n)
-#             pass
-#         else:
-#             p.requires_grad = False
+    
     print("pretrain state dict loaded")
     # exit()
     for name, param in model.named_parameters():

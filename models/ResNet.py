@@ -131,11 +131,11 @@ class ResNet503D(nn.Module):
                                              nonlocal_idx=nl_idx[3], nonlocal_channels=2048)
 
 
-#         self.hist = HistYusufLayer(conf.centers, conf.width)
-#         self.hist = HistYusufLayer(n_bins=conf.nbins, inchannel=conf.last_feature_dim, centers=conf.centers, width=conf.width)
+#         self.hist = HistYusufLayer(conf.centers, conf.widths)
+#         self.hist = HistYusufLayer(n_bins=conf.nbins, inchannel=conf.last_feature_dim, centers=conf.centers, width=conf.widths)
         if conf.use_hist:
             # self.hist = HistByProf(edges=conf.hist_by_prof_edges)
-            self.hist = HistYusufLayer(inchannel=conf.last_feature_dim, centers=conf.centers, width=conf.width)
+            self.hist = HistYusufLayer(inchannel=conf.last_feature_dim, centers=conf.centers, width=conf.widths)
 
             
         if conf.use_linear_to_merge_features and conf.use_hist:
@@ -148,7 +148,7 @@ class ResNet503D(nn.Module):
         
         if conf.use_dropout:
             self.dropout = nn.Dropout(p=0.5)
-        
+   
         if conf.use_hist:
             if conf.use_linear_to_merge_features:
                 _coef = 1
@@ -158,39 +158,22 @@ class ResNet503D(nn.Module):
                 _coef = (self.hist.nbins + 1) if conf.concat_hist_max else (self.hist.nbins)
 
             if conf.use_linear_to_get_important_features:
+                self.feature_reduction = nn.Sequential(
+                    nn.Linear(conf.last_feature_dim * (_coef), conf.last_feature_dim),
+                    # nn.BatchNorm1d(conf.last_feature_dim),
+                    # nn.ReLU()
+                )
                 # if this is true then _coef is must be one but we need the value later so we don't assinged it to 1
                 self.bn = nn.BatchNorm1d(conf.last_feature_dim)
-            else:
-                self.bn = nn.BatchNorm1d(conf.last_feature_dim * _coef)
-        else:
-            self.bn = nn.BatchNorm1d(conf.last_feature_dim)
-        self.bn.apply(weights_init_kaiming)
-
-        if conf.use_hist:
-            if conf.use_linear_to_merge_features:
-                _coef = 1
-            elif conf.use_just_last_bin:
-                _coef = (1 + 1) if conf.concat_hist_max else 1
-            else:
-                _coef = (self.hist.nbins + 1) if conf.concat_hist_max else (self.hist.nbins)
-                
-#             self.classifier = nn.Linear(conf.last_feature_dim * (self.hist.nbins + 1), num_classes)
-            if conf.use_linear_to_get_important_features:
-                # if this is true then _coef is must be one but we need the value later so we don't assinged it to 1
                 self.classifier = nn.Linear(conf.last_feature_dim, num_classes)
             else:
+                self.bn = nn.BatchNorm1d(conf.last_feature_dim * _coef)
                 self.classifier = nn.Linear(conf.last_feature_dim * (_coef), num_classes)
-               
         else:
+            self.bn = nn.BatchNorm1d(conf.last_feature_dim)
             self.classifier = nn.Linear(conf.last_feature_dim, num_classes)
 
-        if conf.use_hist and conf.use_linear_to_get_important_features:
-            self.feature_reduction = nn.Sequential(
-                nn.Linear(conf.last_feature_dim * (_coef), conf.last_feature_dim),
-                # nn.BatchNorm1d(conf.last_feature_dim),
-                # nn.ReLU()
-            )
-
+        self.bn.apply(weights_init_kaiming)
         self.classifier.apply(weights_init_classifier)
 
     def _inflate_reslayer(self, reslayer2d, c3d_idx, nonlocal_idx=[], nonlocal_channels=0):
