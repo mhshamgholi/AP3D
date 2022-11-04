@@ -24,7 +24,7 @@ import tools.data_manager as data_manager
 from tools.video_loader import VideoDataset
 from tools.utils import Logger
 from tools.eval_metrics import evaluate
-from common_test_train import modify_model
+from commons import modify_model
 
 parser = argparse.ArgumentParser(description='Test AP3D using all frames')
 # Datasets
