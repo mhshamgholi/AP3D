@@ -13,4 +13,4 @@
 # CUDA_VISIBLE_DEVICES=-1 python train.py --root ~/iust/datasets/ -d mars --arch ap3dres50 --gpu 0 --save_dir ./logs/removeme --train_batch 32 --test_batch 32 --lr 0.0003 --eval_step 10
 
 #run in arman 11.5 
-CUDA_VISIBLE_DEVICES=0 python train.py --root ~/iust/datasets/ -d mars --arch ap3dres50 --gpu 0 --save_dir ./logs/row51 --train_batch 32 --test_batch 32 --lr 0.0003 --eval_step 10 --distance euclidean --pretrain ./logs/row41/best_model.pth.tar
+CUDA_VISIBLE_DEVICES=0 python train.py --root ~/iust/datasets/ -d mars --arch ap3dres50 --gpu 0 --save_dir ./logs/row52 --train_batch 32 --test_batch 32 --lr 0.0003 --eval_step 10 --distance cosine --pretrain ./logs/row41/best_model.pth.tar
