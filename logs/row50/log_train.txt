@@ -1,0 +1,301 @@
+==========
+Args:Namespace(arch='ap3dres50', dataset='mars', distance='cosine', eval_step=10, gamma=0.1, gpu='0', height=256, lr=0.0003, margin=0.3, max_epoch=240, num_instances=4, pretrain='', resume='', root='/home/shamgholi/iust/datasets/', sample_stride=8, save_dir='./logs/row50', seed=1, seq_len=4, start_epoch=0, start_eval=0, stepsize=[60, 120, 180], test_batch=32, train_batch=32, use_cpu=False, weight_decay=0.0005, width=128, workers=4)
+==========
+Currently using GPU 0
+Initializing dataset mars
+=> MARS loaded
+Dataset statistics:
+  ------------------------------
+  subset   | # ids | # tracklets
+  ------------------------------
+  train    |   625 |     8298
+  query    |   626 |     1980
+  gallery  |   622 |     9330
+  ------------------------------
+  total    |  1247 |    19608
+  number of images per tracklet: 2 ~ 920, average 59.5
+  ------------------------------
+Initializing model: ap3dres50
+Model size: 14.40174M
+pretrain state dict loaded
+>>> module conv1.weight is trainable ? False
+>>> module bn1.weight is trainable ? False
+>>> module bn1.bias is trainable ? False
+>>> module layer1.0.conv1.weight is trainable ? False
+>>> module layer1.0.bn1.weight is trainable ? False
+>>> module layer1.0.bn1.bias is trainable ? False
+>>> module layer1.0.conv2.weight is trainable ? False
+>>> module layer1.0.bn2.weight is trainable ? False
+>>> module layer1.0.bn2.bias is trainable ? False
+>>> module layer1.1.conv1.weight is trainable ? False
+>>> module layer1.1.bn1.weight is trainable ? False
+>>> module layer1.1.bn1.bias is trainable ? False
+>>> module layer1.1.conv2.weight is trainable ? False
+>>> module layer1.1.bn2.weight is trainable ? False
+>>> module layer1.1.bn2.bias is trainable ? False
+>>> module layer2.0.conv1.weight is trainable ? False
+>>> module layer2.0.bn1.weight is trainable ? False
+>>> module layer2.0.bn1.bias is trainable ? False
+>>> module layer2.0.conv2.APM.semantic_mapping.weight is trainable ? False
+>>> module layer2.0.conv2.APM.x_mapping.weight is trainable ? False
+>>> module layer2.0.conv2.APM.n_mapping.weight is trainable ? False
+>>> module layer2.0.conv2.APM.contrastive_att_net.0.weight is trainable ? False
+>>> module layer2.0.conv2.spatial_conv3d.weight is trainable ? False
+>>> module layer2.0.conv2.temporal_conv3d.weight is trainable ? False
+>>> module layer2.0.bn2.weight is trainable ? False
+>>> module layer2.0.bn2.bias is trainable ? False
+>>> module layer2.0.downsample.0.weight is trainable ? False
+>>> module layer2.0.downsample.1.weight is trainable ? False
+>>> module layer2.0.downsample.1.bias is trainable ? False
+>>> module layer2.1.conv1.weight is trainable ? False
+>>> module layer2.1.bn1.weight is trainable ? False
+>>> module layer2.1.bn1.bias is trainable ? False
+>>> module layer2.1.conv2.weight is trainable ? False
+>>> module layer2.1.bn2.weight is trainable ? False
+>>> module layer2.1.bn2.bias is trainable ? False
+>>> module layer3.0.conv1.weight is trainable ? False
+>>> module layer3.0.bn1.weight is trainable ? False
+>>> module layer3.0.bn1.bias is trainable ? False
+>>> module layer3.0.conv2.APM.semantic_mapping.weight is trainable ? False
+>>> module layer3.0.conv2.APM.x_mapping.weight is trainable ? False
+>>> module layer3.0.conv2.APM.n_mapping.weight is trainable ? False
+>>> module layer3.0.conv2.APM.contrastive_att_net.0.weight is trainable ? False
+>>> module layer3.0.conv2.spatial_conv3d.weight is trainable ? False
+>>> module layer3.0.conv2.temporal_conv3d.weight is trainable ? False
+>>> module layer3.0.bn2.weight is trainable ? False
+>>> module layer3.0.bn2.bias is trainable ? False
+>>> module layer3.0.downsample.0.weight is trainable ? False
+>>> module layer3.0.downsample.1.weight is trainable ? False
+>>> module layer3.0.downsample.1.bias is trainable ? False
+>>> module layer3.1.conv1.weight is trainable ? False
+>>> module layer3.1.bn1.weight is trainable ? False
+>>> module layer3.1.bn1.bias is trainable ? False
+>>> module layer3.1.conv2.weight is trainable ? False
+>>> module layer3.1.bn2.weight is trainable ? False
+>>> module layer3.1.bn2.bias is trainable ? False
+>>> module layer4.0.conv1.weight is trainable ? False
+>>> module layer4.0.bn1.weight is trainable ? False
+>>> module layer4.0.bn1.bias is trainable ? False
+>>> module layer4.0.conv2.weight is trainable ? False
+>>> module layer4.0.bn2.weight is trainable ? False
+>>> module layer4.0.bn2.bias is trainable ? False
+>>> module layer4.0.downsample.0.weight is trainable ? False
+>>> module layer4.0.downsample.1.weight is trainable ? False
+>>> module layer4.0.downsample.1.bias is trainable ? False
+>>> module layer4.1.conv1.weight is trainable ? False
+>>> module layer4.1.bn1.weight is trainable ? False
+>>> module layer4.1.bn1.bias is trainable ? False
+>>> module layer4.1.conv2.weight is trainable ? False
+>>> module layer4.1.bn2.weight is trainable ? False
+>>> module layer4.1.bn2.bias is trainable ? False
+>>> module hist.conv_centers.weight is trainable ? False
+>>> module hist.conv_centers.bias is trainable ? False
+>>> module hist.conv_widths.weight is trainable ? False
+>>> module hist.conv_widths.bias is trainable ? False
+>>> module feature_reduction.0.weight is trainable ? True
+>>> module feature_reduction.0.bias is trainable ? True
+>>> module bn.weight is trainable ? True
+>>> module bn.bias is trainable ? True
+>>> module classifier.weight is trainable ? True
+>>> module classifier.bias is trainable ? True
+----------
+model layers:
+ResNet503D(
+  (conv1): Conv3d(3, 64, kernel_size=(1, 7, 7), stride=(1, 2, 2), padding=(0, 3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace=True)
+  (maxpool): MaxPool3d(kernel_size=(1, 3, 3), stride=(1, 2, 2), padding=(0, 1, 1), dilation=(1, 1, 1), ceil_mode=False)
+  (layer1): Sequential(
+    (0): Bottleneck3D(
+      (conv1): Conv3d(64, 64, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv3d(64, 64, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+    (1): Bottleneck3D(
+      (conv1): Conv3d(64, 64, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv3d(64, 64, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): Bottleneck3D(
+      (conv1): Conv3d(64, 128, kernel_size=(1, 3, 3), stride=(1, 2, 2), padding=(0, 1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): APP3DC(
+        (APM): APM(
+          (padding): ConstantPad3d(padding=(0, 0, 0, 0, 1, 1), value=0)
+          (semantic_mapping): Conv3d(128, 8, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+          (x_mapping): Conv3d(128, 8, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+          (n_mapping): Conv3d(128, 8, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+          (contrastive_att_net): Sequential(
+            (0): Conv3d(8, 1, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+            (1): Sigmoid()
+          )
+        )
+        (spatial_conv3d): Conv3d(128, 128, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (temporal_conv3d): Conv3d(128, 128, kernel_size=(3, 1, 1), stride=(3, 1, 1), bias=False)
+      )
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (downsample): Sequential(
+        (0): Conv3d(64, 128, kernel_size=(1, 1, 1), stride=(1, 2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): Bottleneck3D(
+      (conv1): Conv3d(128, 128, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv3d(128, 128, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): Bottleneck3D(
+      (conv1): Conv3d(128, 256, kernel_size=(1, 3, 3), stride=(1, 2, 2), padding=(0, 1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): APP3DC(
+        (APM): APM(
+          (padding): ConstantPad3d(padding=(0, 0, 0, 0, 1, 1), value=0)
+          (semantic_mapping): Conv3d(256, 16, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+          (x_mapping): Conv3d(256, 16, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+          (n_mapping): Conv3d(256, 16, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+          (contrastive_att_net): Sequential(
+            (0): Conv3d(16, 1, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+            (1): Sigmoid()
+          )
+        )
+        (spatial_conv3d): Conv3d(256, 256, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (temporal_conv3d): Conv3d(256, 256, kernel_size=(3, 1, 1), stride=(3, 1, 1), bias=False)
+      )
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (downsample): Sequential(
+        (0): Conv3d(128, 256, kernel_size=(1, 1, 1), stride=(1, 2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): Bottleneck3D(
+      (conv1): Conv3d(256, 256, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv3d(256, 256, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): Bottleneck3D(
+      (conv1): Conv3d(256, 512, kernel_size=(1, 3, 3), stride=(1, 2, 2), padding=(0, 1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv3d(512, 512, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (downsample): Sequential(
+        (0): Conv3d(256, 512, kernel_size=(1, 1, 1), stride=(1, 2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): Bottleneck3D(
+      (conv1): Conv3d(512, 512, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv3d(512, 512, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+  )
+  (hist): HistYusufLayer(
+    (conv_centers): Conv2d(512, 5120, kernel_size=(1, 1), stride=(1, 1), groups=512)
+    (conv_widths): Conv2d(5120, 5120, kernel_size=(1, 1), stride=(1, 1), groups=5120)
+    (relu1): Threshold(threshold=1.0, value=0.0)
+    (gap): AdaptiveAvgPool2d(output_size=1)
+  )
+  (feature_reduction): Sequential(
+    (0): Linear(in_features=5120, out_features=512, bias=True)
+  )
+  (bn): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (classifier): Linear(in_features=512, out_features=625, bias=True)
+)
+Model size: 14.40174M
+==> Start training
+Epoch1 Time:33.0s Data:1.5s Loss:6.1170 Xent:5.7560 Htri:0.3610 Acc:12.21% 
+Epoch2 Time:32.3s Data:1.3s Loss:4.7006 Xent:4.4011 Htri:0.2995 Acc:22.21% 
+Epoch3 Time:31.9s Data:1.2s Loss:3.7913 Xent:3.5159 Htri:0.2755 Acc:34.81% 
+Epoch4 Time:32.4s Data:1.2s Loss:3.1200 Xent:2.8592 Htri:0.2608 Acc:45.61% 
+Epoch5 Time:32.1s Data:1.2s Loss:2.6138 Xent:2.3601 Htri:0.2537 Acc:53.52% 
+Epoch6 Time:32.2s Data:1.2s Loss:2.2261 Xent:1.9768 Htri:0.2493 Acc:61.56% 
+Epoch7 Time:32.9s Data:1.3s Loss:1.9101 Xent:1.6662 Htri:0.2438 Acc:67.53% 
+Epoch8 Time:32.6s Data:1.2s Loss:1.6588 Xent:1.4165 Htri:0.2423 Acc:72.49% 
+Epoch9 Time:32.5s Data:1.2s Loss:1.4465 Xent:1.2085 Htri:0.2380 Acc:76.50% 
+Epoch10 Time:32.7s Data:1.2s Loss:1.2987 Xent:1.0615 Htri:0.2373 Acc:78.90% 
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 512]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 512]) matrix
+Extracting features complete in 0m 51s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:26.9% top5:48.9% top10:57.4% mAP:16.8%
+------------------
+Epoch11 Time:32.5s Data:1.2s Loss:1.1542 Xent:0.9223 Htri:0.2319 Acc:82.41% 
+Epoch12 Time:33.1s Data:1.2s Loss:1.0485 Xent:0.8180 Htri:0.2305 Acc:83.99% 
+Epoch13 Time:32.8s Data:1.2s Loss:0.9997 Xent:0.7648 Htri:0.2350 Acc:85.15% 
+Epoch14 Time:32.6s Data:1.3s Loss:0.8760 Xent:0.6482 Htri:0.2278 Acc:88.19% 
+Epoch15 Time:32.6s Data:1.2s Loss:0.8392 Xent:0.6102 Htri:0.2290 Acc:88.72% 
+Epoch16 Time:32.8s Data:1.2s Loss:0.8241 Xent:0.5911 Htri:0.2331 Acc:88.71% 
+Epoch17 Time:32.7s Data:1.3s Loss:0.7754 Xent:0.5411 Htri:0.2344 Acc:89.37% 
+Epoch18 Time:32.9s Data:1.3s Loss:0.7420 Xent:0.5088 Htri:0.2333 Acc:89.43% 
+Epoch19 Time:32.8s Data:1.2s Loss:0.6989 Xent:0.4718 Htri:0.2271 Acc:90.74% 
+Epoch20 Time:32.7s Data:1.2s Loss:0.6859 Xent:0.4537 Htri:0.2322 Acc:91.22% 
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 512]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 512]) matrix
+Extracting features complete in 0m 51s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:28.8% top5:48.8% top10:58.3% mAP:17.1%
+------------------
+Epoch21 Time:32.7s Data:1.3s Loss:0.6469 Xent:0.4216 Htri:0.2253 Acc:91.74% 
+Epoch22 Time:32.9s Data:1.2s Loss:0.6181 Xent:0.3933 Htri:0.2248 Acc:92.33% 
+Epoch23 Time:32.5s Data:1.3s Loss:0.6369 Xent:0.4105 Htri:0.2263 Acc:91.57% 
+Epoch24 Time:33.1s Data:1.3s Loss:0.6130 Xent:0.3832 Htri:0.2298 Acc:92.10% 
+Epoch25 Time:32.5s Data:1.3s Loss:0.5822 Xent:0.3585 Htri:0.2237 Acc:93.23% 
+Epoch26 Time:32.6s Data:1.2s Loss:0.5727 Xent:0.3480 Htri:0.2247 Acc:93.16% 
+Epoch27 Time:32.6s Data:1.2s Loss:0.5747 Xent:0.3459 Htri:0.2288 Acc:92.70% 
+Epoch28 Time:32.8s Data:1.3s Loss:0.5567 Xent:0.3306 Htri:0.2261 Acc:92.98% 
+Epoch29 Time:32.9s Data:1.3s Loss:0.5400 Xent:0.3168 Htri:0.2232 Acc:93.62% 
+Epoch30 Time:33.1s Data:1.2s Loss:0.5556 Xent:0.3255 Htri:0.2301 Acc:93.42% 
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 512]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 512]) matrix
+Extracting features complete in 1m 11s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:28.2% top5:48.9% top10:58.2% mAP:16.8%
+------------------
+Epoch31 Time:50.5s Data:1.7s Loss:0.5473 Xent:0.3205 Htri:0.2268 Acc:93.27% 
+Epoch32 Time:47.9s Data:1.6s Loss:0.5239 Xent:0.2983 Htri:0.2256 Acc:94.14% 
+Epoch33 Time:47.2s Data:1.7s Loss:0.5099 Xent:0.2881 Htri:0.2217 Acc:94.31% 
+Epoch34 Time:34.5s Data:1.4s Loss:0.5019 Xent:0.2814 Htri:0.2206 Acc:94.28% 
+Epoch35 Time:45.6s Data:1.4s Loss:0.5100 Xent:0.2853 Htri:0.2247 Acc:94.31% 
+Epoch36 Time:47.5s Data:1.7s Loss:0.4995 Xent:0.2729 Htri:0.2266 Acc:94.84% 
+Epoch37 Time:40.1s Data:1.5s Loss:0.5104 Xent:0.2865 Htri:0.2239 Acc:94.28% 
+Epoch38 Time:32.4s Data:1.2s Loss:0.4925 Xent:0.2654 Htri:0.2271 Acc:94.45% 
+Epoch39 Time:32.2s Data:1.3s Loss:0.4759 Xent:0.2553 Htri:0.2206 Acc:95.09% 
+Epoch40 Time:32.6s Data:1.3s Loss:0.4951 Xent:0.2699 Htri:0.2252 Acc:94.44% 
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 512]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 512]) matrix
+Extracting features complete in 0m 51s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:30.5% top5:48.9% top10:58.8% mAP:17.4%
+------------------
+Epoch41 Time:32.6s Data:1.2s Loss:0.4990 Xent:0.2695 Htri:0.2295 Acc:94.81% 
+Epoch42 Time:35.1s Data:1.3s Loss:0.5033 Xent:0.2772 Htri:0.2261 Acc:94.03% 
