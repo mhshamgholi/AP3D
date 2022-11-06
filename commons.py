@@ -12,7 +12,7 @@ def modify_model(model, args, conf: config.Config):
         for n, p in model.named_parameters():
             if ('hist.' in n) or ('classifier' in n):
                 my_state_dict[n] = p
-        my_state_dict = dict(filter(lambda elem: 'bn.' not in elem[0], my_state_dict.items()))
+        # my_state_dict = dict(filter(lambda elem: 'bn.' not in elem[0], my_state_dict.items()))
 
         model.load_state_dict(my_state_dict, strict=False)
         # model.bn.load_state_dict(my_state_dict['bn'])
