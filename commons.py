@@ -25,11 +25,13 @@ def modify_model(model, args, conf: config.Config):
     
     print("pretrain state dict loaded")
     # exit()
-    for name, param in model.named_parameters():
-        print(f'>>> module {name} is trainable ? {param.requires_grad}')
+    if conf.print_model_parameters_trainable:
+        for name, param in model.named_parameters():
+            print(f'>>> module {name} is trainable ? {param.requires_grad}')
     print('-'*10)
-    print('model layers:')
-    print(model)
+    if conf.print_model_layers:
+        print('model layers:')
+        print(model)
     print("Model size: {:.5f}M".format(sum(p.numel() for p in model.parameters())/1000000.0))
     
 

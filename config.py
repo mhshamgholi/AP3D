@@ -6,6 +6,9 @@ class Config:
 
         
     def __init__(self) -> None:
+
+        self.print_model_parameters_trainable = True
+        self.print_model_layers = True
         # width = np.array([0.1, 0.1, 0.1, 0.1, 0.1])
         # width = np.array([0.1, 0.1, 0.1, 0.1, 0.1, 4, 4, 4, 4, 4])
         # centers = np.array([0.1, 0.3, 0.5, 0.7, 0.9])
