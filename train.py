@@ -10,7 +10,7 @@ import datetime
 import argparse
 import os.path as osp
 import numpy as np
-import config as conf
+import config
 
 import torch
 import torch.nn as nn
@@ -84,6 +84,7 @@ if input(f"log dir is {args.save_dir}, Are you sure? ") != "yes":
 
 
 def main():
+    conf = config.Config()
     torch.manual_seed(args.seed)
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
     use_gpu = torch.cuda.is_available()
@@ -138,10 +139,10 @@ def main():
         pin_memory=pin_memory, drop_last=False)
     
     print("Initializing model: {}".format(args.arch))
-    model = models.init_model(name=args.arch, num_classes=dataset.num_train_pids)
+    model = models.init_model(name=args.arch, conf=conf, num_classes=dataset.num_train_pids)
     print("Model size: {:.5f}M".format(sum(p.numel() for p in model.parameters())/1000000.0))
 
-    modify_model(model, args)
+    modify_model(model, args, conf)
     
     criterion_xent = nn.CrossEntropyLoss()
     criterion_htri = TripletLoss(margin=args.margin, distance=args.distance)

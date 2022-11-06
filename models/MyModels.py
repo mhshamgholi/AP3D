@@ -3,7 +3,7 @@ from torch import nn
 import math
 import numpy as np
 import pdb
-import config as conf
+import config
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
@@ -31,9 +31,10 @@ class HistByNorm(nn.Module):
 
     
 class HistByProf(nn.Module):
-    def __init__(self, edges):
+    def __init__(self, edges, use_just_last_bin):
         super(HistByProf, self).__init__()
         self.hist_edges = nn.Parameter(torch.tensor(edges, dtype=torch.float32), requires_grad=True)
+        self.use_last_bin = use_just_last_bin
 #         self.norm_centers = []
 #         self.sigma = 0.39
         self.nbins = len(edges) + 1
@@ -58,7 +59,7 @@ class HistByProf(nn.Module):
         # res[:, 0] = torch.sum(1 - self.sigmoid(inputt - self.hist_edges[0]), 1)
         res[:, -1] = torch.mean(self.sigmoid(inputt - self.hist_edges[-1]), 1)
         # res[:, -1] = torch.sum(self.sigmoid(inputt - self.hist_edges[-1]), 1)
-        if conf.use_just_last_bin:
+        if self.use_just_last_bin:
             res = res[:, -1] # get last bin
         res = res.view(x.shape[0], x.shape[1], -1)
 #         res = res * x.shape[-1] * x.shape[-2] # unnormalize to prevent from gradient vannish

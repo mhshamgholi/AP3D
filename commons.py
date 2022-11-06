@@ -1,7 +1,7 @@
 import torch
 import config
 
-def modify_model(model, args):
+def modify_model(model, args, conf: config.Config):
 #     if args.arch == "ap3dres50" and args.pretrain != "":
 #         return None
     
@@ -18,7 +18,7 @@ def modify_model(model, args):
         # model.bn.load_state_dict(my_state_dict['bn'])
 
     for n, p in model.named_parameters():
-        if any(str(n).startswith(param) for param in config.what_to_freeze_startwith):
+        if any(str(n).startswith(param) for param in conf.what_to_freeze_startwith):
             p.requires_grad = False
         else:
             p.requires_grad = True
