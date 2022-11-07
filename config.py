@@ -35,9 +35,12 @@ class Config():
 
         if self.use_linear_to_merge_features and self.use_linear_to_get_important_features:
             raise Exception("both 'use_linear_to_merge_features' 'use_linear_to_get_important_features are True'")
+            
+        # init hist
+        self.init_hist
 
-
-        self.hist_name = "HistByProf"
+    def init_hist(self, hist_name):
+        self.hist_name = hist_name
         if self.hist_name == "HistByProf":
             self.hist_model = MyModels.HistByProf(edges=self.hist_by_prof_edges, use_just_last_bin=self.use_just_last_bin)
         elif self.hist_name == "HistYusufLayer":

@@ -13,8 +13,16 @@ def modify_model(model, args, conf: config.Config):
             if ('hist.' in n) or ('classifier' in n):
                 my_state_dict[n] = p
         # my_state_dict = dict(filter(lambda elem: 'bn.' not in elem[0], my_state_dict.items()))
-
-        model.load_state_dict(my_state_dict, strict=False)
+        try:
+            model.load_state_dict(my_state_dict, strict=False)
+        except RuntimeError as e:
+            if 'bn.' in str(e):
+                my_state_dict = dict(filter(lambda elem: 'bn.' not in elem[0], my_state_dict.items()))
+                model.load_state_dict(my_state_dict, strict=False)
+                print("-"*20)
+                print("RUNTIMEERROR IN LOADING BATCHNORM STATEDICT, WEIGHTS OF BN IS NOW RANDOM")
+                print("-"*20)
+                
         # model.bn.load_state_dict(my_state_dict['bn'])
 
     for n, p in model.named_parameters():
