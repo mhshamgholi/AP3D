@@ -1,11 +1,11 @@
 import numpy as np
 from torchvision import transforms as torchT
+from models import MyModels
 
-
-class Config:
+class Config():
 
         
-    def __init__(self) -> None:
+    def __init__(self):
 
         self.print_model_parameters_trainable = True
         self.print_model_layers = True
@@ -36,6 +36,13 @@ class Config:
         if self.use_linear_to_merge_features and self.use_linear_to_get_important_features:
             raise Exception("both 'use_linear_to_merge_features' 'use_linear_to_get_important_features are True'")
 
+
+        self.hist_name = "HistByProf"
+        if self.hist_name == "HistByProf":
+            self.hist_model = MyModels.HistByProf(edges=self.hist_by_prof_edges, use_just_last_bin=self.use_just_last_bin)
+        elif self.hist_name == "HistYusufLayer":
+            self.hist_model = MyModels.HistYusufLayer(inchannel=self.last_feature_dim, centers=self.centers, width=self.widths)
+        
 
 
     def get_spatial_transform_train(self, args):

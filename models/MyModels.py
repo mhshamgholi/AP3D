@@ -34,7 +34,7 @@ class HistByProf(nn.Module):
     def __init__(self, edges, use_just_last_bin):
         super(HistByProf, self).__init__()
         self.hist_edges = nn.Parameter(torch.tensor(edges, dtype=torch.float32), requires_grad=True)
-        self.use_last_bin = use_just_last_bin
+        self.use_just_last_bin = use_just_last_bin
 #         self.norm_centers = []
 #         self.sigma = 0.39
         self.nbins = len(edges) + 1

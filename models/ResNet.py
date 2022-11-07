@@ -13,7 +13,6 @@ from models import AP3D
 from models import NonLocal
 
 from .MyModels import HistByNorm, HistYusufLayer, HistByProf
-import config
 import pdb
 
 __all__ = ['AP3DResNet50', 'AP3DNLResNet50']
@@ -99,7 +98,7 @@ class Bottleneck3D(nn.Module):
 
 
 class ResNet503D(nn.Module):
-    def __init__(self, conf: config.Config, num_classes, block, c3d_idx, nl_idx, temperature=4, contrastive_att=True, **kwargs):
+    def __init__(self, conf, num_classes, block, c3d_idx, nl_idx, temperature=4, contrastive_att=True, **kwargs):
         super(ResNet503D, self).__init__()
         self.conf = conf
         self.block = block
@@ -134,7 +133,8 @@ class ResNet503D(nn.Module):
 #         self.hist = HistYusufLayer(n_bins=self.conf.nbins, inchannel=self.conf.last_feature_dim, centers=self.conf.centers, width=self.conf.widths)
         if self.conf.use_hist:
             # self.hist = HistByProf(edges=self.conf.hist_by_prof_edges, self.conf.use_last_bin)
-            self.hist = HistYusufLayer(inchannel=self.conf.last_feature_dim, centers=self.conf.centers, width=self.conf.widths)
+            # self.hist = HistYusufLayer(inchannel=self.conf.last_feature_dim, centers=self.conf.centers, width=self.conf.widths)
+            self.hist = conf.hist_model
 
             
         if self.conf.use_linear_to_merge_features and self.conf.use_hist:
@@ -244,14 +244,14 @@ class ResNet503D(nn.Module):
         return y, f
 
 
-def AP3DResNet50(conf: config.Config, num_classes, **kwargs):
+def AP3DResNet50(conf, num_classes, **kwargs):
     c3d_idx = [[],[0, 2],[0, 2, 4],[]]
     nl_idx = [[],[],[],[]]
 
     return ResNet503D(conf, num_classes, AP3D.APP3DC, c3d_idx, nl_idx, **kwargs)
 
 
-def AP3DNLResNet50(conf: config.Config, num_classes, **kwargs):
+def AP3DNLResNet50(conf, num_classes, **kwargs):
     c3d_idx = [[],[0, 2],[0, 2, 4],[]]
     nl_idx = [[],[1, 3],[1, 3, 5],[]]
 
