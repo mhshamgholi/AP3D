@@ -11,18 +11,20 @@ class Config():
         self.print_model_layers = True
         # width = np.array([0.1, 0.1, 0.1, 0.1, 0.1])
         # width = np.array([0.1, 0.1, 0.1, 0.1, 0.1, 4, 4, 4, 4, 4])
+        width = np.array([0.1, 0.1, 0.1, 0.1, 0.1, 0.1])
         # centers = np.array([0.1, 0.3, 0.5, 0.7, 0.9])
         # centers = np.array([0.1, 0.3, 0.5, 0.7, 0.9, 5, 13, 21, 29, 37])
-        self.centers = [0.05, 0.15, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95]
-        self.widths = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
+        centers = np.array([0.1, 0.3, 0.5, 0.7, 0.9, 1.1])
+        # self.centers = [0.05, 0.15, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95]
+        # self.widths = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
 
 
         self.hist_by_prof_edges = [0, 0.2, 0.4, 0.6, 0.8, 1] # 15, 30]
         self.use_dropout = False
         self.use_hist = True #False
         self.use_just_last_bin = False
-        self.concat_hist_max = True #False
-        self.use_linear_to_get_important_features = True # 2048 * 8 -> 2048
+        self.concat_hist_max = False #False
+        self.use_linear_to_get_important_features = False # 2048 * 8 -> 2048
 
         self.use_resnet18 = True
         self.last_feature_dim = 512 if self.use_resnet18 else 2048
@@ -37,7 +39,7 @@ class Config():
             raise Exception("both 'use_linear_to_merge_features' 'use_linear_to_get_important_features are True'")
             
         # init hist
-        self.init_hist
+        self.init_hist("HistYusufLayer")
 
     def init_hist(self, hist_name):
         self.hist_name = hist_name
