@@ -13,6 +13,7 @@ __pycache__/
 removeme
 .Python
 .idea/
+.vscode/
 build/
 develop-eggs/
 dist/

@@ -96,6 +96,10 @@ def write_json(obj, fpath):
         json.dump(obj, f, indent=4, separators=(',', ': '))
 
 
+def hist_intersection(hist_1, hist_2):
+    minima = torch.minimum(hist_1, hist_2)
+    intersection = torch.true_divide(torch.sum(minima), torch.sum(torch.maximum(hist_1, hist_2)))
+    return intersection
 
 
 
