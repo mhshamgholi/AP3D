@@ -1,5 +1,5 @@
 ==========
-Args:Namespace(arch='ap3dres50', dataset='mars', distance='hist_intersection', eval_step=10, gamma=0.1, gpu='0', height=256, lr=0.0003, margin=0.3, max_epoch=240, num_instances=4, pretrain='./logs/row41/best_model.pth.tar', resume='', root='/home/shamgholi/iust/datasets/', sample_stride=8, save_dir='./logs/row54', seed=1, seq_len=4, start_epoch=0, start_eval=0, stepsize=[60, 120, 180], test_batch=32, train_batch=32, use_cpu=False, weight_decay=0.0005, width=128, workers=4)
+Args:Namespace(arch='ap3dres50', dataset='mars', distance='hist_intersect', eval_step=10, gamma=0.1, gpu='0', height=256, lr=0.0003, margin=0.3, max_epoch=240, num_instances=4, pretrain='./logs/row41/best_model.pth.tar', resume='', root='/home/shamgholi/iust/datasets/', sample_stride=8, save_dir='./logs/row54', seed=1, seq_len=4, start_epoch=0, start_eval=0, stepsize=[60, 120, 180], test_batch=32, train_batch=32, use_cpu=False, weight_decay=0.0005, width=128, workers=4)
 ==========
 Currently using GPU 0
 Initializing dataset mars
@@ -21,84 +21,6 @@ Model size: 13.37671M
 RUNTIMEERROR IN LOADING BATCHNORM STATEDICT, WEIGHTS OF BN IS NOW RANDOM
 --------------------
 pretrain state dict loaded
->>> module conv1.weight is trainable ? False
->>> module bn1.weight is trainable ? False
->>> module bn1.bias is trainable ? False
->>> module layer1.0.conv1.weight is trainable ? False
->>> module layer1.0.bn1.weight is trainable ? False
->>> module layer1.0.bn1.bias is trainable ? False
->>> module layer1.0.conv2.weight is trainable ? False
->>> module layer1.0.bn2.weight is trainable ? False
->>> module layer1.0.bn2.bias is trainable ? False
->>> module layer1.1.conv1.weight is trainable ? False
->>> module layer1.1.bn1.weight is trainable ? False
->>> module layer1.1.bn1.bias is trainable ? False
->>> module layer1.1.conv2.weight is trainable ? False
->>> module layer1.1.bn2.weight is trainable ? False
->>> module layer1.1.bn2.bias is trainable ? False
->>> module layer2.0.conv1.weight is trainable ? False
->>> module layer2.0.bn1.weight is trainable ? False
->>> module layer2.0.bn1.bias is trainable ? False
->>> module layer2.0.conv2.APM.semantic_mapping.weight is trainable ? False
->>> module layer2.0.conv2.APM.x_mapping.weight is trainable ? False
->>> module layer2.0.conv2.APM.n_mapping.weight is trainable ? False
->>> module layer2.0.conv2.APM.contrastive_att_net.0.weight is trainable ? False
->>> module layer2.0.conv2.spatial_conv3d.weight is trainable ? False
->>> module layer2.0.conv2.temporal_conv3d.weight is trainable ? False
->>> module layer2.0.bn2.weight is trainable ? False
->>> module layer2.0.bn2.bias is trainable ? False
->>> module layer2.0.downsample.0.weight is trainable ? False
->>> module layer2.0.downsample.1.weight is trainable ? False
->>> module layer2.0.downsample.1.bias is trainable ? False
->>> module layer2.1.conv1.weight is trainable ? False
->>> module layer2.1.bn1.weight is trainable ? False
->>> module layer2.1.bn1.bias is trainable ? False
->>> module layer2.1.conv2.weight is trainable ? False
->>> module layer2.1.bn2.weight is trainable ? False
->>> module layer2.1.bn2.bias is trainable ? False
->>> module layer3.0.conv1.weight is trainable ? False
->>> module layer3.0.bn1.weight is trainable ? False
->>> module layer3.0.bn1.bias is trainable ? False
->>> module layer3.0.conv2.APM.semantic_mapping.weight is trainable ? False
->>> module layer3.0.conv2.APM.x_mapping.weight is trainable ? False
->>> module layer3.0.conv2.APM.n_mapping.weight is trainable ? False
->>> module layer3.0.conv2.APM.contrastive_att_net.0.weight is trainable ? False
->>> module layer3.0.conv2.spatial_conv3d.weight is trainable ? False
->>> module layer3.0.conv2.temporal_conv3d.weight is trainable ? False
->>> module layer3.0.bn2.weight is trainable ? False
->>> module layer3.0.bn2.bias is trainable ? False
->>> module layer3.0.downsample.0.weight is trainable ? False
->>> module layer3.0.downsample.1.weight is trainable ? False
->>> module layer3.0.downsample.1.bias is trainable ? False
->>> module layer3.1.conv1.weight is trainable ? False
->>> module layer3.1.bn1.weight is trainable ? False
->>> module layer3.1.bn1.bias is trainable ? False
->>> module layer3.1.conv2.weight is trainable ? False
->>> module layer3.1.bn2.weight is trainable ? False
->>> module layer3.1.bn2.bias is trainable ? False
->>> module layer4.0.conv1.weight is trainable ? False
->>> module layer4.0.bn1.weight is trainable ? False
->>> module layer4.0.bn1.bias is trainable ? False
->>> module layer4.0.conv2.weight is trainable ? False
->>> module layer4.0.bn2.weight is trainable ? False
->>> module layer4.0.bn2.bias is trainable ? False
->>> module layer4.0.downsample.0.weight is trainable ? False
->>> module layer4.0.downsample.1.weight is trainable ? False
->>> module layer4.0.downsample.1.bias is trainable ? False
->>> module layer4.1.conv1.weight is trainable ? False
->>> module layer4.1.bn1.weight is trainable ? False
->>> module layer4.1.bn1.bias is trainable ? False
->>> module layer4.1.conv2.weight is trainable ? False
->>> module layer4.1.bn2.weight is trainable ? False
->>> module layer4.1.bn2.bias is trainable ? False
->>> module hist.conv_centers.weight is trainable ? False
->>> module hist.conv_centers.bias is trainable ? False
->>> module hist.conv_widths.weight is trainable ? False
->>> module hist.conv_widths.bias is trainable ? False
->>> module bn.weight is trainable ? True
->>> module bn.bias is trainable ? True
->>> module classifier.weight is trainable ? True
->>> module classifier.bias is trainable ? True
 ----------
 model layers:
 ResNet503D(
@@ -218,3 +140,86 @@ ResNet503D(
   (classifier): Linear(in_features=3072, out_features=625, bias=True)
 )
 Model size: 13.37671M
+>>> module module.conv1.weight is trainable ? False, device: cuda:0
+>>> module module.bn1.weight is trainable ? False, device: cuda:0
+>>> module module.bn1.bias is trainable ? False, device: cuda:0
+>>> module module.layer1.0.conv1.weight is trainable ? False, device: cuda:0
+>>> module module.layer1.0.bn1.weight is trainable ? False, device: cuda:0
+>>> module module.layer1.0.bn1.bias is trainable ? False, device: cuda:0
+>>> module module.layer1.0.conv2.weight is trainable ? False, device: cuda:0
+>>> module module.layer1.0.bn2.weight is trainable ? False, device: cuda:0
+>>> module module.layer1.0.bn2.bias is trainable ? False, device: cuda:0
+>>> module module.layer1.1.conv1.weight is trainable ? False, device: cuda:0
+>>> module module.layer1.1.bn1.weight is trainable ? False, device: cuda:0
+>>> module module.layer1.1.bn1.bias is trainable ? False, device: cuda:0
+>>> module module.layer1.1.conv2.weight is trainable ? False, device: cuda:0
+>>> module module.layer1.1.bn2.weight is trainable ? False, device: cuda:0
+>>> module module.layer1.1.bn2.bias is trainable ? False, device: cuda:0
+>>> module module.layer2.0.conv1.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.0.bn1.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.0.bn1.bias is trainable ? False, device: cuda:0
+>>> module module.layer2.0.conv2.APM.semantic_mapping.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.0.conv2.APM.x_mapping.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.0.conv2.APM.n_mapping.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.0.conv2.APM.contrastive_att_net.0.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.0.conv2.spatial_conv3d.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.0.conv2.temporal_conv3d.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.0.bn2.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.0.bn2.bias is trainable ? False, device: cuda:0
+>>> module module.layer2.0.downsample.0.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.0.downsample.1.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.0.downsample.1.bias is trainable ? False, device: cuda:0
+>>> module module.layer2.1.conv1.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.1.bn1.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.1.bn1.bias is trainable ? False, device: cuda:0
+>>> module module.layer2.1.conv2.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.1.bn2.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.1.bn2.bias is trainable ? False, device: cuda:0
+>>> module module.layer3.0.conv1.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.0.bn1.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.0.bn1.bias is trainable ? False, device: cuda:0
+>>> module module.layer3.0.conv2.APM.semantic_mapping.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.0.conv2.APM.x_mapping.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.0.conv2.APM.n_mapping.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.0.conv2.APM.contrastive_att_net.0.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.0.conv2.spatial_conv3d.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.0.conv2.temporal_conv3d.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.0.bn2.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.0.bn2.bias is trainable ? False, device: cuda:0
+>>> module module.layer3.0.downsample.0.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.0.downsample.1.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.0.downsample.1.bias is trainable ? False, device: cuda:0
+>>> module module.layer3.1.conv1.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.1.bn1.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.1.bn1.bias is trainable ? False, device: cuda:0
+>>> module module.layer3.1.conv2.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.1.bn2.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.1.bn2.bias is trainable ? False, device: cuda:0
+>>> module module.layer4.0.conv1.weight is trainable ? False, device: cuda:0
+>>> module module.layer4.0.bn1.weight is trainable ? False, device: cuda:0
+>>> module module.layer4.0.bn1.bias is trainable ? False, device: cuda:0
+>>> module module.layer4.0.conv2.weight is trainable ? False, device: cuda:0
+>>> module module.layer4.0.bn2.weight is trainable ? False, device: cuda:0
+>>> module module.layer4.0.bn2.bias is trainable ? False, device: cuda:0
+>>> module module.layer4.0.downsample.0.weight is trainable ? False, device: cuda:0
+>>> module module.layer4.0.downsample.1.weight is trainable ? False, device: cuda:0
+>>> module module.layer4.0.downsample.1.bias is trainable ? False, device: cuda:0
+>>> module module.layer4.1.conv1.weight is trainable ? False, device: cuda:0
+>>> module module.layer4.1.bn1.weight is trainable ? False, device: cuda:0
+>>> module module.layer4.1.bn1.bias is trainable ? False, device: cuda:0
+>>> module module.layer4.1.conv2.weight is trainable ? False, device: cuda:0
+>>> module module.layer4.1.bn2.weight is trainable ? False, device: cuda:0
+>>> module module.layer4.1.bn2.bias is trainable ? False, device: cuda:0
+>>> module module.hist.conv_centers.weight is trainable ? False, device: cuda:0
+>>> module module.hist.conv_centers.bias is trainable ? False, device: cuda:0
+>>> module module.hist.conv_widths.weight is trainable ? False, device: cuda:0
+>>> module module.hist.conv_widths.bias is trainable ? False, device: cuda:0
+>>> module module.bn.weight is trainable ? True, device: cuda:0
+>>> module module.bn.bias is trainable ? True, device: cuda:0
+>>> module module.classifier.weight is trainable ? True, device: cuda:0
+>>> module module.classifier.bias is trainable ? True, device: cuda:0
+==> Start training
+Epoch1 Time:142.5s Data:1.4s Loss:4.7913 Xent:4.2605 Htri:0.5309 Acc:48.94% 
+Epoch2 Time:147.0s Data:1.4s Loss:1.4420 Xent:1.0214 Htri:0.4206 Acc:87.87% 
+Epoch3 Time:148.2s Data:1.4s Loss:0.5946 Xent:0.2617 Htri:0.3329 Acc:99.15% 
+Epoch4 Time:143.4s Data:1.4s Loss:0.3658 Xent:0.0972 Htri:0.2686 Acc:99.92% 

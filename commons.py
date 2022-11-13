@@ -33,9 +33,9 @@ def modify_model(model, args, conf: config.Config):
     
     print("pretrain state dict loaded")
     # exit()
-    if conf.print_model_parameters_trainable:
-        for name, param in model.named_parameters():
-            print(f'>>> module {name} is trainable ? {param.requires_grad}')
+    # if conf.print_model_parameters_trainable:
+    #     for name, param in model.named_parameters():
+    #         print(f'>>> module {name} is trainable ? {param.requires_grad}, device: {param.device}')
     print('-'*10)
     if conf.print_model_layers:
         print('model layers:')

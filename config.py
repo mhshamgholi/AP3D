@@ -1,6 +1,7 @@
 import numpy as np
 from torchvision import transforms as torchT
 from models import MyModels
+import torch
 
 class Config():
 
@@ -38,7 +39,8 @@ class Config():
         if self.use_linear_to_merge_features and self.use_linear_to_get_important_features:
             raise Exception("both 'use_linear_to_merge_features' 'use_linear_to_get_important_features are True'")
             
-        # init hist
+        self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        # init hist 
         self.init_hist("HistYusufLayer")
 
     def init_hist(self, hist_name):
@@ -47,6 +49,7 @@ class Config():
             self.hist_model = MyModels.HistByProf(edges=self.hist_by_prof_edges, use_just_last_bin=self.use_just_last_bin)
         elif self.hist_name == "HistYusufLayer":
             self.hist_model = MyModels.HistYusufLayer(inchannel=self.last_feature_dim, centers=self.centers, width=self.widths)
+        # self.hist_model = self.hist_model.to(self.device)
         
 
 

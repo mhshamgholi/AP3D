@@ -43,12 +43,16 @@ class TripletLoss(nn.Module):
             dist = dist.clamp(min=1e-12).sqrt()  # for numerical stability
         elif self.distance == 'hist_intersect':
             # raise Exception('hist_intersect not implemented')
-            dist = torch.zeros((n,n))
+            dist = torch.zeros((n,n), device=inputs.device, dtype=torch.float32)
             for i in range(n):
-                for j in range(i,n):
-                    d = 1 - hist_intersection(inputs[i], inputs[j])
-                    dist[i,j] = d
-                    dist[j,i] = d
+                feat = inputs[i]
+                feat = feat.repeat(len(inputs), 1)
+                d = 1 - hist_intersection(feat, inputs)
+                dist[i, :] = d
+                # for j in range(i,n):
+                #     d = 1 - hist_intersection(inputs[i], inputs[j])
+                #     dist[i,j] = d
+                #     dist[j,i] = d
         elif self.distance == 'cosine':
             fnorm = torch.norm(inputs, p=2, dim=1, keepdim=True)
             l2norm = inputs.div(fnorm.expand_as(inputs))
