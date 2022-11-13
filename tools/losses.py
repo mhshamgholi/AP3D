@@ -3,6 +3,7 @@ from __future__ import absolute_import
 import torch
 from torch import nn
 from torch.autograd import Variable
+from utils import hist_intersection
 
 __all__ = ['TripletLoss']
 
@@ -20,7 +21,7 @@ class TripletLoss(nn.Module):
     """
     def __init__(self, margin=0.3, distance='euclidean'):
         super(TripletLoss, self).__init__()
-        if distance not in ['euclidean', 'cosine']:
+        if distance not in ['euclidean', 'cosine', 'hist_intersect']:
             raise KeyError("Unsupported distance: {}".format(distance))
         self.distance = distance
         self.margin = margin
@@ -40,6 +41,14 @@ class TripletLoss(nn.Module):
             dist = dist + dist.t()
             dist.addmm_(1, -2, inputs, inputs.t())
             dist = dist.clamp(min=1e-12).sqrt()  # for numerical stability
+        elif self.distance == 'hist_intersect':
+            # raise Exception('hist_intersect not implemented')
+            dist = torch.zeros((n,n))
+            for i in range(n):
+                for j in range(i,n):
+                    d = 1 - hist_intersection(inputs[i], inputs[j])
+                    dist[i,j] = d
+                    dist[j,i] = d
         elif self.distance == 'cosine':
             fnorm = torch.norm(inputs, p=2, dim=1, keepdim=True)
             l2norm = inputs.div(fnorm.expand_as(inputs))

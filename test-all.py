@@ -22,7 +22,7 @@ import transforms.spatial_transforms as ST
 import transforms.temporal_transforms as TT
 import tools.data_manager as data_manager
 from tools.video_loader import VideoDataset
-from tools.utils import Logger
+from tools.utils import Logger, hist_intersection
 from tools.eval_metrics import evaluate
 from commons import modify_model
 
@@ -45,7 +45,7 @@ parser.add_argument('--resume', type=str, default='./', metavar='PATH')
 parser.add_argument('--pretrain', type=str, default='')
 parser.add_argument('--test_epochs', default=[240], nargs='+', type=int)
 parser.add_argument('--distance', type=str, default='cosine', 
-                    help="euclidean or cosine")
+                    help="euclidean or cosine or hist_intersect")
 parser.add_argument('--gpu', default='0, 1', type=str, 
                     help='gpu device ids for CUDA_VISIBLE_DEVICES')
 
@@ -172,6 +172,12 @@ def test(model, queryloader, galleryloader, use_gpu):
                   torch.pow(gf, 2).sum(dim=1, keepdim=True).expand(n, m).t()
         for i in range(m):
             distmat[i:i+1].addmm_(1, -2, qf[i:i+1], gf.t())
+    elif args.distance == 'hist_intersect':
+        # raise Exception("hist_intersect not implemented")
+        for iq, q in enumerate(qf):
+            q_repeat = q.repeat(len(gf), 1)
+            d = 1 - hist_intersection(q_repeat, gf)
+            distmat[iq, :] = d
     else:
         q_norm = torch.norm(qf, p=2, dim=1, keepdim=True)
         g_norm = torch.norm(gf, p=2, dim=1, keepdim=True)

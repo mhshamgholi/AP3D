@@ -25,7 +25,7 @@ import transforms.temporal_transforms as TT
 import tools.data_manager as data_manager
 from tools.video_loader import VideoDataset
 from tools.losses import TripletLoss
-from tools.utils import AverageMeter, Logger, save_checkpoint
+from tools.utils import AverageMeter, Logger, save_checkpoint, hist_intersection
 from tools.eval_metrics import evaluate
 from tools.samplers import RandomIdentitySampler
 from commons import modify_model, log_model_after_epoch
@@ -59,7 +59,7 @@ parser.add_argument('--weight_decay', default=5e-04, type=float)
 parser.add_argument('--margin', type=float, default=0.3, 
                     help="margin for triplet loss")
 parser.add_argument('--distance', type=str, default='cosine', 
-                    help="euclidean or cosine")
+                    help="euclidean or cosine, or hist_intersect")
 parser.add_argument('--num_instances', type=int, default=4, 
                     help="number of instances per identity")
 # Architecture
@@ -326,6 +326,12 @@ def test(model, queryloader, galleryloader, use_gpu, ranks=[1, 5, 10, 20]):
                   torch.pow(gf, 2).sum(dim=1, keepdim=True).expand(n, m).t()
         for i in range(m):
             distmat[i:i+1].addmm_(1, -2, qf[i:i+1], gf.t())
+    elif args.distance == 'hist_intersect':
+        # raise Exception("hist_intersect not implemented")
+        for iq, q in enumerate(qf):
+            q_repeat = q.repeat(len(gf), 1)
+            d = 1 - hist_intersection(q_repeat, gf)
+            distmat[iq, :] = d
     else:
         q_norm = torch.norm(qf, p=2, dim=1, keepdim=True)
         g_norm = torch.norm(gf, p=2, dim=1, keepdim=True)
