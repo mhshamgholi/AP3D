@@ -3,7 +3,7 @@ from __future__ import absolute_import
 import torch
 from torch import nn
 from torch.autograd import Variable
-from utils import hist_intersection
+from tools.utils import hist_intersection
 
 __all__ = ['TripletLoss']
 
