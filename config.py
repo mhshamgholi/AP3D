@@ -27,7 +27,7 @@ class Config():
         self.concat_hist_max = False #False
         self.use_linear_to_get_important_features = False # 2048 * 8 -> 2048
 
-        self.use_resnet18 = True
+        self.use_resnet18 = False
         self.last_feature_dim = 512 if self.use_resnet18 else 2048
         # use_pad_for_resnet18_Bottleneck3D = True # if use_resnet18 is False then this param will be ignored
 
