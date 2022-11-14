@@ -161,6 +161,13 @@ def main():
         model = nn.DataParallel(model).cuda()
         # model = model.cuda()
 
+    if conf.print_model_parameters_trainable:
+        for name, param in model.named_parameters():
+            print(f'>>> module {name} is trainable ? {param.requires_grad}, device: {param.device}')
+        
+    if not conf.use_hist and 'hist' in args.distance :
+        raise Exception("you're not using hist, but loss is {args.distance}")
+
     start_time = time.time()
     train_time = 0
     best_rank1 = -np.inf

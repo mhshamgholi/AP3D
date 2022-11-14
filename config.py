@@ -1,6 +1,7 @@
 import numpy as np
 from torchvision import transforms as torchT
 from models import MyModels
+import torch
 
 class Config():
 
@@ -26,19 +27,20 @@ class Config():
         self.concat_hist_max = False #False
         self.use_linear_to_get_important_features = False # 2048 * 8 -> 2048
 
-        self.use_resnet18 = True
+        self.use_resnet18 = False
         self.last_feature_dim = 512 if self.use_resnet18 else 2048
         # use_pad_for_resnet18_Bottleneck3D = True # if use_resnet18 is False then this param will be ignored
 
         self.use_linear_to_merge_features = False # ( 2048 * 8 ) 8 -> 1
 
 
-        self.what_to_freeze_startwith = ['conv1.', 'bn1.', 'layer1.', 'layer2.', 'layer3.', 'layer4.', 'hist.'] # bn. , classifier. , feature_reduction. 
+        self.what_to_freeze_startwith = ['conv1.', 'bn1.', 'layer1.', 'layer2.', 'layer3.', 'layer4.', 'hist.']#  # bn. , classifier. , feature_reduction. 
 
         if self.use_linear_to_merge_features and self.use_linear_to_get_important_features:
             raise Exception("both 'use_linear_to_merge_features' 'use_linear_to_get_important_features are True'")
             
-        # init hist
+        self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        # init hist 
         self.init_hist("HistYusufLayer")
 
     def init_hist(self, hist_name):
@@ -47,6 +49,7 @@ class Config():
             self.hist_model = MyModels.HistByProf(edges=self.hist_by_prof_edges, use_just_last_bin=self.use_just_last_bin)
         elif self.hist_name == "HistYusufLayer":
             self.hist_model = MyModels.HistYusufLayer(inchannel=self.last_feature_dim, centers=self.centers, width=self.widths)
+        # self.hist_model = self.hist_model.to(self.device)
         
 
 
