@@ -51,13 +51,14 @@ class HistByProf(nn.Module):
         res = torch.zeros((x.shape[0] * x.shape[1], self.nbins)).to(device)
         inputt = x.view(x.shape[0] * x.shape[1], -1)
 #         for i in range(1, len(self.norm_centers)): # exclude first and last        
-        for i in range(1, len(self.hist_edges)-1):
-            res[:, i] = torch.mean(self.norm(inputt, (self.hist_edges[i] + self.hist_edges[i+1])/2, (self.hist_edges[i+1] - self.hist_edges[i])/4), 1)
+        for i in range(1, len(self.hist_edges)):
+            res[:, i] = torch.sum(self.norm(inputt, (self.hist_edges[i-1] + self.hist_edges[i])/2, (self.hist_edges[i-1] - self.hist_edges[i])/3), 1)
             # res[:, i] = torch.sum(self.norm(inputt, (self.hist_edges[i] + self.hist_edges[i+1])/2, (self.hist_edges[i+1] - self.hist_edges[i])/4), 1)
         
-        res[:, 0] = torch.mean(1 - self.sigmoid(inputt - self.hist_edges[0]), 1)
+        res[:, 0] = torch.sum(self.norm(inputt, self.hist_edges[0], (self.hist_edges[0] - self.hist_edges[1])/3), 1)
+        # it seems that sigmoid can't count zero well.
         # res[:, 0] = torch.sum(1 - self.sigmoid(inputt - self.hist_edges[0]), 1)
-        res[:, -1] = torch.mean(self.sigmoid(inputt - self.hist_edges[-1]), 1)
+        res[:, -1] = torch.sum(self.sigmoid(inputt - self.hist_edges[-1]), 1)
         # res[:, -1] = torch.sum(self.sigmoid(inputt - self.hist_edges[-1]), 1)
         if self.use_just_last_bin:
             res = res[:, -1] # get last bin
