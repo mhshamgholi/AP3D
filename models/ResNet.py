@@ -212,12 +212,15 @@ class ResNet503D(nn.Module):
         b, c, t, h, w = x.size()
         x = x.permute(0, 2, 1, 3, 4).contiguous()
         x = x.view(b*t, c, h, w)
-        if self.conf.use_hist and self.conf.concat_hist_max:
+        if self.conf.use_hist and self.conf.concat_hist_max and not self.conf.use_hist_and_max_seprately:
             x1 = self.hist(x)
             x2 = F.max_pool2d(x, x.size()[2:]).view(b*t, self.conf.last_feature_dim, 1) # -> [80, self.conf.last_feature_dim, 1, 1]
             #x = torch.cat((x1, x2), 1)
             x = torch.cat((x1, x2), 2)
-        elif self.conf.use_hist and not self.conf.concat_hist_max:
+        elif self.conf.use_hist and not self.conf.concat_hist_max and self.conf.use_hist_and_max_seprately:
+            x_max = F.max_pool2d(x, x.size()[2:])
+            x = self.hist(x)
+        elif self.conf.use_hist and not self.conf.concat_hist_max and not self.conf.use_hist_and_max_seprately:
             x = self.hist(x)
         else:
             x = F.max_pool2d(x, x.size()[2:])
@@ -230,18 +233,29 @@ class ResNet503D(nn.Module):
             
             x = x.view(b * t, -1)
             x = self.feature_reduction(x)
+
         
         x = x.view(b, t, -1)
-        
+        if self.conf.use_hist_and_max_seprately:
+            x_max = x_max.view(b, t, -1)
+
         if not self.training:
-            return x
+            if self.conf.use_hist_and_max_seprately:
+                return x_max
+            else:
+                return x
 
-        x = x.mean(1)
-        f = self.bn(x)
-
-        y = self.classifier(f)
-
-        return y, f
+        if self.conf.use_hist_and_max_seprately:
+            x = x.mean(1) # x is hist features
+            x_max = x_max.mean(1)
+            f = self.bn(x_max)
+            y = self.classifier(f)
+            return y, f, x
+        else:
+            x = x.mean(1)
+            f = self.bn(x)
+            y = self.classifier(f)
+            return y, f
 
 
 def AP3DResNet50(conf, num_classes, **kwargs):

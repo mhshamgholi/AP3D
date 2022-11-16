@@ -83,8 +83,11 @@ if input(f"log dir is {args.save_dir}, Are you sure? ") != "yes":
     exit()
 
 
+conf = config.Config()
+if conf.use_hist_and_max_seprately:
+    criterion_hist = TripletLoss(margin=args.margin, distance="hist_intersect")
+
 def main():
-    conf = config.Config()
     torch.manual_seed(args.seed)
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
     use_gpu = torch.cuda.is_available()
@@ -146,6 +149,8 @@ def main():
     
     criterion_xent = nn.CrossEntropyLoss()
     criterion_htri = TripletLoss(margin=args.margin, distance=args.distance)
+
+
 
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     scheduler = lr_scheduler.MultiStepLR(optimizer, milestones=args.stepsize, gamma=args.gamma)
@@ -213,6 +218,7 @@ def main():
 def train(epoch, model, criterion_xent, criterion_htri, optimizer, trainloader, use_gpu):
     batch_xent_loss = AverageMeter()
     batch_htri_loss = AverageMeter()
+    batch_hist_loss = AverageMeter()
     batch_loss = AverageMeter()
     batch_corrects = AverageMeter()
     batch_time = AverageMeter()
@@ -236,13 +242,20 @@ def train(epoch, model, criterion_xent, criterion_htri, optimizer, trainloader, 
         optimizer.zero_grad()
 
         # forward
-        outputs, features = model(vids)
+        if conf.use_hist_and_max_seprately:
+            outputs, features, hist_features = model(vids)
+        else:
+            outputs, features = model(vids)
 
         # combine hard triplet loss with cross entropy loss
         xent_loss = criterion_xent(outputs, pids)
         htri_loss = criterion_htri(features, pids)
 
-        loss = xent_loss + htri_loss
+        if conf.use_hist_and_max_seprately:
+            hist_loss = criterion_hist(hist_features, pids)
+            loss = xent_loss + htri_loss + hist_loss
+        else:
+            loss = xent_loss + htri_loss
 
         # backward + optimize
         loss.backward()
@@ -254,23 +267,39 @@ def train(epoch, model, criterion_xent, criterion_htri, optimizer, trainloader, 
         
         batch_xent_loss.update(xent_loss.item(), pids.size(0))
         batch_htri_loss.update(htri_loss.item(), pids.size(0))
+        if conf.use_hist_and_max_seprately:
+            batch_hist_loss.update(hist_loss.item(), pids.size(0))
         batch_loss.update(loss.item(), pids.size(0)) 
 
         # measure elapsed time
         batch_time.update(time.time() - end)
         end = time.time()
 
-    print('Epoch{0} '
-          'Time:{batch_time.sum:.1f}s '
-          'Data:{data_time.sum:.1f}s '
-          'Loss:{loss.avg:.4f} '
-          'Xent:{xent.avg:.4f} '
-          'Htri:{htri.avg:.4f} '
-          'Acc:{acc.avg:.2%} '.format(
-          epoch+1, batch_time=batch_time,
-          data_time=data_time, loss=batch_loss,
-          xent=batch_xent_loss, htri=batch_htri_loss,
-          acc=batch_corrects))
+    if conf.use_hist_and_max_seprately:
+        print('Epoch{0} '
+            'Time:{batch_time.sum:.1f}s '
+            'Data:{data_time.sum:.1f}s '
+            'Loss:{loss.avg:.5f} '
+            'Xent:{xent.avg:.5f} '
+            'Htri:{htri.avg:.5f} '
+            'hist:{hist.avg:.5f} '
+            'Acc:{acc.avg:.2%} '.format(
+            epoch+1, batch_time=batch_time,
+            data_time=data_time, loss=batch_loss,
+            xent=batch_xent_loss, htri=batch_htri_loss, hist=batch_hist_loss,
+            acc=batch_corrects))
+    else:
+        print('Epoch{0} '
+            'Time:{batch_time.sum:.1f}s '
+            'Data:{data_time.sum:.1f}s '
+            'Loss:{loss.avg:.4f} '
+            'Xent:{xent.avg:.4f} '
+            'Htri:{htri.avg:.4f} '
+            'Acc:{acc.avg:.2%} '.format(
+            epoch+1, batch_time=batch_time,
+            data_time=data_time, loss=batch_loss,
+            xent=batch_xent_loss, htri=batch_htri_loss,
+            acc=batch_corrects))
     
 
 def test(model, queryloader, galleryloader, use_gpu, ranks=[1, 5, 10, 20]):
