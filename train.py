@@ -79,8 +79,7 @@ parser.add_argument('--gpu', default='0', type=str,
 
 args = parser.parse_args()
 
-if input(f"log dir is {args.save_dir}, Are you sure? ") != "yes":
-    exit()
+
 
 
 conf = config.Config()
@@ -95,7 +94,9 @@ def main():
 
     sys.stdout = Logger(osp.join(args.save_dir, 'log_train.txt'))
     print("==========\nArgs:{}\n==========".format(args))
-
+    print("==========\conf:{}\n==========".format(vars(conf)))
+    if input(f"script runs based on above values, Are you sure? ") != "yes":
+        exit()
     if use_gpu:
         print("Currently using GPU {}".format(args.gpu))
         torch.cuda.manual_seed_all(args.seed)
