@@ -92,11 +92,13 @@ def main():
     use_gpu = torch.cuda.is_available()
     if args.use_cpu: use_gpu = False
 
-    sys.stdout = Logger(osp.join(args.save_dir, 'log_train.txt'))
     print("==========\nArgs:{}\n==========".format(args))
     print("==========\conf:{}\n==========".format(vars(conf)))
     if input(f"script runs based on above values, Are you sure? ") != "yes":
         exit()
+    
+    sys.stdout = Logger(osp.join(args.save_dir, 'log_train.txt'))
+    
     if use_gpu:
         print("Currently using GPU {}".format(args.gpu))
         torch.cuda.manual_seed_all(args.seed)
