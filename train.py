@@ -186,7 +186,7 @@ def main():
 
         start_train_time = time.time()
         train(epoch, model, criterion_xent, criterion_htri, optimizer, trainloader, use_gpu)
-        if conf.use_hist and conf.print_hist_params:
+        if conf.use_hist and conf.print_hist_params_bool:
             conf.print_hist_params()
         train_time += round(time.time() - start_train_time)
         scheduler.step()

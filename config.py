@@ -10,7 +10,7 @@ class Config():
 
         self.print_model_parameters_trainable = True
         self.print_model_layers = True
-        self.print_hist_params = True
+        self.print_hist_params_bool = True
         # width = np.array([0.1, 0.1, 0.1, 0.1, 0.1])
         # width = np.array([0.1, 0.1, 0.1, 0.1, 0.1, 4, 4, 4, 4, 4])
         self.widths = np.array([0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 1.8])
