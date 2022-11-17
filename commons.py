@@ -10,7 +10,12 @@ def modify_model(model, args, conf: config.Config):
         my_state_dict = torch.load(args.pretrain, map_location=map_loc)['state_dict']
         # copy params from random model to pretrain model, because some layer are new or some layer's size is changed
         for n, p in model.named_parameters():
-            if ('hist.' in n) or ('classifier' in n):
+            if 'classifier' in n:
+                if my_state_dict['classifier.weight'].numel() == model.classifier.weight.numel():
+                    continue
+                else:
+                    my_state_dict[n] = p
+            if ('hist.' in n):
                 my_state_dict[n] = p
         # my_state_dict = dict(filter(lambda elem: 'bn.' not in elem[0], my_state_dict.items()))
         try:

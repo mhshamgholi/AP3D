@@ -60,9 +60,9 @@ class Config():
     def print_hist_params(self):
         if self.use_hist and hasattr(self, 'hist_name'):
             if self.hist_name == "HistByProf":
-                print('hist edges', self.hist_model.hist_edges)
+                print('hist edges', self.hist_model.hist_edges.detach().cpu().numpy().tolist())
             elif self.hist_name == "HistYusufLayer":
-                print('hist centers', self.hist_model.hist_centers, 'hist widths', self.hist_model.hist_widths)
+                print('hist centers', self.hist_model.hist_centers.detach().cpu().numpy().tolist(), 'hist widths', self.hist_model.hist_widths.detach().cpu().numpy().tolist())
             else:
                 raise Exception(f"hist_name {self.hist_name} is unknow in 'print_hist_params'")
 
