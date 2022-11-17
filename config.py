@@ -23,7 +23,7 @@ class Config():
 
         self.hist_by_prof_edges = [0, 0.2, 0.4, 0.6, 0.8, 1] # 15, 30]
         self.use_dropout = False
-        self.use_hist_and_max_seprately = False # here histogram is just used for help model to train better. it is not used at inference and Xent 
+        self.use_hist_and_max_seprately = True # here histogram is just used for help model to train better. it is not used at inference and Xent 
         self.use_hist = True or self.use_hist_and_max_seprately #False
         self.use_just_last_bin = False
         self.concat_hist_max = False #False

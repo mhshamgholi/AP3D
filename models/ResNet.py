@@ -149,7 +149,7 @@ class ResNet503D(nn.Module):
             self.dropout = nn.Dropout(p=0.5)
    
         if self.conf.use_hist:
-            if self.conf.use_linear_to_merge_features:
+            if self.conf.use_linear_to_merge_features or self.conf.use_hist_and_max_seprately:
                 _coef = 1
             elif self.conf.use_just_last_bin:
                 _coef = (1 + 1) if self.conf.concat_hist_max else 1

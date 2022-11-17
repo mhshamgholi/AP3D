@@ -84,7 +84,7 @@ args = parser.parse_args()
 
 conf = config.Config()
 if conf.use_hist_and_max_seprately:
-    criterion_hist = TripletLoss(margin=args.margin, distance="hist_intersect")
+    criterion_hist = TripletLoss(margin=0.2, distance="hist_intersect")
 
 def main():
     torch.manual_seed(args.seed)
@@ -258,7 +258,7 @@ def train(epoch, model, criterion_xent, criterion_htri, optimizer, trainloader, 
 
         if conf.use_hist_and_max_seprately:
             hist_loss = criterion_hist(hist_features, pids)
-            loss = xent_loss + htri_loss + hist_loss
+            loss = xent_loss + htri_loss + 0.5 * hist_loss
         else:
             loss = xent_loss + htri_loss
 
