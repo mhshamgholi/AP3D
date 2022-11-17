@@ -10,6 +10,7 @@ class Config():
 
         self.print_model_parameters_trainable = True
         self.print_model_layers = True
+        self.print_hist_params = True
         # width = np.array([0.1, 0.1, 0.1, 0.1, 0.1])
         # width = np.array([0.1, 0.1, 0.1, 0.1, 0.1, 4, 4, 4, 4, 4])
         self.widths = np.array([0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 1.8])
@@ -56,7 +57,14 @@ class Config():
             self.hist_model = MyModels.HistYusufLayer(inchannel=self.last_feature_dim, centers=self.centers, width=self.widths)
         # self.hist_model = self.hist_model.to(self.device)
         
-
+    def print_hist_params(self):
+        if self.use_hist and hasattr(self, 'hist_name'):
+            if self.hist_name == "HistByProf":
+                print('hist edges', self.hist_model.hist_edges)
+            elif self.hist_name == "HistYusufLayer":
+                print('hist centers', self.hist_model.hist_centers, 'hist widths', self.hist_model.hist_widths)
+            else:
+                raise Exception(f"hist_name {self.hist_name} is unknow in 'print_hist_params'")
 
     def get_spatial_transform_train(self, args):
     #     return torchT.Compose([
