@@ -79,13 +79,12 @@ parser.add_argument('--gpu', default='0', type=str,
 
 args = parser.parse_args()
 
-if input(f"log dir is {args.save_dir}, Are you sure? ") != "yes":
-    exit()
+
 
 
 conf = config.Config()
 if conf.use_hist_and_max_seprately:
-    criterion_hist = TripletLoss(margin=args.margin, distance="hist_intersect")
+    criterion_hist = TripletLoss(margin=0.2, distance="hist_intersect")
 
 def main():
     torch.manual_seed(args.seed)
@@ -93,9 +92,13 @@ def main():
     use_gpu = torch.cuda.is_available()
     if args.use_cpu: use_gpu = False
 
-    sys.stdout = Logger(osp.join(args.save_dir, 'log_train.txt'))
     print("==========\nArgs:{}\n==========".format(args))
-
+    print("==========\conf:{}\n==========".format(vars(conf)))
+    if input(f"script runs based on above values, Are you sure? ") != "yes":
+        exit()
+    
+    sys.stdout = Logger(osp.join(args.save_dir, 'log_train.txt'))
+    
     if use_gpu:
         print("Currently using GPU {}".format(args.gpu))
         torch.cuda.manual_seed_all(args.seed)
@@ -183,6 +186,8 @@ def main():
 
         start_train_time = time.time()
         train(epoch, model, criterion_xent, criterion_htri, optimizer, trainloader, use_gpu)
+        if conf.use_hist and conf.print_hist_params_bool:
+            conf.print_hist_params()
         train_time += round(time.time() - start_train_time)
         scheduler.step()
         log_model_after_epoch(model)
@@ -253,7 +258,7 @@ def train(epoch, model, criterion_xent, criterion_htri, optimizer, trainloader, 
 
         if conf.use_hist_and_max_seprately:
             hist_loss = criterion_hist(hist_features, pids)
-            loss = xent_loss + htri_loss + hist_loss
+            loss = xent_loss + htri_loss + 0.5 * hist_loss
         else:
             loss = xent_loss + htri_loss
 
