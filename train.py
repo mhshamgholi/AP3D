@@ -181,19 +181,22 @@ def main():
     best_rank1 = -np.inf
     best_epoch = 0
     print("==> Start training")
+    if conf.use_hist and conf.print_hist_params_bool:
+        conf.print_hist_params()
 
     for epoch in range(start_epoch, args.max_epoch):
 
         start_train_time = time.time()
         train(epoch, model, criterion_xent, criterion_htri, optimizer, trainloader, use_gpu)
-        if conf.use_hist and conf.print_hist_params_bool:
-            conf.print_hist_params()
+
         train_time += round(time.time() - start_train_time)
         scheduler.step()
         log_model_after_epoch(model)
 
         
         if (epoch+1) >= args.start_eval and args.eval_step > 0 and (epoch+1) % args.eval_step == 0 or (epoch+1) == args.max_epoch:
+            if conf.use_hist and conf.print_hist_params_bool:
+                conf.print_hist_params()
             print("==> Test")
             with torch.no_grad():
                 # test using 4 frames

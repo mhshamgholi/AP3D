@@ -54,7 +54,9 @@ class Config():
         if self.hist_name == "HistByProf":
             self.hist_model = MyModels.HistByProf(edges=self.hist_by_prof_edges, use_just_last_bin=self.use_just_last_bin)
         elif self.hist_name == "HistYusufLayer":
-            self.hist_model = MyModels.HistYusufLayer(inchannel=self.last_feature_dim, centers=self.centers, width=self.widths)
+            # self.hist_model = MyModels.HistYusufLayer(inchannel=self.last_feature_dim, centers=self.centers, width=self.widths)
+            self.hist_model = MyModels.HistYusufLayer(inchannel=1, centers=self.centers, width=self.widths)
+
         # self.hist_model = self.hist_model.to(self.device)
         
     def print_hist_params(self):
@@ -62,7 +64,8 @@ class Config():
             if self.hist_name == "HistByProf":
                 print('hist edges', self.hist_model.hist_edges.detach().cpu().numpy().tolist())
             elif self.hist_name == "HistYusufLayer":
-                print('hist centers', self.hist_model.hist_centers.detach().cpu().numpy().tolist(), 'hist widths', self.hist_model.hist_widths.detach().cpu().numpy().tolist())
+                print('hist centers', self.hist_model.conv_centers.bias.detach().cpu().numpy().tolist())
+                print('hist widths', self.hist_model.conv_widths.bias.detach().cpu().numpy().tolist())
             else:
                 raise Exception(f"hist_name {self.hist_name} is unknow in 'print_hist_params'")
 

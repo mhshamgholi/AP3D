@@ -112,6 +112,8 @@ class HistYusufLayer(nn.Module):
         # input 2d array
 #         pdb.set_trace()
         bt, c, h, w = x.shape
+        if self.conv_centers_inchannel == 1:
+            x = x.view(bt * c, 1, h, w)
         x = self.conv_centers(x)
         x = torch.abs(x)
         x = self.conv_widths(x)
