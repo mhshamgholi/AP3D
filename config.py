@@ -47,7 +47,7 @@ class Config():
             
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
         # init hist 
-        self.init_hist("HistYusufLayer")
+        self.init_hist("HistByProf")
 
     def init_hist(self, hist_name):
         self.hist_name = hist_name
