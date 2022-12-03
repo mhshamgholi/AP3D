@@ -182,7 +182,7 @@ def main():
     best_epoch = 0
     print("==> Start training")
     if conf.use_hist and conf.print_hist_params_bool:
-        conf.print_hist_params()
+        conf.print_hist_params(epoch=0, log_path=args.save_dir)
 
     for epoch in range(start_epoch, args.max_epoch):
 
@@ -196,7 +196,7 @@ def main():
         
         if (epoch+1) >= args.start_eval and args.eval_step > 0 and (epoch+1) % args.eval_step == 0 or (epoch+1) == args.max_epoch:
             if conf.use_hist and conf.print_hist_params_bool:
-                conf.print_hist_params()
+                conf.print_hist_params(epoch=epoch+1, log_path=args.save_dir)
             print("==> Test")
             with torch.no_grad():
                 # test using 4 frames

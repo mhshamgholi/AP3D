@@ -2,6 +2,7 @@ import numpy as np
 from torchvision import transforms as torchT
 from models import MyModels
 import torch
+import os
 
 class Config():
 
@@ -47,7 +48,7 @@ class Config():
             
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
         # init hist 
-        self.init_hist("HistByProf")
+        self.init_hist("HistByProfBulk")
 
     def init_hist(self, hist_name):
         self.hist_name = hist_name
@@ -56,16 +57,35 @@ class Config():
         elif self.hist_name == "HistYusufLayer":
             # self.hist_model = MyModels.HistYusufLayer(inchannel=self.last_feature_dim, centers=self.centers, width=self.widths)
             self.hist_model = MyModels.HistYusufLayer(inchannel=1, centers=self.centers, width=self.widths)
+        elif self.hist_name == "HistByProfBulk":
+            self.hist_model = MyModels.HistByProfBulk(num_channels=self.last_feature_dim, init_edges=self.hist_by_prof_edges, use_just_last_bin=self.use_just_last_bin)
+        else:
+            raise Exception(f"hist_name {self.hist_name} is not supported")
 
         # self.hist_model = self.hist_model.to(self.device)
         
-    def print_hist_params(self):
+    def print_hist_params(self, epoch=None, log_path=None):
         if self.use_hist and hasattr(self, 'hist_name'):
             if self.hist_name == "HistByProf":
-                print('hist edges', self.hist_model.hist_edges.detach().cpu().numpy().tolist())
+                l = self.hist_model.hist_edges.detach().cpu().numpy().tolist()
+                l = [round(i, 6) for i in l]
+                print('hist edges', l)
             elif self.hist_name == "HistYusufLayer":
-                print('hist centers', self.hist_model.conv_centers.bias.detach().cpu().numpy().tolist())
-                print('hist widths', self.hist_model.conv_widths.bias.detach().cpu().numpy().tolist())
+                l = self.hist_model.conv_centers.bias.detach().cpu().numpy().tolist()
+                l = [round(i, 6) for i in l]
+                print('hist centers', l)
+                l = self.hist_model.conv_widths.bias.detach().cpu().numpy().tolist()
+                l = [round(i, 6) for i in l]
+                print('hist widths', l)
+            elif self.hist_name == "HistByProfBulk":
+                path = os.path.join(log_path, f'HisEdEp{str(epoch).zfill(3)}.txt')
+                with open(path, 'w') as f:
+                    for ii, layer in enumerate(self.hist_model.hist_layers):
+                        l = layer.hist_edges.detach().cpu().numpy().tolist()
+                        l = [round(i, 6) for i in l]
+                        f.write(f'#{ii}: {l}\n')
+                print(f'edges of HistByProfBulk in epoch {epoch} was writed in {path}')
+
             else:
                 raise Exception(f"hist_name {self.hist_name} is unknow in 'print_hist_params'")
 

@@ -7,13 +7,16 @@ import config
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
+
+
+
+
 class HistByNorm(nn.Module):
     def __init__(self, centers, widths):
         super(HistByNorm, self).__init__()
         self.hist_centers = nn.Parameter(torch.tensor(centers, dtype=torch.float32), requires_grad=True)
         self.hist_widths = nn.Parameter(torch.tensor(widths, dtype=torch.float32), requires_grad=True)
 
-        
     def forward(self, x): #[72,2048,16,8]
 #         dist = Normal(self.hist_centers, self.hist_widths)
 #         pdb.set_trace()
@@ -27,27 +30,42 @@ class HistByNorm(nn.Module):
     def norm(self, x, mu, sigma):
         return (1 / (sigma * torch.sqrt(torch.tensor(2 * math.pi)))) * torch.exp((-0.5*((x - mu)/sigma)**2))
 
-    
+
 
     
+class HistByProfBulk(nn.Module):
+    def __init__(self,num_channels ,init_edges, use_just_last_bin):
+        super(HistByProfBulk, self).__init__()
+        self.hist_layers = nn.ModuleList(
+            [HistByProf(init_edges, use_just_last_bin) for _ in range(num_channels)]
+        )
+        self.nbins = self.hist_layers[0].nbins
+        self.init_edges = init_edges
+        self.use_just_last_bin = use_just_last_bin
+
+    def forward(self, x):
+        bt, c, h, w = x.shape
+        hist_res = torch.zeros((bt, c, self.nbins)).to(device)
+        for i, hist_layer in enumerate(self.hist_layers):
+            inp = x[:, i, :, :].view(bt, 1, h, w) # bt, 1, h, w
+            hist_res[:, i, :] = hist_layer(inp).view(bt, self.nbins)
+        return hist_res
+
+    def __str__(self) -> str:
+        # super().__str__()
+        return f"HistByProfBulk(num_channels={len(self.hist_layers)}, init_edges={self.init_edges}, use_just_last_bin={self.use_just_last_bin})"
+    def __repr__(self):
+        return f"HistByProfBulk(num_channels={len(self.hist_layers)}, init_edges={self.init_edges}, use_just_last_bin={self.use_just_last_bin})"
+
+
 class HistByProf(nn.Module):
     def __init__(self, edges, use_just_last_bin):
         super(HistByProf, self).__init__()
         self.hist_edges = nn.Parameter(torch.tensor(edges, dtype=torch.float32), requires_grad=True)
         self.use_just_last_bin = use_just_last_bin
-#         self.norm_centers = []
-#         self.sigma = 0.39
         self.nbins = len(edges) + 1
-        
-#         for i in range(len(edges)-1):
-#             self.norm_centers.append((self.hist_edges[i] + self.hist_edges[i+1])/2)
-        
-#         self.norm_centers = nn.Parameter(torch.tensor(self.norm_centers, dtype=torch.float32), requires_grad=True)
-#         self.sigmoid_semi_centers = nn.Parameter(torch.tensor([self.hist_edges[0], self.hist_edges[-1]], dtype=torch.float32), requires_grad=True)
-        
 
     def forward(self, x): #[72,2048,16,8]
-        
         res = torch.zeros((x.shape[0] * x.shape[1], self.nbins)).to(device)
         inputt = x.view(x.shape[0] * x.shape[1], -1)
 #         for i in range(1, len(self.norm_centers)): # exclude first and last        
@@ -72,11 +90,13 @@ class HistByProf(nn.Module):
     def sigmoid(self, x):
         return 1 / (1 + torch.exp(-20*x))
 
+
+
+
 class HistYusufLayer(nn.Module):
     def __init__(self, inchannel=1, centers=None, width=None):
         super(HistYusufLayer, self).__init__()
-        
-        
+
         self.conv_centers_inchannel = inchannel
         if centers is not None and width is not None:
             self.centers, self.width = centers, width
@@ -106,7 +126,6 @@ class HistYusufLayer(nn.Module):
             self.conv_widths.bias.data.fill_(self.width)
         self.relu1 = nn.Threshold(threshold=1.0, value=0.0)
         self.gap = nn.AdaptiveAvgPool2d(1)
-    
     
     def forward(self, x):
         # input 2d array
