@@ -84,7 +84,7 @@ class HistByProfMultiChannel(nn.Module):
         res = res.transpose(1,2) # (bt, c, nbins)
         if self.use_just_last_bin:
             res = res[:, :, -1] # get last bin
-        res = res.view(bt, c, -1)
+        res = res.reshape(bt, c, -1)
         return res # [72,2048,7]
 
     def norm(self, x, mu, sigma):

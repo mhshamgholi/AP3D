@@ -235,7 +235,7 @@ class ResNet503D(nn.Module):
             x = self.feature_reduction(x)
 
         
-        x = x.view(b, t, -1)
+        x = x.reshape(b, t, -1)
         if self.conf.use_hist_and_max_seprately:
             x_max = x_max.view(b, t, -1)
 
