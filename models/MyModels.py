@@ -88,6 +88,7 @@ class HistByProfMultiChannel(nn.Module):
         return res # [72,2048,7]
 
     def norm(self, x, mu, sigma):
+        sigma = torch.add(sigma, 1e-6) # prevent from nan
         norm_out = torch.exp((-0.5*((x - mu)/sigma)**2))
         return norm_out # (bt, h*w, c)
 
