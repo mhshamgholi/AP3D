@@ -3,7 +3,7 @@ from torch import nn
 import math
 import numpy as np
 import pdb
-import config
+
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
@@ -33,9 +33,9 @@ class HistByNorm(nn.Module):
 
 
     
-class HistByProfBulk(nn.Module):
+class HistByProfMultiObj(nn.Module):
     def __init__(self,num_channels ,init_edges, use_just_last_bin):
-        super(HistByProfBulk, self).__init__()
+        super(HistByProfMultiObj, self).__init__()
         self.hist_layers = nn.ModuleList(
             [HistByProf(init_edges, use_just_last_bin) for _ in range(num_channels)]
         )
@@ -53,17 +53,61 @@ class HistByProfBulk(nn.Module):
 
     def __str__(self) -> str:
         # super().__str__()
-        return f"HistByProfBulk(num_channels={len(self.hist_layers)}, init_edges={self.init_edges}, use_just_last_bin={self.use_just_last_bin})"
+        return f"HistByProfMultiObj(num_channels={len(self.hist_layers)}, init_edges={self.init_edges}, use_just_last_bin={self.use_just_last_bin})"
     def __repr__(self):
-        return f"HistByProfBulk(num_channels={len(self.hist_layers)}, init_edges={self.init_edges}, use_just_last_bin={self.use_just_last_bin})"
+        return f"HistByProfMultiObj(num_channels={len(self.hist_layers)}, init_edges={self.init_edges}, use_just_last_bin={self.use_just_last_bin})"
+
+
+class HistByProfMultiChannel(nn.Module):
+    def __init__(self,num_channels, init_edges, use_just_last_bin):
+        super(HistByProfMultiChannel, self).__init__()
+        self.init_edges = init_edges
+        edges_repeat = torch.tensor(init_edges, dtype=torch.float32).repeat(num_channels, 1)
+        self.hist_edges = nn.Parameter(edges_repeat, requires_grad=True)
+        self.use_just_last_bin = use_just_last_bin
+        self.nbins = len(init_edges) + 1
+
+
+    def forward(self, x): #[72,2048,16,8]
+        bt, c, h, w = x.shape
+        res = torch.zeros((bt, self.nbins, c)).to(device)
+        x = x.view(bt, c, h*w)
+        x = x.transpose(1, 2) # (bt, h*w, c)
+        for i in range(1, self.hist_edges.shape[-1]): # iterate over edges
+            mu = (self.hist_edges[:, i-1] + self.hist_edges[:, i])/2 # (c,)
+            sigma = (self.hist_edges[:, i-1] - self.hist_edges[:, i])/3 # (c,)
+            norm_out = self.norm(x, mu, sigma)
+            res[:, i, :] = torch.sum(norm_out, 1)
+        
+        res[:, 0, :] = torch.sum(self.norm(x, self.hist_edges[:, 0], (self.hist_edges[:, 0] - self.hist_edges[:, 1])/3), 1)
+        res[:, -1, :] = torch.sum(self.sigmoid(x - self.hist_edges[:, -1]), 1)
+        res = res.transpose(1,2) # (bt, c, nbins)
+        if self.use_just_last_bin:
+            res = res[:, :, -1] # get last bin
+        res = res.view(bt, c, -1)
+        return res # [72,2048,7]
+
+    def norm(self, x, mu, sigma):
+        norm_out = torch.exp((-0.5*((x - mu)/sigma)**2))
+        return norm_out # (bt, h*w, c)
+
+    def sigmoid(self, x):
+        sig_out = 1 / (1 + torch.exp(-20*(x)))
+        return sig_out
+
+    def __str__(self):
+        return f"HistByProfMultiChannel(num_channels={len(self.hist_edges)}, init_edges={self.init_edges}, use_just_last_bin={self.use_just_last_bin})"
+    def __repr__(self):
+        return f"HistByProfMultiChannel(num_channels={len(self.hist_edges)}, init_edges={self.init_edges}, use_just_last_bin={self.use_just_last_bin})"
+
 
 
 class HistByProf(nn.Module):
-    def __init__(self, edges, use_just_last_bin):
+    def __init__(self, init_edges, use_just_last_bin):
         super(HistByProf, self).__init__()
-        self.hist_edges = nn.Parameter(torch.tensor(edges, dtype=torch.float32), requires_grad=True)
+        self.hist_edges = nn.Parameter(torch.tensor(init_edges, dtype=torch.float32), requires_grad=True)
         self.use_just_last_bin = use_just_last_bin
-        self.nbins = len(edges) + 1
+        self.nbins = len(init_edges) + 1
 
     def forward(self, x): #[72,2048,16,8]
         res = torch.zeros((x.shape[0] * x.shape[1], self.nbins)).to(device)
@@ -150,3 +194,10 @@ class HistYusufLayer(nn.Module):
         centers = bin_edges + (bin_edges[2] - bin_edges[1]) / 2
         return centers[:-1], (bin_edges[2] - bin_edges[1]) / 2
 
+
+if __name__ == '__main__':
+    a = torch.rand((128,512,8,4))
+    t = (10,9)
+    print(HistByProfMultiChannel(512, [0,0.2,0.4,0.6,0.8,1], False)(a)[t[0], t[1]])
+    print(HistByProf([0,0.2,0.4,0.6,0.8,1], False)(a)[t[0], t[1]])
+    print(a[t[0], t[1]])
