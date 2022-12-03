@@ -80,8 +80,8 @@ class Config():
             elif self.hist_name == "HistByProfMultiChannel":
                 path = os.path.join(log_path, f'HisEdEp{str(epoch).zfill(3)}.txt')
                 with open(path, 'w') as f:
-                    for ii, layer in enumerate(self.hist_model.hist_layers):
-                        l = layer.hist_edges.detach().cpu().numpy().tolist()
+                    for ii, edge in enumerate(self.hist_model.hist_edges):
+                        l = edge.detach().cpu().numpy().tolist()
                         l = [round(i, 6) for i in l]
                         f.write(f'#{ii}: {l}\n')
                 print(f'edges of HistByProfMultiChannel in epoch {epoch} was writed in {path}')
