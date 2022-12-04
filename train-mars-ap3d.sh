@@ -1,5 +1,5 @@
 # run in cccloud
-CUDA_VISIBLE_DEVICES=0 python train.py --root /mnt/File/shamgholi/datasets/ -d mars --arch ap3dres50 --gpu 0 --save_dir ./logs/row63 --train_batch 32 --test_batch 32 --lr 0.00003 --eval_step 10 --distance cosine --pretrain ./logs/row57/best_model.pth.tar #--weight_decay 0.001
+CUDA_VISIBLE_DEVICES=0 python train.py --root /mnt/File/shamgholi/datasets/ -d mars --arch ap3dres50 --gpu 0 --save_dir ./logs/row65 --train_batch 32 --test_batch 32 --lr 0.00003 --eval_step 10 --distance cosine --pretrain ./logs/row57/best_model.pth.tar #--weight_decay 0.001
 
 # run in 3080 windows
 # set CUDA_VISIBLE_DEVICES=0 & C:\\Users\\STOCKLAND\\.conda\\envs\\shmghli1\\python.exe train.py --root C:\\Users\\STOCKLAND\\Documents\\shamgholi\\datasets -d mars --arch ap3dres50 --gpu 0 --save_dir D:\\shamgholi\\AP3D\\logs\\ap3d_res18_3080 --train_batch 32 --test_batch 32 --lr 0.0003 --eval_step 10 #--weight_decay 0.001
