@@ -1,0 +1,690 @@
+Currently using GPU 0
+Initializing dataset mars
+=> MARS loaded
+Dataset statistics:
+  ------------------------------
+  subset   | # ids | # tracklets
+  ------------------------------
+  train    |   625 |     8298
+  query    |   626 |     1980
+  gallery  |   622 |     9330
+  ------------------------------
+  total    |  1247 |    19608
+  number of images per tracklet: 2 ~ 920, average 59.5
+  ------------------------------
+Initializing model: ap3dres50
+Model size: 13.68852M
+pretrain state dict loaded
+----------
+model layers:
+ResNet503D(
+  (conv1): Conv3d(3, 64, kernel_size=(1, 7, 7), stride=(1, 2, 2), padding=(0, 3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace=True)
+  (maxpool): MaxPool3d(kernel_size=(1, 3, 3), stride=(1, 2, 2), padding=(0, 1, 1), dilation=(1, 1, 1), ceil_mode=False)
+  (layer1): Sequential(
+    (0): Bottleneck3D(
+      (conv1): Conv3d(64, 64, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv3d(64, 64, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+    (1): Bottleneck3D(
+      (conv1): Conv3d(64, 64, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv3d(64, 64, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): Bottleneck3D(
+      (conv1): Conv3d(64, 128, kernel_size=(1, 3, 3), stride=(1, 2, 2), padding=(0, 1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): APP3DC(
+        (APM): APM(
+          (padding): ConstantPad3d(padding=(0, 0, 0, 0, 1, 1), value=0)
+          (semantic_mapping): Conv3d(128, 8, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+          (x_mapping): Conv3d(128, 8, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+          (n_mapping): Conv3d(128, 8, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+          (contrastive_att_net): Sequential(
+            (0): Conv3d(8, 1, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+            (1): Sigmoid()
+          )
+        )
+        (spatial_conv3d): Conv3d(128, 128, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (temporal_conv3d): Conv3d(128, 128, kernel_size=(3, 1, 1), stride=(3, 1, 1), bias=False)
+      )
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (downsample): Sequential(
+        (0): Conv3d(64, 128, kernel_size=(1, 1, 1), stride=(1, 2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): Bottleneck3D(
+      (conv1): Conv3d(128, 128, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv3d(128, 128, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): Bottleneck3D(
+      (conv1): Conv3d(128, 256, kernel_size=(1, 3, 3), stride=(1, 2, 2), padding=(0, 1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): APP3DC(
+        (APM): APM(
+          (padding): ConstantPad3d(padding=(0, 0, 0, 0, 1, 1), value=0)
+          (semantic_mapping): Conv3d(256, 16, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+          (x_mapping): Conv3d(256, 16, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+          (n_mapping): Conv3d(256, 16, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+          (contrastive_att_net): Sequential(
+            (0): Conv3d(16, 1, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+            (1): Sigmoid()
+          )
+        )
+        (spatial_conv3d): Conv3d(256, 256, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (temporal_conv3d): Conv3d(256, 256, kernel_size=(3, 1, 1), stride=(3, 1, 1), bias=False)
+      )
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (downsample): Sequential(
+        (0): Conv3d(128, 256, kernel_size=(1, 1, 1), stride=(1, 2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): Bottleneck3D(
+      (conv1): Conv3d(256, 256, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv3d(256, 256, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): Bottleneck3D(
+      (conv1): Conv3d(256, 512, kernel_size=(1, 3, 3), stride=(1, 2, 2), padding=(0, 1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv3d(512, 512, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (downsample): Sequential(
+        (0): Conv3d(256, 512, kernel_size=(1, 1, 1), stride=(1, 2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): Bottleneck3D(
+      (conv1): Conv3d(512, 512, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv3d(512, 512, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+    )
+  )
+  (hist): HistByProfMultiChannel(num_channels=512, init_edges=[0, 0.2, 0.4, 0.6, 0.8, 1], use_just_last_bin=False)
+  (bn): BatchNorm1d(3584, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (classifier): Linear(in_features=3584, out_features=625, bias=True)
+)
+Model size: 13.68852M
+>>> module module.conv1.weight is trainable ? False, device: cuda:0
+>>> module module.bn1.weight is trainable ? False, device: cuda:0
+>>> module module.bn1.bias is trainable ? False, device: cuda:0
+>>> module module.layer1.0.conv1.weight is trainable ? False, device: cuda:0
+>>> module module.layer1.0.bn1.weight is trainable ? False, device: cuda:0
+>>> module module.layer1.0.bn1.bias is trainable ? False, device: cuda:0
+>>> module module.layer1.0.conv2.weight is trainable ? False, device: cuda:0
+>>> module module.layer1.0.bn2.weight is trainable ? False, device: cuda:0
+>>> module module.layer1.0.bn2.bias is trainable ? False, device: cuda:0
+>>> module module.layer1.1.conv1.weight is trainable ? False, device: cuda:0
+>>> module module.layer1.1.bn1.weight is trainable ? False, device: cuda:0
+>>> module module.layer1.1.bn1.bias is trainable ? False, device: cuda:0
+>>> module module.layer1.1.conv2.weight is trainable ? False, device: cuda:0
+>>> module module.layer1.1.bn2.weight is trainable ? False, device: cuda:0
+>>> module module.layer1.1.bn2.bias is trainable ? False, device: cuda:0
+>>> module module.layer2.0.conv1.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.0.bn1.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.0.bn1.bias is trainable ? False, device: cuda:0
+>>> module module.layer2.0.conv2.APM.semantic_mapping.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.0.conv2.APM.x_mapping.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.0.conv2.APM.n_mapping.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.0.conv2.APM.contrastive_att_net.0.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.0.conv2.spatial_conv3d.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.0.conv2.temporal_conv3d.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.0.bn2.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.0.bn2.bias is trainable ? False, device: cuda:0
+>>> module module.layer2.0.downsample.0.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.0.downsample.1.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.0.downsample.1.bias is trainable ? False, device: cuda:0
+>>> module module.layer2.1.conv1.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.1.bn1.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.1.bn1.bias is trainable ? False, device: cuda:0
+>>> module module.layer2.1.conv2.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.1.bn2.weight is trainable ? False, device: cuda:0
+>>> module module.layer2.1.bn2.bias is trainable ? False, device: cuda:0
+>>> module module.layer3.0.conv1.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.0.bn1.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.0.bn1.bias is trainable ? False, device: cuda:0
+>>> module module.layer3.0.conv2.APM.semantic_mapping.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.0.conv2.APM.x_mapping.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.0.conv2.APM.n_mapping.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.0.conv2.APM.contrastive_att_net.0.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.0.conv2.spatial_conv3d.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.0.conv2.temporal_conv3d.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.0.bn2.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.0.bn2.bias is trainable ? False, device: cuda:0
+>>> module module.layer3.0.downsample.0.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.0.downsample.1.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.0.downsample.1.bias is trainable ? False, device: cuda:0
+>>> module module.layer3.1.conv1.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.1.bn1.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.1.bn1.bias is trainable ? False, device: cuda:0
+>>> module module.layer3.1.conv2.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.1.bn2.weight is trainable ? False, device: cuda:0
+>>> module module.layer3.1.bn2.bias is trainable ? False, device: cuda:0
+>>> module module.layer4.0.conv1.weight is trainable ? False, device: cuda:0
+>>> module module.layer4.0.bn1.weight is trainable ? False, device: cuda:0
+>>> module module.layer4.0.bn1.bias is trainable ? False, device: cuda:0
+>>> module module.layer4.0.conv2.weight is trainable ? False, device: cuda:0
+>>> module module.layer4.0.bn2.weight is trainable ? False, device: cuda:0
+>>> module module.layer4.0.bn2.bias is trainable ? False, device: cuda:0
+>>> module module.layer4.0.downsample.0.weight is trainable ? False, device: cuda:0
+>>> module module.layer4.0.downsample.1.weight is trainable ? False, device: cuda:0
+>>> module module.layer4.0.downsample.1.bias is trainable ? False, device: cuda:0
+>>> module module.layer4.1.conv1.weight is trainable ? False, device: cuda:0
+>>> module module.layer4.1.bn1.weight is trainable ? False, device: cuda:0
+>>> module module.layer4.1.bn1.bias is trainable ? False, device: cuda:0
+>>> module module.layer4.1.conv2.weight is trainable ? False, device: cuda:0
+>>> module module.layer4.1.bn2.weight is trainable ? False, device: cuda:0
+>>> module module.layer4.1.bn2.bias is trainable ? False, device: cuda:0
+>>> module module.hist.hist_edges is trainable ? True, device: cuda:0
+>>> module module.bn.weight is trainable ? True, device: cuda:0
+>>> module module.bn.bias is trainable ? True, device: cuda:0
+>>> module module.classifier.weight is trainable ? True, device: cuda:0
+>>> module module.classifier.bias is trainable ? True, device: cuda:0
+==> Start training
+edges of HistByProfMultiChannel in epoch 0 was writed in ./logs/row64/HisEdEp000.txt
+Epoch1 Time:105.6s Data:2.3s Loss:0.0404 Xent:0.0398 Htri:0.0006 Acc:99.99% 
+Epoch2 Time:82.6s Data:1.5s Loss:0.0384 Xent:0.0375 Htri:0.0009 Acc:99.99% 
+Epoch3 Time:81.3s Data:1.5s Loss:0.0360 Xent:0.0354 Htri:0.0006 Acc:99.99% 
+Epoch4 Time:81.9s Data:1.5s Loss:0.0357 Xent:0.0351 Htri:0.0006 Acc:100.00% 
+Epoch5 Time:81.1s Data:1.5s Loss:0.0335 Xent:0.0330 Htri:0.0005 Acc:99.97% 
+Epoch6 Time:81.0s Data:1.5s Loss:0.0334 Xent:0.0330 Htri:0.0004 Acc:99.99% 
+Epoch7 Time:80.9s Data:1.5s Loss:0.0318 Xent:0.0313 Htri:0.0005 Acc:99.97% 
+Epoch8 Time:80.5s Data:1.5s Loss:0.0315 Xent:0.0308 Htri:0.0007 Acc:99.96% 
+Epoch9 Time:80.7s Data:1.5s Loss:0.0304 Xent:0.0299 Htri:0.0005 Acc:99.97% 
+Epoch10 Time:80.5s Data:1.5s Loss:0.0315 Xent:0.0309 Htri:0.0006 Acc:99.97% 
+edges of HistByProfMultiChannel in epoch 10 was writed in ./logs/row64/HisEdEp010.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 47s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:82.2% top5:92.6% top10:94.7% mAP:70.3%
+------------------
+Epoch11 Time:81.2s Data:1.7s Loss:0.0296 Xent:0.0290 Htri:0.0006 Acc:100.00% 
+Epoch12 Time:81.5s Data:1.5s Loss:0.0321 Xent:0.0312 Htri:0.0008 Acc:99.96% 
+Epoch13 Time:81.2s Data:1.5s Loss:0.0312 Xent:0.0303 Htri:0.0010 Acc:99.97% 
+Epoch14 Time:82.1s Data:1.5s Loss:0.0278 Xent:0.0271 Htri:0.0007 Acc:100.00% 
+Epoch15 Time:81.7s Data:1.5s Loss:0.0293 Xent:0.0286 Htri:0.0007 Acc:100.00% 
+Epoch16 Time:81.3s Data:1.5s Loss:0.0285 Xent:0.0278 Htri:0.0006 Acc:99.95% 
+Epoch17 Time:81.6s Data:1.5s Loss:0.0293 Xent:0.0286 Htri:0.0006 Acc:99.97% 
+Epoch18 Time:81.8s Data:1.5s Loss:0.0281 Xent:0.0277 Htri:0.0004 Acc:100.00% 
+Epoch19 Time:82.1s Data:1.5s Loss:0.0299 Xent:0.0292 Htri:0.0007 Acc:99.99% 
+Epoch20 Time:80.6s Data:1.5s Loss:0.0284 Xent:0.0279 Htri:0.0004 Acc:100.00% 
+edges of HistByProfMultiChannel in epoch 20 was writed in ./logs/row64/HisEdEp020.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 33s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:82.2% top5:92.8% top10:94.8% mAP:70.1%
+------------------
+Epoch21 Time:81.0s Data:1.6s Loss:0.0286 Xent:0.0280 Htri:0.0006 Acc:99.97% 
+Epoch22 Time:81.5s Data:1.5s Loss:0.0292 Xent:0.0286 Htri:0.0006 Acc:99.96% 
+Epoch23 Time:81.2s Data:1.4s Loss:0.0288 Xent:0.0284 Htri:0.0004 Acc:99.99% 
+Epoch24 Time:81.4s Data:1.5s Loss:0.0285 Xent:0.0280 Htri:0.0005 Acc:99.97% 
+Epoch25 Time:82.2s Data:1.5s Loss:0.0283 Xent:0.0278 Htri:0.0005 Acc:99.99% 
+Epoch26 Time:83.6s Data:1.5s Loss:0.0294 Xent:0.0286 Htri:0.0008 Acc:99.99% 
+Epoch27 Time:83.6s Data:1.5s Loss:0.0284 Xent:0.0278 Htri:0.0006 Acc:99.97% 
+Epoch28 Time:84.0s Data:1.6s Loss:0.0297 Xent:0.0292 Htri:0.0005 Acc:99.96% 
+Epoch29 Time:83.5s Data:1.5s Loss:0.0274 Xent:0.0266 Htri:0.0007 Acc:100.00% 
+Epoch30 Time:83.1s Data:1.5s Loss:0.0289 Xent:0.0283 Htri:0.0006 Acc:99.99% 
+edges of HistByProfMultiChannel in epoch 30 was writed in ./logs/row64/HisEdEp030.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 38s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:82.5% top5:92.9% top10:94.7% mAP:70.5%
+------------------
+Epoch31 Time:81.8s Data:1.8s Loss:0.0286 Xent:0.0281 Htri:0.0005 Acc:99.96% 
+Epoch32 Time:81.1s Data:1.5s Loss:0.0279 Xent:0.0273 Htri:0.0006 Acc:99.99% 
+Epoch33 Time:81.5s Data:1.5s Loss:0.0277 Xent:0.0272 Htri:0.0004 Acc:100.00% 
+Epoch34 Time:81.3s Data:1.5s Loss:0.0279 Xent:0.0275 Htri:0.0004 Acc:99.99% 
+Epoch35 Time:81.5s Data:1.5s Loss:0.0277 Xent:0.0272 Htri:0.0005 Acc:99.99% 
+Epoch36 Time:81.2s Data:1.5s Loss:0.0291 Xent:0.0282 Htri:0.0008 Acc:99.99% 
+Epoch37 Time:81.4s Data:1.5s Loss:0.0275 Xent:0.0269 Htri:0.0006 Acc:99.99% 
+Epoch38 Time:81.2s Data:1.5s Loss:0.0279 Xent:0.0271 Htri:0.0008 Acc:99.99% 
+Epoch39 Time:81.0s Data:1.5s Loss:0.0277 Xent:0.0273 Htri:0.0005 Acc:99.97% 
+Epoch40 Time:80.9s Data:1.5s Loss:0.0277 Xent:0.0272 Htri:0.0005 Acc:100.00% 
+edges of HistByProfMultiChannel in epoch 40 was writed in ./logs/row64/HisEdEp040.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 34s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:81.5% top5:92.7% top10:94.7% mAP:70.2%
+------------------
+Epoch41 Time:81.1s Data:1.6s Loss:0.0281 Xent:0.0276 Htri:0.0004 Acc:99.99% 
+Epoch42 Time:80.6s Data:1.4s Loss:0.0268 Xent:0.0264 Htri:0.0004 Acc:100.00% 
+Epoch43 Time:80.7s Data:1.4s Loss:0.0273 Xent:0.0268 Htri:0.0004 Acc:100.00% 
+Epoch44 Time:80.5s Data:1.5s Loss:0.0289 Xent:0.0284 Htri:0.0004 Acc:99.99% 
+Epoch45 Time:81.9s Data:1.5s Loss:0.0287 Xent:0.0280 Htri:0.0007 Acc:99.97% 
+Epoch46 Time:80.8s Data:1.5s Loss:0.0282 Xent:0.0275 Htri:0.0007 Acc:99.96% 
+Epoch47 Time:81.1s Data:1.5s Loss:0.0295 Xent:0.0289 Htri:0.0006 Acc:99.99% 
+Epoch48 Time:81.2s Data:1.5s Loss:0.0295 Xent:0.0288 Htri:0.0007 Acc:99.99% 
+Epoch49 Time:81.1s Data:1.5s Loss:0.0279 Xent:0.0272 Htri:0.0007 Acc:100.00% 
+Epoch50 Time:80.7s Data:1.5s Loss:0.0288 Xent:0.0283 Htri:0.0005 Acc:99.97% 
+edges of HistByProfMultiChannel in epoch 50 was writed in ./logs/row64/HisEdEp050.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 35s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:81.3% top5:92.6% top10:94.4% mAP:70.1%
+------------------
+Epoch51 Time:80.4s Data:1.6s Loss:0.0287 Xent:0.0281 Htri:0.0006 Acc:99.97% 
+Epoch52 Time:81.5s Data:1.5s Loss:0.0292 Xent:0.0288 Htri:0.0004 Acc:99.97% 
+Epoch53 Time:81.3s Data:1.4s Loss:0.0302 Xent:0.0296 Htri:0.0006 Acc:99.96% 
+Epoch54 Time:81.5s Data:1.5s Loss:0.0296 Xent:0.0291 Htri:0.0005 Acc:99.96% 
+Epoch55 Time:80.8s Data:1.5s Loss:0.0279 Xent:0.0274 Htri:0.0005 Acc:99.99% 
+Epoch56 Time:81.1s Data:1.5s Loss:0.0288 Xent:0.0284 Htri:0.0004 Acc:99.97% 
+Epoch57 Time:81.0s Data:1.5s Loss:0.0291 Xent:0.0284 Htri:0.0007 Acc:99.99% 
+Epoch58 Time:94.0s Data:1.5s Loss:0.0294 Xent:0.0284 Htri:0.0010 Acc:100.00% 
+Epoch59 Time:94.9s Data:1.5s Loss:0.0289 Xent:0.0283 Htri:0.0006 Acc:99.99% 
+Epoch60 Time:95.0s Data:1.6s Loss:0.0307 Xent:0.0298 Htri:0.0009 Acc:99.96% 
+edges of HistByProfMultiChannel in epoch 60 was writed in ./logs/row64/HisEdEp060.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 47s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:81.5% top5:92.7% top10:94.7% mAP:70.1%
+------------------
+Epoch61 Time:95.0s Data:1.7s Loss:0.0267 Xent:0.0262 Htri:0.0005 Acc:99.99% 
+Epoch62 Time:94.8s Data:1.6s Loss:0.0269 Xent:0.0265 Htri:0.0005 Acc:99.97% 
+Epoch63 Time:80.8s Data:1.6s Loss:0.0286 Xent:0.0278 Htri:0.0008 Acc:99.97% 
+Epoch64 Time:80.8s Data:1.5s Loss:0.0274 Xent:0.0268 Htri:0.0006 Acc:99.99% 
+Epoch65 Time:80.9s Data:1.5s Loss:0.0284 Xent:0.0277 Htri:0.0007 Acc:100.00% 
+Epoch66 Time:81.2s Data:1.5s Loss:0.0279 Xent:0.0274 Htri:0.0005 Acc:99.97% 
+Epoch67 Time:81.2s Data:1.5s Loss:0.0270 Xent:0.0262 Htri:0.0007 Acc:100.00% 
+Epoch68 Time:81.8s Data:1.5s Loss:0.0290 Xent:0.0285 Htri:0.0005 Acc:99.96% 
+Epoch69 Time:81.5s Data:1.5s Loss:0.0272 Xent:0.0268 Htri:0.0004 Acc:99.95% 
+Epoch70 Time:89.4s Data:1.5s Loss:0.0283 Xent:0.0276 Htri:0.0007 Acc:99.96% 
+edges of HistByProfMultiChannel in epoch 70 was writed in ./logs/row64/HisEdEp070.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 47s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:81.8% top5:92.5% top10:94.5% mAP:70.1%
+------------------
+Epoch71 Time:94.8s Data:1.7s Loss:0.0275 Xent:0.0269 Htri:0.0005 Acc:100.00% 
+Epoch72 Time:94.9s Data:1.6s Loss:0.0276 Xent:0.0270 Htri:0.0005 Acc:100.00% 
+Epoch73 Time:94.9s Data:1.5s Loss:0.0256 Xent:0.0252 Htri:0.0004 Acc:99.99% 
+Epoch74 Time:95.0s Data:1.6s Loss:0.0278 Xent:0.0274 Htri:0.0004 Acc:99.97% 
+Epoch75 Time:95.2s Data:1.6s Loss:0.0276 Xent:0.0270 Htri:0.0005 Acc:99.96% 
+Epoch76 Time:94.9s Data:1.6s Loss:0.0279 Xent:0.0273 Htri:0.0005 Acc:99.99% 
+Epoch77 Time:95.0s Data:1.6s Loss:0.0271 Xent:0.0267 Htri:0.0005 Acc:99.96% 
+Epoch78 Time:95.0s Data:1.6s Loss:0.0271 Xent:0.0264 Htri:0.0007 Acc:100.00% 
+Epoch79 Time:94.9s Data:1.6s Loss:0.0277 Xent:0.0272 Htri:0.0006 Acc:100.00% 
+Epoch80 Time:81.4s Data:1.5s Loss:0.0287 Xent:0.0281 Htri:0.0006 Acc:99.97% 
+edges of HistByProfMultiChannel in epoch 80 was writed in ./logs/row64/HisEdEp080.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 34s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:81.5% top5:92.5% top10:94.5% mAP:70.0%
+------------------
+Epoch81 Time:81.0s Data:1.6s Loss:0.0275 Xent:0.0271 Htri:0.0004 Acc:99.99% 
+Epoch82 Time:81.4s Data:1.5s Loss:0.0279 Xent:0.0271 Htri:0.0008 Acc:99.96% 
+Epoch83 Time:81.3s Data:1.5s Loss:0.0290 Xent:0.0281 Htri:0.0009 Acc:99.93% 
+Epoch84 Time:81.3s Data:1.5s Loss:0.0281 Xent:0.0276 Htri:0.0005 Acc:99.99% 
+Epoch85 Time:80.4s Data:1.5s Loss:0.0277 Xent:0.0272 Htri:0.0006 Acc:99.97% 
+Epoch86 Time:81.1s Data:1.5s Loss:0.0282 Xent:0.0276 Htri:0.0005 Acc:99.97% 
+Epoch87 Time:81.1s Data:1.5s Loss:0.0287 Xent:0.0282 Htri:0.0004 Acc:99.95% 
+Epoch88 Time:81.0s Data:1.5s Loss:0.0283 Xent:0.0275 Htri:0.0008 Acc:99.97% 
+Epoch89 Time:80.9s Data:1.4s Loss:0.0278 Xent:0.0273 Htri:0.0006 Acc:99.97% 
+Epoch90 Time:81.2s Data:1.5s Loss:0.0279 Xent:0.0271 Htri:0.0008 Acc:99.96% 
+edges of HistByProfMultiChannel in epoch 90 was writed in ./logs/row64/HisEdEp090.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 34s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:81.9% top5:92.6% top10:94.7% mAP:70.2%
+------------------
+Epoch91 Time:81.4s Data:1.6s Loss:0.0285 Xent:0.0280 Htri:0.0006 Acc:99.96% 
+Epoch92 Time:81.2s Data:1.5s Loss:0.0276 Xent:0.0271 Htri:0.0006 Acc:99.97% 
+Epoch93 Time:81.3s Data:1.5s Loss:0.0280 Xent:0.0276 Htri:0.0004 Acc:99.95% 
+Epoch94 Time:81.3s Data:1.5s Loss:0.0282 Xent:0.0275 Htri:0.0007 Acc:99.97% 
+Epoch95 Time:81.8s Data:1.5s Loss:0.0267 Xent:0.0263 Htri:0.0004 Acc:100.00% 
+Epoch96 Time:81.3s Data:1.5s Loss:0.0278 Xent:0.0272 Htri:0.0006 Acc:99.96% 
+Epoch97 Time:81.5s Data:1.5s Loss:0.0277 Xent:0.0269 Htri:0.0007 Acc:99.97% 
+Epoch98 Time:81.9s Data:1.5s Loss:0.0278 Xent:0.0272 Htri:0.0005 Acc:99.99% 
+Epoch99 Time:81.2s Data:1.5s Loss:0.0295 Xent:0.0288 Htri:0.0008 Acc:99.95% 
+Epoch100 Time:81.1s Data:1.5s Loss:0.0274 Xent:0.0268 Htri:0.0005 Acc:99.99% 
+edges of HistByProfMultiChannel in epoch 100 was writed in ./logs/row64/HisEdEp100.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 34s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:81.3% top5:92.5% top10:94.4% mAP:69.8%
+------------------
+Epoch101 Time:81.7s Data:1.6s Loss:0.0291 Xent:0.0282 Htri:0.0009 Acc:99.96% 
+Epoch102 Time:80.6s Data:1.5s Loss:0.0274 Xent:0.0268 Htri:0.0006 Acc:99.99% 
+Epoch103 Time:81.5s Data:1.5s Loss:0.0281 Xent:0.0274 Htri:0.0007 Acc:100.00% 
+Epoch104 Time:81.4s Data:1.5s Loss:0.0284 Xent:0.0281 Htri:0.0004 Acc:99.99% 
+Epoch105 Time:82.1s Data:1.5s Loss:0.0290 Xent:0.0283 Htri:0.0007 Acc:99.96% 
+Epoch106 Time:82.2s Data:1.5s Loss:0.0285 Xent:0.0281 Htri:0.0004 Acc:99.97% 
+Epoch107 Time:82.6s Data:1.5s Loss:0.0270 Xent:0.0265 Htri:0.0006 Acc:99.99% 
+Epoch108 Time:82.3s Data:1.5s Loss:0.0288 Xent:0.0282 Htri:0.0006 Acc:99.97% 
+Epoch109 Time:82.4s Data:1.5s Loss:0.0274 Xent:0.0268 Htri:0.0005 Acc:99.99% 
+Epoch110 Time:82.4s Data:1.5s Loss:0.0292 Xent:0.0286 Htri:0.0006 Acc:99.97% 
+edges of HistByProfMultiChannel in epoch 110 was writed in ./logs/row64/HisEdEp110.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 36s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:81.5% top5:92.6% top10:94.6% mAP:70.1%
+------------------
+Epoch111 Time:81.0s Data:1.6s Loss:0.0281 Xent:0.0277 Htri:0.0004 Acc:100.00% 
+Epoch112 Time:81.5s Data:1.5s Loss:0.0289 Xent:0.0283 Htri:0.0006 Acc:99.97% 
+Epoch113 Time:81.1s Data:1.5s Loss:0.0294 Xent:0.0286 Htri:0.0008 Acc:99.96% 
+Epoch114 Time:80.9s Data:1.5s Loss:0.0290 Xent:0.0281 Htri:0.0009 Acc:99.97% 
+Epoch115 Time:81.2s Data:1.5s Loss:0.0290 Xent:0.0282 Htri:0.0007 Acc:99.96% 
+Epoch116 Time:80.3s Data:1.5s Loss:0.0280 Xent:0.0275 Htri:0.0004 Acc:99.99% 
+Epoch117 Time:80.9s Data:1.5s Loss:0.0294 Xent:0.0287 Htri:0.0007 Acc:100.00% 
+Epoch118 Time:82.0s Data:1.5s Loss:0.0278 Xent:0.0275 Htri:0.0003 Acc:99.99% 
+Epoch119 Time:82.0s Data:1.5s Loss:0.0273 Xent:0.0269 Htri:0.0004 Acc:99.97% 
+Epoch120 Time:81.6s Data:1.5s Loss:0.0254 Xent:0.0249 Htri:0.0005 Acc:99.99% 
+edges of HistByProfMultiChannel in epoch 120 was writed in ./logs/row64/HisEdEp120.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 34s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:81.5% top5:92.6% top10:94.6% mAP:69.8%
+------------------
+Epoch121 Time:81.9s Data:1.6s Loss:0.0276 Xent:0.0270 Htri:0.0006 Acc:100.00% 
+Epoch122 Time:81.7s Data:1.5s Loss:0.0281 Xent:0.0276 Htri:0.0005 Acc:99.99% 
+Epoch123 Time:80.8s Data:1.5s Loss:0.0283 Xent:0.0277 Htri:0.0006 Acc:100.00% 
+Epoch124 Time:81.8s Data:1.5s Loss:0.0285 Xent:0.0276 Htri:0.0009 Acc:99.97% 
+Epoch125 Time:80.6s Data:1.5s Loss:0.0281 Xent:0.0275 Htri:0.0006 Acc:99.99% 
+Epoch126 Time:81.2s Data:1.5s Loss:0.0283 Xent:0.0276 Htri:0.0007 Acc:99.99% 
+Epoch127 Time:81.7s Data:1.5s Loss:0.0296 Xent:0.0286 Htri:0.0010 Acc:99.99% 
+Epoch128 Time:81.1s Data:1.5s Loss:0.0272 Xent:0.0267 Htri:0.0005 Acc:99.99% 
+Epoch129 Time:81.5s Data:1.5s Loss:0.0286 Xent:0.0281 Htri:0.0005 Acc:99.99% 
+Epoch130 Time:81.8s Data:1.5s Loss:0.0288 Xent:0.0281 Htri:0.0007 Acc:99.99% 
+edges of HistByProfMultiChannel in epoch 130 was writed in ./logs/row64/HisEdEp130.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 37s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:81.4% top5:92.6% top10:94.5% mAP:70.2%
+------------------
+Epoch131 Time:83.2s Data:1.6s Loss:0.0288 Xent:0.0282 Htri:0.0006 Acc:99.97% 
+Epoch132 Time:83.4s Data:1.5s Loss:0.0284 Xent:0.0279 Htri:0.0005 Acc:99.99% 
+Epoch133 Time:82.7s Data:1.5s Loss:0.0286 Xent:0.0280 Htri:0.0006 Acc:100.00% 
+Epoch134 Time:83.0s Data:1.5s Loss:0.0301 Xent:0.0294 Htri:0.0007 Acc:99.93% 
+Epoch135 Time:83.4s Data:1.5s Loss:0.0264 Xent:0.0258 Htri:0.0005 Acc:100.00% 
+Epoch136 Time:82.5s Data:1.5s Loss:0.0295 Xent:0.0290 Htri:0.0006 Acc:99.96% 
+Epoch137 Time:81.2s Data:1.5s Loss:0.0286 Xent:0.0282 Htri:0.0005 Acc:99.95% 
+Epoch138 Time:80.9s Data:1.5s Loss:0.0288 Xent:0.0282 Htri:0.0006 Acc:99.96% 
+Epoch139 Time:81.5s Data:1.5s Loss:0.0271 Xent:0.0268 Htri:0.0003 Acc:99.99% 
+Epoch140 Time:81.4s Data:1.5s Loss:0.0293 Xent:0.0283 Htri:0.0009 Acc:99.97% 
+edges of HistByProfMultiChannel in epoch 140 was writed in ./logs/row64/HisEdEp140.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 34s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:81.7% top5:92.4% top10:94.5% mAP:69.9%
+------------------
+Epoch141 Time:81.0s Data:1.6s Loss:0.0282 Xent:0.0276 Htri:0.0006 Acc:99.99% 
+Epoch142 Time:80.8s Data:1.5s Loss:0.0281 Xent:0.0274 Htri:0.0007 Acc:99.99% 
+Epoch143 Time:81.0s Data:1.5s Loss:0.0273 Xent:0.0268 Htri:0.0006 Acc:99.99% 
+Epoch144 Time:81.0s Data:1.5s Loss:0.0277 Xent:0.0271 Htri:0.0005 Acc:99.99% 
+Epoch145 Time:81.4s Data:1.5s Loss:0.0285 Xent:0.0281 Htri:0.0004 Acc:99.95% 
+Epoch146 Time:82.9s Data:1.5s Loss:0.0287 Xent:0.0282 Htri:0.0005 Acc:99.96% 
+Epoch147 Time:83.5s Data:1.5s Loss:0.0286 Xent:0.0279 Htri:0.0007 Acc:99.96% 
+Epoch148 Time:83.5s Data:1.5s Loss:0.0291 Xent:0.0285 Htri:0.0006 Acc:99.99% 
+Epoch149 Time:84.1s Data:1.5s Loss:0.0280 Xent:0.0273 Htri:0.0007 Acc:100.00% 
+Epoch150 Time:83.5s Data:1.6s Loss:0.0281 Xent:0.0275 Htri:0.0006 Acc:99.97% 
+edges of HistByProfMultiChannel in epoch 150 was writed in ./logs/row64/HisEdEp150.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 38s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:81.5% top5:92.5% top10:94.7% mAP:70.0%
+------------------
+Epoch151 Time:82.3s Data:1.6s Loss:0.0286 Xent:0.0277 Htri:0.0009 Acc:99.97% 
+Epoch152 Time:82.2s Data:1.5s Loss:0.0278 Xent:0.0273 Htri:0.0005 Acc:99.99% 
+Epoch153 Time:82.6s Data:1.5s Loss:0.0274 Xent:0.0266 Htri:0.0008 Acc:99.99% 
+Epoch154 Time:82.5s Data:1.5s Loss:0.0276 Xent:0.0268 Htri:0.0008 Acc:99.99% 
+Epoch155 Time:82.3s Data:1.5s Loss:0.0283 Xent:0.0278 Htri:0.0005 Acc:100.00% 
+Epoch156 Time:81.5s Data:1.5s Loss:0.0277 Xent:0.0273 Htri:0.0004 Acc:99.99% 
+Epoch157 Time:81.6s Data:1.5s Loss:0.0279 Xent:0.0275 Htri:0.0004 Acc:99.97% 
+Epoch158 Time:81.7s Data:1.5s Loss:0.0276 Xent:0.0269 Htri:0.0006 Acc:99.99% 
+Epoch159 Time:81.5s Data:1.5s Loss:0.0294 Xent:0.0287 Htri:0.0007 Acc:100.00% 
+Epoch160 Time:81.3s Data:1.5s Loss:0.0287 Xent:0.0281 Htri:0.0006 Acc:99.96% 
+edges of HistByProfMultiChannel in epoch 160 was writed in ./logs/row64/HisEdEp160.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 35s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:81.8% top5:92.7% top10:94.6% mAP:70.1%
+------------------
+Epoch161 Time:83.5s Data:1.7s Loss:0.0280 Xent:0.0277 Htri:0.0003 Acc:99.99% 
+Epoch162 Time:83.5s Data:1.5s Loss:0.0287 Xent:0.0282 Htri:0.0005 Acc:99.97% 
+Epoch163 Time:83.9s Data:1.5s Loss:0.0290 Xent:0.0283 Htri:0.0008 Acc:99.99% 
+Epoch164 Time:83.0s Data:1.5s Loss:0.0299 Xent:0.0293 Htri:0.0006 Acc:100.00% 
+Epoch165 Time:83.7s Data:1.5s Loss:0.0288 Xent:0.0283 Htri:0.0006 Acc:99.99% 
+Epoch166 Time:83.4s Data:1.5s Loss:0.0273 Xent:0.0269 Htri:0.0004 Acc:99.99% 
+Epoch167 Time:82.1s Data:1.5s Loss:0.0275 Xent:0.0271 Htri:0.0004 Acc:99.99% 
+Epoch168 Time:82.5s Data:1.5s Loss:0.0279 Xent:0.0274 Htri:0.0005 Acc:99.99% 
+Epoch169 Time:82.4s Data:1.5s Loss:0.0285 Xent:0.0280 Htri:0.0005 Acc:99.97% 
+Epoch170 Time:83.0s Data:1.5s Loss:0.0292 Xent:0.0286 Htri:0.0005 Acc:99.97% 
+edges of HistByProfMultiChannel in epoch 170 was writed in ./logs/row64/HisEdEp170.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 37s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:81.6% top5:92.2% top10:94.6% mAP:70.0%
+------------------
+Epoch171 Time:81.9s Data:1.7s Loss:0.0293 Xent:0.0283 Htri:0.0009 Acc:100.00% 
+Epoch172 Time:81.3s Data:1.5s Loss:0.0283 Xent:0.0279 Htri:0.0004 Acc:99.99% 
+Epoch173 Time:81.4s Data:1.5s Loss:0.0279 Xent:0.0276 Htri:0.0003 Acc:99.96% 
+Epoch174 Time:81.4s Data:1.5s Loss:0.0286 Xent:0.0281 Htri:0.0005 Acc:100.00% 
+Epoch175 Time:81.5s Data:1.5s Loss:0.0300 Xent:0.0295 Htri:0.0006 Acc:99.99% 
+Epoch176 Time:81.5s Data:1.5s Loss:0.0283 Xent:0.0276 Htri:0.0007 Acc:99.96% 
+Epoch177 Time:81.5s Data:1.5s Loss:0.0275 Xent:0.0271 Htri:0.0005 Acc:99.97% 
+Epoch178 Time:80.7s Data:1.5s Loss:0.0277 Xent:0.0273 Htri:0.0004 Acc:99.99% 
+Epoch179 Time:81.7s Data:1.5s Loss:0.0288 Xent:0.0282 Htri:0.0007 Acc:99.97% 
+Epoch180 Time:81.7s Data:1.5s Loss:0.0285 Xent:0.0280 Htri:0.0005 Acc:99.97% 
+edges of HistByProfMultiChannel in epoch 180 was writed in ./logs/row64/HisEdEp180.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 34s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:81.7% top5:92.5% top10:94.6% mAP:70.0%
+------------------
+Epoch181 Time:81.8s Data:1.6s Loss:0.0287 Xent:0.0281 Htri:0.0006 Acc:99.97% 
+Epoch182 Time:81.2s Data:1.4s Loss:0.0297 Xent:0.0292 Htri:0.0005 Acc:99.97% 
+Epoch183 Time:81.1s Data:1.5s Loss:0.0286 Xent:0.0279 Htri:0.0007 Acc:99.96% 
+Epoch184 Time:80.8s Data:1.5s Loss:0.0280 Xent:0.0276 Htri:0.0004 Acc:99.99% 
+Epoch185 Time:81.1s Data:1.5s Loss:0.0275 Xent:0.0270 Htri:0.0005 Acc:99.99% 
+Epoch186 Time:80.6s Data:1.5s Loss:0.0283 Xent:0.0275 Htri:0.0008 Acc:99.99% 
+Epoch187 Time:81.4s Data:1.5s Loss:0.0282 Xent:0.0276 Htri:0.0006 Acc:99.96% 
+Epoch188 Time:80.9s Data:1.5s Loss:0.0284 Xent:0.0277 Htri:0.0007 Acc:99.97% 
+Epoch189 Time:81.2s Data:1.4s Loss:0.0282 Xent:0.0277 Htri:0.0005 Acc:100.00% 
+Epoch190 Time:81.0s Data:1.5s Loss:0.0297 Xent:0.0293 Htri:0.0004 Acc:99.96% 
+edges of HistByProfMultiChannel in epoch 190 was writed in ./logs/row64/HisEdEp190.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 35s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:81.7% top5:92.8% top10:94.7% mAP:70.2%
+------------------
+Epoch191 Time:81.2s Data:1.6s Loss:0.0285 Xent:0.0277 Htri:0.0008 Acc:99.99% 
+Epoch192 Time:81.6s Data:1.5s Loss:0.0275 Xent:0.0266 Htri:0.0009 Acc:99.99% 
+Epoch193 Time:81.6s Data:1.5s Loss:0.0276 Xent:0.0270 Htri:0.0005 Acc:99.95% 
+Epoch194 Time:81.9s Data:1.5s Loss:0.0276 Xent:0.0269 Htri:0.0007 Acc:99.99% 
+Epoch195 Time:81.6s Data:1.5s Loss:0.0293 Xent:0.0287 Htri:0.0005 Acc:99.95% 
+Epoch196 Time:81.5s Data:1.6s Loss:0.0280 Xent:0.0273 Htri:0.0007 Acc:100.00% 
+Epoch197 Time:81.7s Data:1.5s Loss:0.0303 Xent:0.0298 Htri:0.0005 Acc:99.96% 
+Epoch198 Time:81.9s Data:1.5s Loss:0.0287 Xent:0.0280 Htri:0.0007 Acc:99.99% 
+Epoch199 Time:81.3s Data:1.5s Loss:0.0288 Xent:0.0279 Htri:0.0008 Acc:99.97% 
+Epoch200 Time:81.2s Data:1.5s Loss:0.0285 Xent:0.0278 Htri:0.0007 Acc:99.97% 
+edges of HistByProfMultiChannel in epoch 200 was writed in ./logs/row64/HisEdEp200.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 33s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:81.4% top5:92.3% top10:94.5% mAP:70.1%
+------------------
+Epoch201 Time:80.9s Data:1.6s Loss:0.0284 Xent:0.0278 Htri:0.0006 Acc:99.99% 
+Epoch202 Time:81.3s Data:1.5s Loss:0.0297 Xent:0.0290 Htri:0.0007 Acc:99.97% 
+Epoch203 Time:80.5s Data:1.5s Loss:0.0281 Xent:0.0276 Htri:0.0005 Acc:99.99% 
+Epoch204 Time:81.2s Data:1.5s Loss:0.0280 Xent:0.0273 Htri:0.0006 Acc:99.97% 
+Epoch205 Time:80.9s Data:1.5s Loss:0.0293 Xent:0.0285 Htri:0.0008 Acc:99.99% 
+Epoch206 Time:81.2s Data:1.5s Loss:0.0277 Xent:0.0272 Htri:0.0005 Acc:99.99% 
+Epoch207 Time:81.4s Data:1.5s Loss:0.0272 Xent:0.0267 Htri:0.0005 Acc:100.00% 
+Epoch208 Time:81.0s Data:1.5s Loss:0.0283 Xent:0.0278 Htri:0.0005 Acc:99.99% 
+Epoch209 Time:81.5s Data:1.5s Loss:0.0282 Xent:0.0275 Htri:0.0008 Acc:99.99% 
+Epoch210 Time:81.7s Data:1.5s Loss:0.0297 Xent:0.0291 Htri:0.0006 Acc:99.95% 
+edges of HistByProfMultiChannel in epoch 210 was writed in ./logs/row64/HisEdEp210.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 34s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:81.5% top5:92.1% top10:94.5% mAP:70.0%
+------------------
+Epoch211 Time:82.0s Data:1.6s Loss:0.0278 Xent:0.0272 Htri:0.0006 Acc:99.99% 
+Epoch212 Time:82.1s Data:1.5s Loss:0.0295 Xent:0.0288 Htri:0.0006 Acc:99.97% 
+Epoch213 Time:82.0s Data:1.5s Loss:0.0289 Xent:0.0282 Htri:0.0007 Acc:99.99% 
+Epoch214 Time:82.1s Data:1.5s Loss:0.0283 Xent:0.0278 Htri:0.0005 Acc:99.99% 
+Epoch215 Time:81.7s Data:1.5s Loss:0.0269 Xent:0.0262 Htri:0.0007 Acc:99.99% 
+Epoch216 Time:82.3s Data:1.5s Loss:0.0268 Xent:0.0262 Htri:0.0006 Acc:99.99% 
+Epoch217 Time:83.7s Data:1.5s Loss:0.0275 Xent:0.0269 Htri:0.0005 Acc:100.00% 
+Epoch218 Time:84.0s Data:1.5s Loss:0.0283 Xent:0.0277 Htri:0.0006 Acc:99.99% 
+Epoch219 Time:84.5s Data:1.5s Loss:0.0292 Xent:0.0286 Htri:0.0006 Acc:100.00% 
+Epoch220 Time:84.2s Data:1.5s Loss:0.0287 Xent:0.0281 Htri:0.0006 Acc:100.00% 
+edges of HistByProfMultiChannel in epoch 220 was writed in ./logs/row64/HisEdEp220.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 38s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:81.8% top5:92.5% top10:94.7% mAP:70.1%
+------------------
+Epoch221 Time:81.2s Data:1.6s Loss:0.0288 Xent:0.0279 Htri:0.0010 Acc:100.00% 
+Epoch222 Time:81.1s Data:1.5s Loss:0.0290 Xent:0.0286 Htri:0.0005 Acc:99.96% 
+Epoch223 Time:81.3s Data:1.5s Loss:0.0279 Xent:0.0274 Htri:0.0004 Acc:100.00% 
+Epoch224 Time:80.6s Data:1.5s Loss:0.0311 Xent:0.0302 Htri:0.0008 Acc:99.95% 
+Epoch225 Time:80.6s Data:1.5s Loss:0.0272 Xent:0.0267 Htri:0.0005 Acc:100.00% 
+Epoch226 Time:80.7s Data:1.5s Loss:0.0292 Xent:0.0284 Htri:0.0007 Acc:99.97% 
+Epoch227 Time:80.8s Data:1.5s Loss:0.0287 Xent:0.0282 Htri:0.0005 Acc:99.99% 
+Epoch228 Time:83.3s Data:1.5s Loss:0.0280 Xent:0.0274 Htri:0.0006 Acc:99.97% 
+Epoch229 Time:83.5s Data:1.5s Loss:0.0293 Xent:0.0286 Htri:0.0007 Acc:99.93% 
+Epoch230 Time:83.1s Data:1.6s Loss:0.0278 Xent:0.0271 Htri:0.0006 Acc:99.99% 
+edges of HistByProfMultiChannel in epoch 230 was writed in ./logs/row64/HisEdEp230.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 37s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:81.5% top5:92.3% top10:94.5% mAP:69.9%
+------------------
+Epoch231 Time:83.0s Data:1.6s Loss:0.0283 Xent:0.0278 Htri:0.0006 Acc:99.99% 
+Epoch232 Time:81.6s Data:1.5s Loss:0.0277 Xent:0.0271 Htri:0.0006 Acc:99.99% 
+Epoch233 Time:81.5s Data:1.5s Loss:0.0301 Xent:0.0297 Htri:0.0004 Acc:99.95% 
+Epoch234 Time:81.6s Data:1.4s Loss:0.0275 Xent:0.0271 Htri:0.0004 Acc:99.99% 
+Epoch235 Time:81.1s Data:1.5s Loss:0.0270 Xent:0.0266 Htri:0.0004 Acc:100.00% 
+Epoch236 Time:81.3s Data:1.5s Loss:0.0278 Xent:0.0274 Htri:0.0004 Acc:99.97% 
+Epoch237 Time:81.4s Data:1.5s Loss:0.0273 Xent:0.0268 Htri:0.0005 Acc:99.97% 
+Epoch238 Time:81.3s Data:1.5s Loss:0.0278 Xent:0.0275 Htri:0.0003 Acc:99.99% 
+Epoch239 Time:81.5s Data:1.5s Loss:0.0282 Xent:0.0274 Htri:0.0008 Acc:100.00% 
+Epoch240 Time:81.2s Data:1.5s Loss:0.0284 Xent:0.0278 Htri:0.0006 Acc:99.99% 
+edges of HistByProfMultiChannel in epoch 240 was writed in ./logs/row64/HisEdEp240.txt
+==> Test
+Extracted features for query set, obtained torch.Size([1980, 3584]) matrix
+Extracted features for gallery set, obtained torch.Size([11310, 3584]) matrix
+Extracting features complete in 1m 34s
+Computing distance matrix
+Computing CMC and mAP
+Results ----------
+top1:81.5% top5:92.6% top10:94.6% mAP:70.1%
+------------------
+==> Best Rank-1 82.5%, achieved at epoch 30
+Finished. Total elapsed time (h:m:s): 7:04:45. Training time (h:m:s): 5:30:27.
