@@ -42,7 +42,7 @@ class Config():
         self.use_linear_to_merge_features = False # ( 2048 * 8 ) 8 -> 1
 
 
-        self.what_to_freeze_startwith = ['conv1.', 'bn1.', 'layer1.', 'layer2.', 'layer3.', 'layer4.', 'hist.']# ,   # bn. , classifier. , feature_reduction. 
+        self.what_to_freeze_startwith = ['conv1.', 'bn1.', 'layer1.', 'layer2.', 'layer3.', 'layer4.']# , , 'hist.'  # bn. , classifier. , feature_reduction. 
 
         if self.use_linear_to_merge_features and self.use_linear_to_get_important_features:
             raise Exception("both 'use_linear_to_merge_features' 'use_linear_to_get_important_features are True'")
