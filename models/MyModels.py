@@ -101,6 +101,51 @@ class HistByProfMultiChannel(nn.Module):
     def __repr__(self):
         return f"HistByProfMultiChannel(num_channels={len(self.hist_edges)}, init_edges={self.init_edges}, use_just_last_bin={self.use_just_last_bin})"
 
+    
+class HistByProfDiffMultiChannel(nn.Module):
+    def __init__(self,num_channels, init_edges, use_just_last_bin):
+        super(HistByProfMultiChannel, self).__init__()
+        self.init_edges = init_edges
+        edges_repeat = torch.tensor(init_edges, dtype=torch.float32).repeat(num_channels, 1)
+        self.hist_edges = nn.Parameter(edges_repeat, requires_grad=True)
+        self.use_just_last_bin = use_just_last_bin
+        self.nbins = len(init_edges) + 1
+
+
+    def forward(self, x): #[72,2048,16,8]
+        bt, c, h, w = x.shape
+        res = torch.zeros((bt, self.nbins, c)).to(device)
+        x = x.view(bt, c, h*w)
+        x = x.transpose(1, 2) # (bt, h*w, c)
+        for i in range(1, self.hist_edges.shape[-1]): # iterate over edges
+            width = max(0, self.hist_edges[:, i] - self.hist_edges[:, i-1]) # must be greater than zero
+            mu = self.hist_edges[:, i-1] + width/2 # (c,)
+            sigma = width/3 # (c,)
+            norm_out = self.norm(x, mu, sigma)
+            res[:, i, :] = torch.sum(norm_out, 1)
+            
+        width = max(0, self.hist_edges[:, 1] - self.hist_edges[:, 0]) # must be greater than zero
+        res[:, 0, :] = torch.sum(self.norm(x, self.hist_edges[:, 0], width/3), 1)
+        res[:, -1, :] = torch.sum(self.sigmoid(x - self.hist_edges[:, -1]), 1)
+        res = res.transpose(1,2) # (bt, c, nbins)
+        if self.use_just_last_bin:
+            res = res[:, :, -1] # get last bin
+        res = res.reshape(bt, c, -1)
+        return res # [72,2048,7]
+
+    def norm(self, x, mu, sigma):
+        sigma = torch.add(sigma, 1e-6) # prevent from nan
+        norm_out = torch.exp((-0.5*((x - mu)/sigma)**2))
+        return norm_out # (bt, h*w, c)
+
+    def sigmoid(self, x):
+        sig_out = 1 / (1 + torch.exp(-20*(x)))
+        return sig_out
+
+    def __str__(self):
+        return f"HistByProfMultiChannel(num_channels={len(self.hist_edges)}, init_edges={self.init_edges}, use_just_last_bin={self.use_just_last_bin})"
+    def __repr__(self):
+        return f"HistByProfMultiChannel(num_channels={len(self.hist_edges)}, init_edges={self.init_edges}, use_just_last_bin={self.use_just_last_bin})"
 
 
 class HistByProf(nn.Module):

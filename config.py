@@ -48,7 +48,7 @@ class Config():
             
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
         # init hist 
-        self.init_hist("HistByProfMultiChannel")
+        self.init_hist("HistByProfDiffMultiChannel")
 
     def init_hist(self, hist_name):
         self.hist_name = hist_name
@@ -59,6 +59,8 @@ class Config():
             self.hist_model = MyModels.HistYusufLayer(inchannel=1, centers=self.centers, width=self.widths)
         elif self.hist_name == "HistByProfMultiChannel":
             self.hist_model = MyModels.HistByProfMultiChannel(num_channels=self.last_feature_dim, init_edges=self.hist_by_prof_edges, use_just_last_bin=self.use_just_last_bin)
+        elif self.hist_name == "HistByProfDiffMultiChannel":
+            self.hist_model = MyModels.HistByProfDiffMultiChannel(num_channels=self.last_feature_dim, init_edges=self.hist_by_prof_edges, use_just_last_bin=self.use_just_last_bin)
         else:
             raise Exception(f"hist_name {self.hist_name} is not supported")
 
