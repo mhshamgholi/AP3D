@@ -104,7 +104,7 @@ class HistByProfMultiChannel(nn.Module):
     
 class HistByProfDiffMultiChannel(nn.Module):
     def __init__(self,num_channels, init_edges, use_just_last_bin):
-        super(HistByProfMultiChannel, self).__init__()
+        super(HistByProfDiffMultiChannel, self).__init__()
         self.init_edges = init_edges
         edges_repeat = torch.tensor(init_edges, dtype=torch.float32).repeat(num_channels, 1)
         self.hist_edges = nn.Parameter(edges_repeat, requires_grad=True)
