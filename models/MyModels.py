@@ -1,5 +1,6 @@
 import torch
 from torch import nn
+import torch.nn.functional as F
 import math
 import numpy as np
 import pdb
@@ -118,13 +119,15 @@ class HistByProfDiffMultiChannel(nn.Module):
         x = x.view(bt, c, h*w)
         x = x.transpose(1, 2) # (bt, h*w, c)
         for i in range(1, self.hist_edges.shape[-1]): # iterate over edges
-            width = max(0, self.hist_edges[:, i] - self.hist_edges[:, i-1]) # must be greater than zero
+            width = self.hist_edges[:, i] - self.hist_edges[:, i-1] # must be greater than zero
+            width = F.relu(width)
             mu = self.hist_edges[:, i-1] + width/2 # (c,)
             sigma = width/3 # (c,)
             norm_out = self.norm(x, mu, sigma)
             res[:, i, :] = torch.sum(norm_out, 1)
             
-        width = max(0, self.hist_edges[:, 1] - self.hist_edges[:, 0]) # must be greater than zero
+        width = self.hist_edges[:, 1] - self.hist_edges[:, 0] # must be greater than zero
+        width = F.relu(width)
         res[:, 0, :] = torch.sum(self.norm(x, self.hist_edges[:, 0], width/3), 1)
         res[:, -1, :] = torch.sum(self.sigmoid(x - self.hist_edges[:, -1]), 1)
         res = res.transpose(1,2) # (bt, c, nbins)

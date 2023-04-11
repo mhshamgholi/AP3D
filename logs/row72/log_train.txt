@@ -205,3 +205,4 @@ Model size: 13.68852M
 >>> module module.classifier.weight is trainable ? True, device: cuda:0
 >>> module module.classifier.bias is trainable ? True, device: cuda:0
 ==> Start training
+edges of HistByProfDiffMultiChannel in epoch 0 was writed in ./logs/row72/HisEdEp000.txt
