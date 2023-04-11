@@ -22,7 +22,8 @@ class Config():
         # self.widths = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
 
 
-        self.hist_by_prof_edges = [0, 0.2, 0.4, 0.6, 0.8, 1] # 15, 30]
+        # self.hist_by_prof_edges = [0, 0.2, 0.4, 0.6, 0.8, 1] # 15, 30]
+        self.hist_by_prof_edges = [0.125, 0.375, 0.625, 0.875] # 15, 30]
         self.use_dropout = False
         self.use_hist_and_max_seprately = False # here histogram is just used for help model to train better. it is not used at inference and Xent 
         self.use_hist = True or self.use_hist_and_max_seprately #False
@@ -41,7 +42,7 @@ class Config():
         self.use_linear_to_merge_features = False # ( 2048 * 8 ) 8 -> 1
 
 
-        self.what_to_freeze_startwith = ['conv1.', 'bn1.', 'layer1.', 'layer2.', 'layer3.', 'layer4.']#  , 'hist.' # bn. , classifier. , feature_reduction. 
+        self.what_to_freeze_startwith = ['conv1.', 'bn1.', 'layer1.', 'layer2.', 'layer3.', 'layer4.']# , , 'hist.'  # bn. , classifier. , feature_reduction. 
 
         if self.use_linear_to_merge_features and self.use_linear_to_get_important_features:
             raise Exception("both 'use_linear_to_merge_features' 'use_linear_to_get_important_features are True'")
