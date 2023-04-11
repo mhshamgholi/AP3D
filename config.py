@@ -80,14 +80,14 @@ class Config():
                 l = self.hist_model.conv_widths.bias.detach().cpu().numpy().tolist()
                 l = [round(i, 6) for i in l]
                 print('hist widths', l)
-            elif self.hist_name == "HistByProfMultiChannel":
+            elif self.hist_name == "HistByProfMultiChannel" or self.hist_name == "HistByProfDiffMultiChannel":
                 path = os.path.join(log_path, f'HisEdEp{str(epoch).zfill(3)}.txt')
                 with open(path, 'w') as f:
                     for ii, edge in enumerate(self.hist_model.hist_edges):
                         l = edge.detach().cpu().numpy().tolist()
                         l = [round(i, 6) for i in l]
                         f.write(f'#{ii}: {l}\n')
-                print(f'edges of HistByProfMultiChannel in epoch {epoch} was writed in {path}')
+                print(f'edges of {self.hist_name} in epoch {epoch} was writed in {path}')
 
             else:
                 raise Exception(f"hist_name {self.hist_name} is unknow in 'print_hist_params'")
