@@ -1,10 +1,10 @@
-## [Appearance-Preserving 3D Convolution for Video-based Person Re-identification](http://arxiv.org/abs/2007.08434)
+#### [experiments excel](https://docs.google.com/spreadsheets/d/1fVqYhwlGdbjq8LHpuDbNoWAIeYPBh96jnMIYqy773DQ/edit?usp=sharing)
 
-#### Requirements: Python=3.6 and Pytorch=1.0.0
+#### Requirements: 
 
+Python=3.6 and Pytorch=1.0.0
 
-
-### Training and test
+#### Training and test
 
   ```Shell
   # For MARS
@@ -12,15 +12,3 @@
   python test-all.py --root /home/guxinqian/data/ -d mars --arch ap3dres50 --gpu 0 --resume log-mars-ap3d
   
   ```
-
-
-### Citation
-
-If you use our code in your research or wish to refer to the baseline results, please use the following BibTeX entry.
-
-    @inproceedings{gu2020AP3D,
-      title={Appearance-Preserving 3D Convolution for Video-based Person Re-identification},
-      author={Gu, Xinqian and Chang, Hong and Ma, Bingpeng and Zhang, Hongkai and Chen, Xilin},
-      booktitle={ECCV},
-      year={2020},
-    }
